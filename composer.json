@@ -4,7 +4,7 @@
   "description": "PrestaShop Edition Basic module",
   "license": "AFL-3.0",
   "require": {
-    "php": ">=7.2.5 <=8.0",
+    "php": ">=8.1",
     "prestashop/module-lib-service-container": "^2.0",
     "symfony/string": "<6.0",
     "prestashop/prestashop-accounts-installer": "^1.0",
@@ -12,9 +12,9 @@
   },
   "require-dev": {
     "prestashop/php-dev-tools": "^4",
-    "friendsofphp/php-cs-fixer": "3.3.2",
+    "friendsofphp/php-cs-fixer": "3.64",
     "phpstan/phpstan": "^1.10",
-    "overtrue/phplint": "<4.0",
+    "overtrue/phplint": "^9",
     "phpunit/phpunit": "^9.0"
   },
   "autoload": {
@@ -28,5 +28,19 @@
   "config": {
     "preferred-install": "dist",
     "prepend-autoloader": false
+  },
+  "scripts": {
+    "php-cs-fixer": [
+      "@php ./vendor/bin/php-cs-fixer fix"
+    ],
+    "php-cs-fixer-dry": [
+      "@php ./vendor/bin/php-cs-fixer fix --dry-run"
+    ],
+    "php-lint": [
+      "@php ./vendor/bin/phplint --exclude=vendor ."
+    ],
+    "unit-tests": [
+      "@php ./vendor/bin/phpunit tests"
+    ]
   }
 }
