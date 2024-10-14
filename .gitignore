@@ -4,3 +4,4 @@ views/templates/admin/overrides/new-theme/page_header_toolbar.tpl
 .php-cs-fixer.cache
 vendor
 node_modules
+.hintrc
