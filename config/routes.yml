@@ -1,11 +1,3 @@
-ps_edition_basic_home:
-  path: pseditionbasic/homepage
-  methods: [GET, POST]
-  defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\HOME::indexAction
-    _legacy_controller: "HOME"
-    _legacy_link: "HOME"
-
 ps_edition_basic_homepage:
   path: pseditionbasic/homepage
   methods: [GET, POST]

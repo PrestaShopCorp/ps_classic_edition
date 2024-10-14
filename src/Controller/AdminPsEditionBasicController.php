@@ -31,23 +31,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminPsEditionBasicController extends FrameworkBundleAdminController
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * @param string $serviceName
-     *
-     * @return object
-     */
-    public function get($serviceName)
-    {
-        if (null === $this->container) {
-            $this->container = SymfonyContainer::getInstance();
-        }
-
-        return $this->container->get($serviceName);
+    public function __construct(
+        protected string $homepageJsLink,
+    ) {
     }
 
     protected function layoutTitle(): string
@@ -136,18 +122,30 @@ class AdminPsEditionBasicController extends FrameworkBundleAdminController
         }
         $modulePsEditionBasic = $this->get('ps_edition_basic.module');
 
-        $jsLink = $modulePsEditionBasic->getParameter('ps_edition_basic.edition_basic_homepage_js');
+        if ($this->has('PrestaShop\Module\PsAccounts\Service\PsAccountsService')) {
+            $psAccountService = $this->get('PrestaShop\Module\PsAccounts\Service\PsAccountsService');
+            $employeeAccount = $psAccountService->getEmployeeAccount();
+            $psAccountID = ($employeeAccount ? $employeeAccount->getUid() : $psAccountService->getUserUuid());
+            $psShopID = $psAccountService->getShopUuid();
+        } else {
+            $psAccountID = '';
+            $psShopID = '';
+        }
 
-        $psAccountService = $this->get('PrestaShop\Module\PsAccounts\Service\PsAccountsService');
-        $userTokenRepository = $this->get('PrestaShop\Module\PsAccounts\Repository\UserTokenRepository');
+        if ($this->has('PrestaShop\Module\PsAccounts\Repository\UserTokenRepository')) {
+            $userTokenRepository = $this->get('PrestaShop\Module\PsAccounts\Repository\UserTokenRepository');
+            $accountUserToken = strval($userTokenRepository->getOrRefreshToken());
+        } else {
+            $accountUserToken = '';
+        }
 
-        $reflection = new \ReflectionClass($this->getContext()->controller);
+        //todo: remove all this horrible mess
+        /*$reflection = new \ReflectionClass($this->getContext()->controller);
         $method = $reflection->getMethod('getTabs');
         $method->setAccessible(true);
-        $tabs = $method->invoke($this->getContext()->controller);
+        $tabs = $method->invoke($this->getContext()->controller);*/
+        $tabs = [];
 
-        $employeeAccount = $psAccountService->getEmployeeAccount();
-        $psAccountID = ($employeeAccount ? $employeeAccount->getUid() : $psAccountService->getUserUuid());
 
         /* ----------------------- Allow auto install account ---------------------- */
         $accountsFacade = null;
@@ -194,7 +192,7 @@ class AdminPsEditionBasicController extends FrameworkBundleAdminController
             'layoutTitle' => $this->layoutTitle(),
             'urlAccountsCdn' => $accountsService ? $accountsService->getAccountsCdn() : '',
             'enableSidebar' => true,
-            'jsLink' => $jsLink,
+            'jsLink' => $this->homepageJsLink,
             'jsContext' => json_encode([
                 'CALL_BACK_MODULE_URL' => $callBackModuleUrl,
                 'SETUP_GUIDE_API_URL' => $setupGuideApiUrl,
@@ -209,14 +207,14 @@ class AdminPsEditionBasicController extends FrameworkBundleAdminController
                 'moduleVersion' => $modulePsEditionBasic->version,
                 'moduleIsUpdatable' => $moduleService->getModuleIsUpdatable(),
                 'moduleUpdateLink' => $moduleService->getUpdateLink(),
-                'userToken' => strval($userTokenRepository->getOrRefreshToken()) ?: '',
-                'psAccountShopID' => $psAccountService->getShopUuid() ?: '',
-                'psAccountID' => $psAccountID ?: '',
-                'shopName' => (string) $this->configuration->get('PS_SHOP_NAME', ''),
-                'isShopEnabled' => (bool) $this->configuration->get('PS_SHOP_ENABLE', false),
-                'psSubscriptionID' => (string) $this->configuration->get('PS_SHOP_SUBSCRIPTION_ID', ''),
+                'userToken' => $accountUserToken,
+                'psAccountShopID' => $psShopID,
+                'psAccountID' => $psAccountID,
+                'shopName' => (string) $this->getConfiguration()->get('PS_SHOP_NAME', ''),
+                'isShopEnabled' => (bool) $this->getConfiguration()->get('PS_SHOP_ENABLE', false),
+                'psSubscriptionID' => (string) $this->getConfiguration()->get('PS_SHOP_SUBSCRIPTION_ID', ''),
                 'callBack' => [
-                    'isCalledBack' => (bool) $this->configuration->get('PS_IS_CALLED_BACK', false),
+                    'isCalledBack' => (bool) $this->getConfiguration()->get('PS_IS_CALLED_BACK', false),
                 ],
                 'tabs' => $this->filter_settings_tabs_recursive($tabs, PS_EDITION_BASIC_SETTINGS_WHITE_LIST, PS_EDITION_BASIC_SETTINGS_BLACK_LIST),
                 'locale' => $this->getContext()->language->iso_code,

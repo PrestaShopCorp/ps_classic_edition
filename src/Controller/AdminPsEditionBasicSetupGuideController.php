@@ -33,25 +33,6 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminPsEditionBasicSetupGuideController extends FrameworkBundleAdminController
 {
     /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * @param string $serviceName
-     *
-     * @return object
-     */
-    public function get($serviceName)
-    {
-        if (null === $this->container) {
-            $this->container = SymfonyContainer::getInstance();
-        }
-
-        return $this->container->get($serviceName);
-    }
-
-    /**
      * Get the steps for the setup guide
      *
      * @return JsonResponse

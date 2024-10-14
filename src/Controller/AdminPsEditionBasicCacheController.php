@@ -32,25 +32,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class AdminPsEditionBasicCacheController extends FrameworkBundleAdminController
 {
     /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * @param string $serviceName
-     *
-     * @return object
-     */
-    public function get($serviceName)
-    {
-        if (null === $this->container) {
-            $this->container = SymfonyContainer::getInstance();
-        }
-
-        return $this->container->get($serviceName);
-    }
-
-    /**
      * Handle the call back requests
      *
      * @return JsonResponse

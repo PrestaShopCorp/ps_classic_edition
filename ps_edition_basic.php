@@ -25,6 +25,7 @@ use PrestaShop\Module\PsEditionBasic\Install\Tabs\TabsInstaller;
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use PrestaShop\PrestaShop\Core\Cache\Clearer\CacheClearerInterface;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\Dotenv\Dotenv;
 
 define('PS_EDITION_BASIC_SETTINGS_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/settingsWhiteList.json'), true));
 define('PS_EDITION_BASIC_SETTINGS_BLACK_LIST', json_decode(file_get_contents(__DIR__ . '/settingsBlackList.json'), true));
@@ -36,7 +37,6 @@ if (!defined('_PS_VERSION_')) {
 
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
-    (new \Symfony\Component\Dotenv\Dotenv(true))->loadEnv(__DIR__ . '/.env');
 }
 
 class ps_edition_basic extends Module

@@ -28,19 +28,21 @@ use GuzzleHttp\Psr7\Request;
 use Prestashop\ModuleLibGuzzleAdapter\ClientFactory;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
-(new \Symfony\Component\Dotenv\Dotenv(true))->loadEnv(dirname(__DIR__, 2) . '/.env');
-
-define('URL', getenv('PS_EDITION_BASIC_PS_ACADEMY_URL'));
-define('KEY', getenv('PS_EDITION_BASIC_PS_ACADEMY_KEY'));
+use Symfony\Component\Dotenv\Dotenv;
 
 class AdminPsEditionBasicPsAcademyController extends FrameworkBundleAdminController
 {
+    public function __construct(
+        protected string $psAcademyUrl,
+        protected string $psAcademyKey,
+    ) {
+    }
+
     private function getProductsId(): array
     {
         $client = (new ClientFactory())->getClient();
-        $requestVideoHosted = new Request('GET', URL . '/api/products?filter[mpn]=[videoHosted]&ws_key=' . KEY . '&output_format=JSON');
-        $requestLiveHosted = new Request('GET', URL . '/api/products?filter[mpn]=[liveHosted]&ws_key=' . KEY . '&output_format=JSON');
+        $requestVideoHosted = new Request('GET', $this->psAcademyUrl . '/api/products?filter[mpn]=[videoHosted]&ws_key=' . $this->psAcademyKey . '&output_format=JSON');
+        $requestLiveHosted = new Request('GET', $this->psAcademyUrl . '/api/products?filter[mpn]=[liveHosted]&ws_key=' . $this->psAcademyKey . '&output_format=JSON');
 
         $responseVideoHosted = $client->sendRequest($requestVideoHosted);
         $responseLiveHosted = $client->sendRequest($requestLiveHosted);
@@ -79,7 +81,7 @@ class AdminPsEditionBasicPsAcademyController extends FrameworkBundleAdminControl
         ];
 
         $client = (new ClientFactory())->getClient();
-        $requestCategory = new Request('GET', URL . '/api/categories/' . $response['id_category_default'] . '?ws_key=' . KEY . '&output_format=JSON');
+        $requestCategory = new Request('GET', $this->psAcademyUrl . '/api/categories/' . $response['id_category_default'] . '?ws_key=' . $this->psAcademyKey . '&output_format=JSON');
         $responseCategory = $client->sendRequest($requestCategory);
         $httpStatusCode = $responseCategory->getStatusCode();
 
@@ -89,7 +91,7 @@ class AdminPsEditionBasicPsAcademyController extends FrameworkBundleAdminControl
         $responseContents = json_decode($responseCategory->getBody()->getContents(), true);
         $category = $responseContents['category']['link_rewrite'][$langIds[$locale]]['value'];
         $link_rewrite = $response['link_rewrite'][$langIds[$locale]]['value'];
-        $productUrl = URL . '/' . $locale . '/' . $category . '/' . $response['id'] . '-' . $link_rewrite . '.html';
+        $productUrl = $this->psAcademyUrl . '/' . $locale . '/' . $category . '/' . $response['id'] . '-' . $link_rewrite . '.html';
 
         $tmp = [
             'name' => $response['name'][$langIds[$locale]]['value'],
@@ -113,7 +115,7 @@ class AdminPsEditionBasicPsAcademyController extends FrameworkBundleAdminControl
 
         if (!empty($ids)) {
             foreach ($ids as $id) {
-                $request = new Request('GET', URL . '/api/products/' . $id . '?ws_key=' . KEY . '&output_format=JSON');
+                $request = new Request('GET', $this->psAcademyUrl . '/api/products/' . $id . '?ws_key=' . $this->psAcademyKey . '&output_format=JSON');
                 $response = $client->sendRequest($request);
                 $httpStatusCode = $response->getStatusCode();
                 if ($httpStatusCode <= 300) {

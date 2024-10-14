@@ -49,8 +49,8 @@ class AdminPsEditionBasicCallBackController extends FrameworkBundleAdminControll
 
     private function storeIsCalled(bool $isCalledBack): bool
     {
-        if (!(bool) $this->configuration->get('PS_IS_CALLED_BACK')) {
-            $this->configuration->set('PS_IS_CALLED_BACK', $isCalledBack);
+        if (!(bool) $this->getConfiguration()->get('PS_IS_CALLED_BACK')) {
+            $this->getConfiguration()->set('PS_IS_CALLED_BACK', $isCalledBack);
 
             return true;
         }
@@ -60,15 +60,15 @@ class AdminPsEditionBasicCallBackController extends FrameworkBundleAdminControll
 
     private function storeApiResponse(string $apiResponse): bool
     {
-        $this->configuration->set('PS_CALLBACK_API_RESPONSE', $apiResponse);
+        $this->getConfiguration()->set('PS_CALLBACK_API_RESPONSE', $apiResponse);
 
         return true;
     }
 
     private function storeSubscriptionId(string $subscriptionId): bool
     {
-        if (!(string) $this->configuration->get('PS_SHOP_SUBSCRIPTION_ID')) {
-            $this->configuration->set('PS_SHOP_SUBSCRIPTION_ID', $subscriptionId);
+        if (!(string) $this->getConfiguration()->get('PS_SHOP_SUBSCRIPTION_ID')) {
+            $this->getConfiguration()->set('PS_SHOP_SUBSCRIPTION_ID', $subscriptionId);
 
             return true;
         }

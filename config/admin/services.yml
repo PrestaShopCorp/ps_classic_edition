@@ -1,2 +1,21 @@
 imports:
   - { resource: ../services.yml }
+
+parameters:
+  env(PS_EDITION_BASIC_PS_ACADEMY_URL): 'https://preprod-academy.prestashop-test.com/'
+  env(PS_EDITION_BASIC_PS_ACADEMY_KEY): ''
+
+services:
+  _defaults:
+    bind:
+      $homepageJsLink: '%env(PS_EDITION_BASIC_HOMEPAGE_JS)%'
+      $psAcademyUrl: '%env(string:PS_EDITION_BASIC_PS_ACADEMY_URL)%'
+      $psAcademyKey: '%env(string:PS_EDITION_BASIC_PS_ACADEMY_KEY)%'
+
+  PrestaShop\Module\PsEditionBasic\Controller\:
+    resource: "%kernel.project_dir%/modules/ps_edition_basic/src/Controller/*"
+    autoconfigure: true
+    autowire: true
+    exclude:
+      # Exclude this protection file that contains no class and breaks the service loading process
+      - "%kernel.project_dir%/modules/ps_edition_basic/src/Controller/index.php"
