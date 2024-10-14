@@ -12,7 +12,8 @@ export default defineConfig({
     origin: "http://localhost:5173",
   },
   build: {
-    // TODO: dist in views/js/vue (can be also in dist)
+    outDir: '../views/js/vue',
+    emptyOutDir: true,
     rollupOptions: {
       output: {
         manualChunks: () => "index.js",
