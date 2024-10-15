@@ -1,0 +1,8 @@
+parameters:
+  # Default values
+  env(PS_EDITION_BASIC_PS_ACADEMY_URL): 'https://preprod-academy.prestashop-test.com/'
+  env(PS_EDITION_BASIC_PS_ACADEMY_KEY): ''
+  env(PS_EDITION_BASIC_HOMEPAGE_JS): 'https://unpkg.com/@prestashopcorp/smb-edition-homepage/dist/assets/index.js'
+  env(PS_EDITION_BASIC_ADMIN_CSS): 'https://unpkg.com/@prestashopcorp/edition-reskin@latest/dist/back.min.css'
+  ps_edition_basic.edition_basic_homepage_js: "%env(PS_EDITION_BASIC_HOMEPAGE_JS)%"
+  ps_edition_basic.edition_basic_admin_css: "%env(PS_EDITION_BASIC_ADMIN_CSS)%"

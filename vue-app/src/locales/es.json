@@ -1,0 +1,272 @@
+{
+  "onb": {
+    "settings": {
+      "description": "Configura tu tienda en unos clics",
+      "modules_description": "Configura los módulos que has instalado",
+      "AdminSmbEditionManageDomainNameController": {
+        "description": "Protege el dominio de tu tienda para que los clientes puedan confiar en él y encontrarlo fácilmente.",
+        "icon": "web"
+      },
+      "AdminPsxlegalassistantController": {
+        "description": "Sigue a nuestro asistente legal para crear tus propias políticas de tienda.",
+        "icon": "collections_bookmark"
+      },
+      "AdminSmbEditionManageSubscriptionController": {
+        "description": "Gestiona tu suscripción según tus necesidades.",
+        "icon": "loyalty"
+      },
+      "AdminParentShipping": {
+        "description": "Elige o combina los métodos de envío que más te convengan.",
+        "icon": "local_shipping"
+      },
+      "AdminParentPayment": {
+        "description": "Elige los métodos de pago disponibles con uno de los proveedores de pago aprobados por PrestaShop.",
+        "icon": "credit_card"
+      },
+      "AdminInternational": {
+        "description": "Muestra los diferentes países, idiomas y divisas que deseas activar en tu tienda.",
+        "icon": "language"
+      },
+      "ShopParameters": {
+        "description": "Configura todos los ajustes técnicos para que tu tienda funcione.",
+        "icon": "stars"
+      },
+      "AdminAdvancedParameters": {
+        "description": "Configura el funcionamiento de tu tienda.",
+        "icon": "settings_ethernet"
+      },
+      "AdminNtbackupandrestore": {
+        "description": "Restaura tu tienda en unos pocos clics.",
+        "icon": "restore"
+      }
+    },
+    "homepage": {
+      "title": "Te damos la bienvenida al espacio para crear tu tienda",
+      "maintenance": {
+        "title": "Tu tienda está desconectada.",
+        "description": "Tus visitantes no pueden acceder a tu tienda. Puedes ponerla online desde la página",
+        "button": "Ir a la página de mantenimiento",
+        "maintenance": "Mantenimiento.",
+        "online": {
+          "title": "Tu tienda está online.",
+          "description": "Utiliza el modo de mantenimiento al modificar la tienda",
+          "button": "Cambiar al modo de mantenimiento"
+        }
+      },
+      "shopInfos": {
+        "title": "Información de la tienda",
+        "domainName": "NOMBRE DEL DOMINIO: ",
+        "changeDomainName": "Cambiar mi nombre de dominio",
+        "subscription": "SUSCRIPCIÓN: ",
+        "manageSubscription": "Gestionar mi suscripción",
+        "endSubscriptionOn": "El período de prueba finaliza el {trialEndDate}",
+        "nextBilling": "Fin y renovación de la suscripción el {nextBilling}"
+      },
+      "help": {
+        "title": "¿Necesitas ayuda?",
+        "description": "¿Tienes preguntas o dudas sobre alguna funcionalidad? Consulta la documentación de nuestro",
+        "help-center": "Centro de Ayuda.",
+        "button": "Acceder a la documentación",
+        "url": "https://help-center.prestashop.com/es?utm_source=back-office&utm_medium=home"
+      },
+      "setupGuide": {
+        "title": "Empieza a vender en {remainingSteps} pasos | Empieza a vender en {remainingSteps} paso | Empieza a vender en {remainingSteps} pasos",
+        "title_done": "¡Felicidades!",
+        "description": "Entendemos tu entusiasmo, nos pasa lo mismo. No obstante, es importante que prepares tu tienda antes de empezar a vender. Sigue los pasos de la lista a tu ritmo para prepararte para su lanzamiento.",
+        "description_done": "Has completado todas las tareas 'en la lista, ahora puedes vender tus productos en línea.",
+        "exploreButton": "Explora el back office.",
+        "progression": "{completedSteps}/{totalSteps} tareas completadas",
+        "modal": {
+          "title": "¿Cerrar la guía definitivamente?",
+          "description": "Si lo prefieres, puedes continuar sin la guía y cerrarla. Esta acción es definitiva.",
+          "mainButton": "Cerrar permanentemente la guía",
+          "cancelButton": "Cancelar"
+        },
+        "domain": {
+          "title": "Personaliza tu nombre de dominio",
+          "description": "Personaliza tu nombre de dominio para impulsar el posicionamiento de tu tienda en los motores de búsqueda",
+          "documentation": {
+            "cta": "Ver documentación",
+            "href": "https://help-center.prestashop.com/en/articles/11530021421714-change-domain-name"
+          },
+          "button": {
+            "skip": "Saltar este paso",
+            "cta": "Personaliza tu nombre de dominio"
+          }
+        },
+        "account": {
+          "title": "Vincula tu tienda",
+          "documentation": {
+            "cta": "Ver documentación",
+            "href": "https://help-center.prestashop.com/en/articles/13394091309074-how-does-the-prestashop-account-module-work"
+          }
+        },
+        "product": {
+          "title": "Añade tu primer producto",
+          "description": "Amplía tu catálogo con tu primer producto",
+          "documentation": {
+            "cta": "Ver documentación",
+            "href": "https://help-center.prestashop.com/en/articles/11637213915666-add-a-new-product"
+          },
+          "button": {
+            "cta": "Añadir un producto"
+          }
+        },
+        "payment": {
+          "title": "Configura tus opciones de pago",
+          "description": "Mejora la experiencia de compra de tus clientes ofreciendo múltiples opciones de pago en tu tienda",
+          "documentation": {
+            "cta": "Ver documentación",
+            "href": "https://help-center.prestashop.com/en/articles/11640755605778-setting-up-payment-methods"
+          },
+          "button": {
+            "cta": "Configura tus opciones de pago"
+          }
+        },
+        "shipping": {
+          "title": "Configura tus opciones de envío",
+          "description": "Configura las opciones de entrega para realizar tus envíos",
+          "documentation": {
+            "cta": "Ver documentación",
+            "href": "https://help-center.prestashop.com/en/articles/11615624974994-configure-delivery-methods"
+          },
+          "button": {
+            "skip": "Saltar este paso",
+            "cta": "Configure sus opciones de entrega"
+          }
+        },
+        "legal": {
+          "title": "Cumple con tus Obligaciones Legales",
+          "description": "Asegúrate de que tu tienda cumple con los requisitos legales antes de empezar a vender",
+          "documentation": {
+            "cta": "Ver documentación",
+            "href": "https://help-center.prestashop.com/en/articles/11644037761042-meeting-legal-obligations"
+          },
+          "button": {
+            "cta": "Cumpla con sus Obligaciones Legales"
+          }
+        },
+        "logo": {
+          "title": "Personalizar el aspecto de mi tienda",
+          "subtitle": "Añadir un logotipo",
+          "description": "Añade logotipos para tu tienda (cabecera, correos electrónicos, factura y favicon)",
+          "documentation": {
+            "cta": "Ver documentación",
+            "href": "https://help-center.prestashop.com/en/articles/11674550243474-add-a-logo-and-favicon"
+          },
+          "button": {
+            "cta": "Añadir un logotipo"
+          }
+        },
+        "psxdesign": {
+          "subtitle": "Selecciona y personaliza tu tema",
+          "description": "Elige y personaliza un tema que defina el aspecto de tu tienda'",
+          "documentation": {
+            "cta": "Ver documentación",
+            "href": "https://help-center.prestashop.com/en/articles/11663976521490-choosing-and-configuring-a-theme"
+          },
+          "button": {
+            "cta": "Selecciona y personaliza tu tema"
+          }
+        }
+      },
+      "minimizedSetupGuide": {
+        "title": "Empieza a vender en {remainingSteps} pasos | Empieza a vender en {remainingSteps} paso | Empieza a vender en {remainingSteps} pasos",
+        "progression": "{completedSteps}/{totalSteps} tareas",
+        "congratulations": {
+          "title": "¡Enhorabuena!",
+          "content": "¡Has terminado la configuración de tu tienda!"
+        }
+      },
+      "disk-usage": {
+        "default": {
+          "title": "Mejora el rendimiento de tu tienda",
+          "description": "¿Necesitas acelerar el tiempo de carga de tu tienda y aumentar el espacio de almacenamiento? Ponte en contacto con nosotros!",
+          "button": "Contáctenos",
+          "usageTitle": "Espacio de almacenamiento utilizado",
+          "usage": "{used} GB utilizados de {total} GB"
+        },
+        "warning": {
+          "title": "Mejora el rendimiento de tu tienda",
+          "description": "¿Necesitas acelerar el tiempo de carga de tu tienda y aumentar el espacio de almacenamiento? Ponte en contacto con nosotros!",
+          "button": "Contáctenos",
+          "usageTitle": "Espacio de almacenamiento casi lleno",
+          "usage": "{used} GB utilizados de {total} GB"
+        },
+        "danger": {
+          "title": "Mejora el rendimiento de tu tienda",
+          "description": "¿Necesitas acelerar el tiempo de carga de tu tienda y aumentar el espacio de almacenamiento? Ponte en contacto con nosotros!",
+          "button": "Contáctenos",
+          "usageTitle": "Espacio de almacenamiento lleno",
+          "usage": "{used} GB utilizados de {total} GB"
+        },
+        "buttonSupport": "Contactar al soporte"
+      },
+      "workshop": {
+        "title": "Participa en nuestros talleres",
+        "subtitle": "1h - Cada semana",
+        "description": "Aproveche nuestros talleres en línea cada semana para discutir varios temas sobre la configuración del back office",
+        "button": "Descubre los talleres disponibles"
+      },
+      "call-back": {
+        "title": "Empezar con buen pie",
+        "subtitle": "1h - Un consejero a tu lado",
+        "description": "Aprovecha una hora con un consultor PrestaShop para configurar tu tienda y asegurar tu éxito.",
+        "button": "Configurar mi tienda con un consultor"
+      },
+      "update-modal": {
+        "update-running": "Actualización en progreso",
+        "update-required": "Actualización necesaria para {moduleName}",
+        "please-wait": "Espere mientras se actualiza el módulo<span class=\"font-bold\">{moduleName}</span>",
+        "module-needs-update": "El módulo <span class=\"font-bold\">{moduleName}</span> debe actualizarse para garantizar el correcto funcionamiento de su tienda",
+        "update-module-btn": "Actualizar <span class=\"font-bold\">{moduleName}",
+        "update-success": "Módulo {moduleName} actualizado correctamente",
+        "update-error": "El módulo {moduleName} no se pudo actualizar",
+        "error-occured": "Se produjo un error al actualizar el módulo.",
+        "refresh": "Recargar página"
+      },
+      "care-offers": {
+        "title": "LA AYUDA QUE NECESITA, CUANDO LA NECESITA",
+        "description": "Concéntrese en su negocio. Deje que nosotros nos ocupemos de los aspectos técnicos.",
+        "button": "Descubra nuestras ofertas",
+        "link": "https://addons.prestashop.com/es/388-support",
+        "bloc-1": {
+          "title": "Ticket de diagnóstico de PrestaShop",
+          "description": "Benefíciese de un diagnóstico completo de su sitio web con la ayuda de los expertos de PrestaShop.",
+          "price": "100€",
+          "button": "Descubrir",
+          "link": "https://addons.prestashop.com/es/support-technique/88366-ticket-de-diagnostic-prestashop.html"
+        },
+        "bloc-2": {
+          "title": "Ayuda rápida",
+          "description": "¿Ha descargado el software PrestaShop y necesita ayuda para instalar rápidamente su tienda en línea en su servidor?",
+          "price": "50€",
+          "button": "Descubrir",
+          "link": "https://addons.prestashop.com/es/pack-de-demarrage/48766-aide-au-demarrage-rapide.html"
+        },
+        "bloc-3": {
+          "title": "Paquete de seguridad",
+          "description": "Para abordar el problema de las vulnerabilidades de seguridad en PrestaShop, ofrecemos un paquete de seguridad que incluye un análisis y las medidas de seguridad asociadas.",
+          "price": "900€",
+          "button": "Descubrir",
+          "link": "https://addons.prestashop.com/es/support/90198-pack-securite.html"
+        },
+        "bloc-4": {
+          "title": "Paquete SEO",
+          "description": "Nuestros expertos identifican y analizan los errores de exploración encontrados por el robot de Google a través de la interfaz de Google Search Console. Tras el análisis, le proporcionan las mejoras técnicas que debe introducir en su optimización para motores de búsqueda y adoptan medidas correctivas.",
+          "price": "550€",
+          "button": "Descubrir",
+          "link": "https://addons.prestashop.com/es/support/90202-pack-seo.html"
+        }
+      },
+      "psAcademy": {
+        "button": "Descubra",
+        "header": {
+          "title": "Formación y tutoriales",
+          "seeAll": "Ver todos",
+          "pages": "Páginas {first} en {second}"
+        }
+      }
+    }
+  }
+}

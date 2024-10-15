@@ -1,6 +1,6 @@
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
 
-name: ci
+name: PHP
 
 on:
   push:
@@ -27,7 +27,8 @@ jobs:
       - name: PHP syntax checker 8.3
         uses: prestashop/github-action-php-lint/8.1@master
 
-  build:
+  linter:
+    name: CS fixer validate composer and lint
     runs-on: ubuntu-latest
 
     steps:
@@ -36,11 +37,14 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{env.PHP_VERSION}}
+          php-version: ${{ env.PHP_VERSION }}
 
       - name: Validate
         run: |
           composer validate --strict
+
+      - name: Composer Install
+        run: COMPOSER_PROCESS_TIMEOUT=600 composer install --ansi --prefer-dist --no-interaction --no-progress
 
       - name: Format
         run: |
@@ -49,6 +53,21 @@ jobs:
       - name: Lint
         run: |
           composer php-lint
+
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+
+      - name: Composer Install
+        run: COMPOSER_PROCESS_TIMEOUT=600 composer install --ansi --prefer-dist --no-interaction --no-progress
 
       - name: Test
         run: |
