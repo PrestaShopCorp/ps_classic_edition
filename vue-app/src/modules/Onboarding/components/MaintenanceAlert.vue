@@ -1,13 +1,12 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { useSubscriptionStore } from "../stores/useSubscriptionStore";
-import constants from "@/common/constants";
-import useTabs from "@/common/composables/use-tabs";
+import { useContext } from "@/common/composables/use-context";
 import trackWithContext from "@/common/tracking/track";
 
 defineProps<{ isShopEnabled: boolean }>();
 
-const { getAdminLink } = useTabs();
+const { context } = useContext();
 
 const subscriptionStore = useSubscriptionStore();
 
@@ -20,7 +19,7 @@ const goMaintenance = async () => {
     version: hostedOrClassic.value,
   });
 
-  window.location.href = getAdminLink(constants.MAINTENANCE) ?? "";
+  window.location.href = context.value.MAINTENANCE_URL;
 };
 </script>
 

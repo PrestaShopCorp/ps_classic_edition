@@ -41,6 +41,7 @@ const contextSchema = z
     GET_SUBSCRIPTION_API_URL: z.string().default(""),
     PS_EDITION_BASIC_PS_ACADEMY_API_URL: z.string().default(""),
     SMB_EDITION_MANAGE_SUBSCRIPTION_API_URL: z.string().default(""),
+    MAINTENANCE_URL: z.string().default(""),
     moduleVersion: z.string().default(""),
     moduleName: z.string().default(""),
     moduleSlug: z.string().default(""),

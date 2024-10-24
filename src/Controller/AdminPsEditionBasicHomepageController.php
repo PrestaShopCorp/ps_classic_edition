@@ -115,6 +115,7 @@ class AdminPsEditionBasicHomepageController extends AdminPsEditionBasicControlle
                 'GET_SUBSCRIPTION_API_URL' => $getSubscriptionApiUrl,
                 'PS_EDITION_BASIC_PS_ACADEMY_API_URL' => $psAcademyApiUrl,
                 'SMB_EDITION_MANAGE_SUBSCRIPTION_API_URL' => $smbEditionManageSubscriptionApiUrl,
+                'MAINTENANCE_URL' => $this->generateUrl('admin_maintenance'),
                 'moduleName' => $modulePsEditionBasic->displayName,
                 'moduleSlug' => $modulePsEditionBasic->name,
                 'moduleVersion' => $modulePsEditionBasic->version,
