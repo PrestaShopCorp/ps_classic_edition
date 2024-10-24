@@ -99,20 +99,11 @@ class ps_edition_basic extends Module
 
     public function install(): bool
     {
-        $filePath = $this->getModulePath('smb_edition');
-        $moduleIsPresentOnDisk = file_exists($filePath);
-
-        // Activate new menu on edition shop
-        if ($moduleIsPresentOnDisk) {
-            Configuration::updateValue('SMB_IS_NEW_MENU_ENABLED', true);
-        } else {
-            // Deactivate on basic shop
-            Configuration::updateValue('SMB_IS_NEW_MENU_ENABLED', false);
-        }
-
-        return parent::install()
+        return
+            parent::install()
             && (new TabsInstaller($this->name))->installTabs()
-            && $this->registerHook($this->getHooksNames());
+            && $this->registerHook($this->getHooksNames())
+        ;
     }
 
     public function postInstall(): bool
@@ -148,11 +139,6 @@ class ps_edition_basic extends Module
         (new TabsInstaller($this->name))->installTabs();
 
         return parent::enable($force_all);
-    }
-
-    public function disable($force_all = false): bool
-    {
-        return parent::disable($force_all);
     }
 
     private function addAdminThemeMedia(): void

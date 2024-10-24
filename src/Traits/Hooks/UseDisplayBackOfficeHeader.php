@@ -27,11 +27,6 @@ trait UseDisplayBackOfficeHeader
 {
     public function hookDisplayBackOfficeHeader(): string
     {
-        if (\Configuration::get('SMB_IS_NEW_MENU_ENABLED')) {
-            $this->context->controller->addJS($this->_path . 'views/js/hooksNewMenu.js');
-            $this->context->controller->addCSS($this->_path . 'views/css/new_menu.css');
-        }
-
         $scriptUrl = $this->getParameter('ps_edition_basic.edition_basic_homepage_js');
 
         return <<<END
