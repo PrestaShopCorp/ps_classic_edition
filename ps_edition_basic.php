@@ -144,8 +144,6 @@ class ps_edition_basic extends Module
     private function addAdminThemeMedia(): void
     {
         $this->context->controller->addCSS($this->getParameter('ps_edition_basic.edition_basic_admin_css'));
-        $this->context->controller->addJS($this->getPathUri() . 'views/js/favicon.js');
-        // Hide minified setup guide if not in edition shop
     }
 
     public function getParameter(string $key)// @phpstan-ignore-line
