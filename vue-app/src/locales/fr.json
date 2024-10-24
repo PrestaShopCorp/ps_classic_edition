@@ -1,45 +1,5 @@
 {
   "onb": {
-    "settings": {
-      "description": "Configurez votre boutique en quelques clics",
-      "modules_description": "Configurez vos modules fraichement installés",
-      "AdminSmbEditionManageDomainNameController": {
-        "description": "Sécurisez le domaine de votre magasin pour que les clients puissent avoir confiance et le trouver facilement.",
-        "icon": "web"
-      },
-      "AdminPsxlegalassistantController": {
-        "description": "Suivez notre assistant juridique pour créer vos propres politiques de boutique.",
-        "icon": "collections_bookmark"
-      },
-      "AdminSmbEditionManageSubscriptionController": {
-        "description": "Gérez votre abonnement selon vos besoins.",
-        "icon": "loyalty"
-      },
-      "AdminParentShipping": {
-        "description": "Choisissez ou combinez les méthodes de livraison qui vous conviennent le mieux.",
-        "icon": "local_shipping"
-      },
-      "AdminParentPayment": {
-        "description": "Choisissez les méthodes de paiement disponibles avec l'un des fournisseurs de paiement approuvés par Prestashop.",
-        "icon": "credit_card"
-      },
-      "AdminInternational": {
-        "description": "Affichez les différents pays, langues et devises que vous souhaitez activer sur votre magasin.",
-        "icon": "language"
-      },
-      "ShopParameters": {
-        "description": "Configurez tous les paramètres techniques pour faire fonctionner votre magasin.",
-        "icon": "stars"
-      },
-      "AdminAdvancedParameters": {
-        "description": "Configurez le fonctionnement de votre boutique.",
-        "icon": "settings_ethernet"
-      },
-      "AdminNtbackupandrestore": {
-        "description": "Restaurez votre boutique en quelques clics.",
-        "icon": "restore"
-      }
-    },
     "homepage": {
       "title": "Bienvenue sur l'espace de création de votre boutique",
       "maintenance": {

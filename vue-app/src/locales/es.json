@@ -1,45 +1,5 @@
 {
   "onb": {
-    "settings": {
-      "description": "Configura tu tienda en unos clics",
-      "modules_description": "Configura los módulos que has instalado",
-      "AdminSmbEditionManageDomainNameController": {
-        "description": "Protege el dominio de tu tienda para que los clientes puedan confiar en él y encontrarlo fácilmente.",
-        "icon": "web"
-      },
-      "AdminPsxlegalassistantController": {
-        "description": "Sigue a nuestro asistente legal para crear tus propias políticas de tienda.",
-        "icon": "collections_bookmark"
-      },
-      "AdminSmbEditionManageSubscriptionController": {
-        "description": "Gestiona tu suscripción según tus necesidades.",
-        "icon": "loyalty"
-      },
-      "AdminParentShipping": {
-        "description": "Elige o combina los métodos de envío que más te convengan.",
-        "icon": "local_shipping"
-      },
-      "AdminParentPayment": {
-        "description": "Elige los métodos de pago disponibles con uno de los proveedores de pago aprobados por PrestaShop.",
-        "icon": "credit_card"
-      },
-      "AdminInternational": {
-        "description": "Muestra los diferentes países, idiomas y divisas que deseas activar en tu tienda.",
-        "icon": "language"
-      },
-      "ShopParameters": {
-        "description": "Configura todos los ajustes técnicos para que tu tienda funcione.",
-        "icon": "stars"
-      },
-      "AdminAdvancedParameters": {
-        "description": "Configura el funcionamiento de tu tienda.",
-        "icon": "settings_ethernet"
-      },
-      "AdminNtbackupandrestore": {
-        "description": "Restaura tu tienda en unos pocos clics.",
-        "icon": "restore"
-      }
-    },
     "homepage": {
       "title": "Te damos la bienvenida al espacio para crear tu tienda",
       "maintenance": {

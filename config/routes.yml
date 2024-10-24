@@ -6,14 +6,6 @@ ps_edition_basic_homepage:
     _legacy_controller: "AdminPsEditionBasicHomepageController"
     _legacy_link: "AdminPsEditionBasicHomepageController"
 
-ps_edition_basic_settings:
-  path: pseditionbasic/settings
-  methods: [GET, POST]
-  defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicSettingsController::indexAction
-    _legacy_controller: "CONFIGURE"
-    _legacy_link: "CONFIGURE"
-
 ps_edition_basic_call_back:
   path: pseditionbasic/call-back
   methods: [GET, POST]
