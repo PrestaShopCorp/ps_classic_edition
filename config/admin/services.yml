@@ -8,7 +8,6 @@ parameters:
 services:
   _defaults:
     bind:
-      $homepageJsLink: '%env(PS_EDITION_BASIC_HOMEPAGE_JS)%'
       $psAcademyUrl: '%env(string:PS_EDITION_BASIC_PS_ACADEMY_URL)%'
       $psAcademyKey: '%env(string:PS_EDITION_BASIC_PS_ACADEMY_KEY)%'
 

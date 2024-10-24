@@ -42,9 +42,6 @@ trait UseActionAdminControllerSetMedia
         if ((int) $configuration->get(self::PS_EDITION_BASIC_MODULE_TABS_LANG_UPDATE_REQUIRED)) {
             $this->updateModuleTabsNames();
         }
-
-        // Loading the reskin because this hook is call inside iframes
-        $this->context->controller->addCSS($this->getParameter('ps_edition_basic.edition_basic_admin_css'));
     }
 
     /**

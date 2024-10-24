@@ -31,11 +31,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminPsEditionBasicController extends FrameworkBundleAdminController
 {
-    public function __construct(
-        protected string $homepageJsLink,
-    ) {
-    }
-
     protected function layoutTitle(): string
     {
         return $this->trans('Home', 'Modules.Editionbasic.Admin');
@@ -192,7 +187,6 @@ class AdminPsEditionBasicController extends FrameworkBundleAdminController
             'layoutTitle' => $this->layoutTitle(),
             'urlAccountsCdn' => $accountsService ? $accountsService->getAccountsCdn() : '',
             'enableSidebar' => true,
-            'jsLink' => $this->homepageJsLink,
             'jsContext' => json_encode([
                 'CALL_BACK_MODULE_URL' => $callBackModuleUrl,
                 'SETUP_GUIDE_API_URL' => $setupGuideApiUrl,

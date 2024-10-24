@@ -26,7 +26,6 @@ use Symfony\Component\String\UnicodeString;
 trait UseHooks
 {
     use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionAdminMenuTabsModifier;
-    use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionAdminControllerInitBefore;
     use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionAdminBreadcrumbModifier;
     use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionObjectLanguageAddAfter;
     use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionAdminControllerSetMedia;

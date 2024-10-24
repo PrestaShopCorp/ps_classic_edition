@@ -141,11 +141,6 @@ class ps_edition_basic extends Module
         return parent::enable($force_all);
     }
 
-    private function addAdminThemeMedia(): void
-    {
-        $this->context->controller->addCSS($this->getParameter('ps_edition_basic.edition_basic_admin_css'));
-    }
-
     public function getParameter(string $key)// @phpstan-ignore-line
     {
         return $this->getContainer()->hasParameter($key) ? $this->getContainer()->getParameter($key) : null;
