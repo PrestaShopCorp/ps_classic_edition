@@ -178,30 +178,6 @@
           "content": "Vous avez terminé la configuration de votre boutique !"
         }
       },
-      "disk-usage": {
-        "default": {
-          "title": "Améliorez les performances de votre boutique",
-          "description": "Besoin d’accélérer le temps de chargement de votre boutique et d’augmenter l’espace de stockage ? Contactez-nous !",
-          "button": "Nous contacter",
-          "usageTitle": "Espace de stockage utilisé",
-          "usage": "{used} Go utilisés sur {total} Go"
-        },
-        "warning": {
-          "title": "Améliorez les performances de votre boutique",
-          "description": "Besoin d’accélérer le temps de chargement de votre boutique et d’augmenter l’espace de stockage ? Contactez-nous !",
-          "button": "Nous contacter",
-          "usageTitle": "Espace de stockage presque plein",
-          "usage": "{used} Go utilisés sur {total} Go"
-        },
-        "danger": {
-          "title": "Améliorez les performances de votre boutique",
-          "description": "Besoin d’accélérer le temps de chargement de votre boutique et d’augmenter l’espace de stockage ? Contactez-nous !",
-          "button": "Nous contacter",
-          "usageTitle": "Espace de stockage saturé",
-          "usage": "{used} Go utilisés sur {total} Go"
-        },
-        "buttonSupport": "Contacter le support"
-      },
       "workshop": {
         "title": "Participez à nos ateliers",
         "subtitle": "1h - Toutes les semaines",

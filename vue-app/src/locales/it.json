@@ -178,30 +178,6 @@
           "content": "Hai finito di configurare il tuo negozio!"
         }
       },
-      "disk-usage": {
-        "default": {
-          "title": "Migliora le prestazioni del tuo negozio",
-          "description": "Hai bisogno di velocizzare i tempi di caricamento del tuo negozio e di aumentare lo spazio di archiviazione? Contattateci!",
-          "button": "Contattaci",
-          "usageTitle": "Spazio di archiviazione utilizzato",
-          "usage": "{used} GB utilizzati su {total} GB"
-        },
-        "warning": {
-          "title": "Migliora le prestazioni del tuo negozio",
-          "description": "Hai bisogno di velocizzare i tempi di caricamento del tuo negozio e di aumentare lo spazio di archiviazione? Contattateci!",
-          "button": "Contattaci",
-          "usageTitle": "Spazio di archiviazione quasi pieno",
-          "usage": "{used} GB utilizzati su {total} GB"
-        },
-        "danger": {
-          "title": "Migliora le prestazioni del tuo negozio",
-          "description": "Hai bisogno di velocizzare i tempi di caricamento del tuo negozio e di aumentare lo spazio di archiviazione? Contattateci!",
-          "button": "Contattaci",
-          "usageTitle": "Spazio di archiviazione saturo",
-          "usage": "{used} GB utilizzati su {total} GB"
-        },
-        "buttonSupport": "Contatta il supporto"
-      },
       "workshop": {
         "title": "Partecipa ai nostri workshop",
         "subtitle": "1 ora - Ogni settimana",

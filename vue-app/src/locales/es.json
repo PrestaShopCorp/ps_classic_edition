@@ -178,30 +178,6 @@
           "content": "¡Has terminado la configuración de tu tienda!"
         }
       },
-      "disk-usage": {
-        "default": {
-          "title": "Mejora el rendimiento de tu tienda",
-          "description": "¿Necesitas acelerar el tiempo de carga de tu tienda y aumentar el espacio de almacenamiento? Ponte en contacto con nosotros!",
-          "button": "Contáctenos",
-          "usageTitle": "Espacio de almacenamiento utilizado",
-          "usage": "{used} GB utilizados de {total} GB"
-        },
-        "warning": {
-          "title": "Mejora el rendimiento de tu tienda",
-          "description": "¿Necesitas acelerar el tiempo de carga de tu tienda y aumentar el espacio de almacenamiento? Ponte en contacto con nosotros!",
-          "button": "Contáctenos",
-          "usageTitle": "Espacio de almacenamiento casi lleno",
-          "usage": "{used} GB utilizados de {total} GB"
-        },
-        "danger": {
-          "title": "Mejora el rendimiento de tu tienda",
-          "description": "¿Necesitas acelerar el tiempo de carga de tu tienda y aumentar el espacio de almacenamiento? Ponte en contacto con nosotros!",
-          "button": "Contáctenos",
-          "usageTitle": "Espacio de almacenamiento lleno",
-          "usage": "{used} GB utilizados de {total} GB"
-        },
-        "buttonSupport": "Contactar al soporte"
-      },
       "workshop": {
         "title": "Participa en nuestros talleres",
         "subtitle": "1h - Cada semana",

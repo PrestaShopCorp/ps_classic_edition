@@ -15,8 +15,6 @@ import type { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-
 const documents = {
   '\n  query GetOneSubscription($customerId: String!) {\n    getOneSubscription(customer_id: $customerId, product_id: "smb_edition") {\n      id\n      trial_end\n    }\n  }\n':
     types.GetOneSubscriptionDocument,
-  "\n  query GetShopDomainInfos($shopId: ID!) {\n    getShopDomainInfos(input: { shopId: $shopId }) {\n      instanceId\n    }\n  }\n":
-    types.GetShopDomainInfosDocument,
   "\n  query GetInstanceDetails($instanceId: String!) {\n    getInstanceDetails(instanceId: $instanceId) {\n      data {\n        diskUsage {\n          total\n          used\n        }\n      }\n    }\n  }\n":
     types.GetInstanceDetailsDocument,
   "\n  query GetHomepageDynamicData($subscriptionStartedAt: Int, $subscriptionBillingUnit: String, $lang: String) {\n    homepageDynamicData(\n      subscriptionStartedAt: $subscriptionStartedAt\n      subscriptionBillingUnit: $subscriptionBillingUnit\n      lang: $lang\n    ) {\n      blocs {\n        image {\n          id\n          src\n        }\n        link {\n          href\n          id\n          referrerpolicy\n          rel\n          target\n          text\n          icon\n        }\n        isActive\n        id\n        text\n        title\n        subTitle\n      }\n      formFeedback {\n        id\n        link {\n          href\n          id\n          referrerpolicy\n          rel\n          target\n          text\n        }\n        text\n      }\n      promoBanners {\n        id\n        icon\n        link {\n          href\n          id\n          referrerpolicy\n          rel\n          target\n          text\n        }\n        text\n      }\n    }\n  }\n":
@@ -43,12 +41,6 @@ export function graphql(source: string): unknown;
 export function graphql(
   source: '\n  query GetOneSubscription($customerId: String!) {\n    getOneSubscription(customer_id: $customerId, product_id: "smb_edition") {\n      id\n      trial_end\n    }\n  }\n',
 ): (typeof documents)['\n  query GetOneSubscription($customerId: String!) {\n    getOneSubscription(customer_id: $customerId, product_id: "smb_edition") {\n      id\n      trial_end\n    }\n  }\n'];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(
-  source: "\n  query GetShopDomainInfos($shopId: ID!) {\n    getShopDomainInfos(input: { shopId: $shopId }) {\n      instanceId\n    }\n  }\n",
-): (typeof documents)["\n  query GetShopDomainInfos($shopId: ID!) {\n    getShopDomainInfos(input: { shopId: $shopId }) {\n      instanceId\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

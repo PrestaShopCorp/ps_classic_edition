@@ -16,7 +16,6 @@
           class="row-span-2"
           :subscription-id="subscriptionId"
         />
-        <disk-usage v-if="instanceInfos" class="row-span-2" :disk="instanceInfos.disk" />
         <our-workshops v-if="isWorkshopsFeatureActive"  class="row-span-2"/>
         <help-center class="row-span-2" />
         <div v-if="isDynamicBlocEnabled">
@@ -43,7 +42,6 @@ import DynamicBloc from "@/modules/Onboarding/components/DynamicBloc.vue";
 import FeedbackBanner from "@/modules/Onboarding/components/FeedbackBanner.vue";
 import SetupGuide from "@/modules/Onboarding/components/SetupGuide/SetupGuide.vue";
 import HelpCenter from "@/modules/Onboarding/components/HelpCenter.vue";
-import DiskUsage from "@/modules/Onboarding/components/DiskUsage.vue";
 import CallBack from "@/modules/Onboarding/components/CallBack.vue";
 import OurWorkshops from "@/modules/Onboarding/components/OurWorkshops.vue";
 import PromoBanner from "@/modules/Onboarding/components/PromoBanner.vue";
@@ -51,8 +49,8 @@ import UpdateIsNeeded from "@/modules/Onboarding/components/UpdateIsNeeded.vue";
 import CareOffers from "@/modules/Onboarding/components/CareOffers.vue";
 import PsAcademy from "@/modules/Onboarding/components/PsAcademy/PsAcademy.vue"
 import { useSetupGuideStore } from "@/modules/Onboarding/stores/useSetupGuideStore";
-import { 
-  FeatureFlag, 
+import {
+  FeatureFlag,
   isFeatureActive,
   isFormFeedBackEnabled,
   isPromoBannerEnabled,
@@ -81,9 +79,6 @@ const showBanner = computed(() => isPromoBannerEnabled && displayPromoBanner.val
 
 const blocDatasList = ref<HomepageDynamicBloc[]>([]);
 const formFeedbackData = ref<HomepageFormFeedback>();
-const instanceInfos = ref();
-
-
 
 const isCallbackFeatureActive = isFeatureActive(FeatureFlag.CALLBACK_FEATURE, context.value.shopCountry);
 const isWorkshopsFeatureActive = isFeatureActive(FeatureFlag.WORKSHOPS_FEATURE, context.value.shopCountry);
@@ -120,17 +115,6 @@ const fetchDynamicBlocDatas = async () => {
   promoBanners.value = banners;
 }
 
-const fetchInstanceInfos = async () => {
-  try {
-    const { instanceId } = await getShopDomainInfos(context.value.psAccountShopID)
-    const res = await getInstanceInfos(instanceId);
-    if (!res) return;
-    instanceInfos.value = { disk: res.disk };
-  } catch (e) {
-    console.log(e);
-  }
-}
-
 onBeforeMount(() => {
   displayPromoBanner.value = sessionStorage.getItem(sessionStorageDisplayPromoBannerKey) ?
     Boolean(Number(sessionStorage.getItem(sessionStorageDisplayPromoBannerKey))) :
@@ -142,10 +126,6 @@ onMounted(async () => {
 
   /* Initialize Account */
   (window as any).psaccountsVue?.init();
-
-  if (isDiskUsageEnabled) {
-    fetchInstanceInfos();
-  }
 
   await fetchSubscriptionInfos();
   fetchDynamicBlocDatas();

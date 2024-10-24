@@ -1,8 +1,6 @@
 import { useContext } from "@/common/composables/use-context";
 import {
   QUERY_GET_HOMEPAGE_DYNAMIC_DATA,
-  QUERY_GET_INSTANCE_DETAIL,
-  QUERY_GET_SHOP_DOMAIN_INFOS,
 } from "@/common/graphql/queries";
 import { request, type Variables } from "graphql-request";
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
@@ -24,26 +22,6 @@ const client = <T, U extends Variables>(document: TypedDocumentNode<T, U>, varia
     document,
     variables,
     requestHeaders,
-  });
-};
-
-export const getInstanceInfos = (instanceId: string) => {
-  const variables = { instanceId };
-
-  return client(QUERY_GET_INSTANCE_DETAIL, variables).then((data) => {
-    return {
-      disk: data.getInstanceDetails.data?.diskUsage,
-    };
-  });
-};
-
-export const getShopDomainInfos = (shopId: string) => {
-  const variables = { shopId };
-
-  return client(QUERY_GET_SHOP_DOMAIN_INFOS, variables).then((data) => {
-    return {
-      instanceId: data.getShopDomainInfos.instanceId,
-    };
   });
 };
 

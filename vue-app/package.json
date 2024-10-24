@@ -5,14 +5,12 @@
     "dist/assets"
   ],
   "scripts": {
-    "predev": "npm run update-graphql-schema",
-    "dev": "vite",
+    "dev": "vite build --watch",
     "build": "run-p type-check \"build-only -- {1}\" --",
     "preview": "vite preview",
     "test": "vitest --passWithNoTests",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit",
-    "update-graphql-schema": "node ../../node_modules/@graphql-codegen/cli/esm/bin.js --require dotenv/config"
+    "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@babel/types": "^7.22.10",

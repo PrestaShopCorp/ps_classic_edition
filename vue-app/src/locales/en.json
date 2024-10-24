@@ -178,30 +178,6 @@
           "content": "You have finished setting up your store!"
         }
       },
-      "disk-usage": {
-        "default": {
-          "title": "Improve your store's performance",
-          "description": "Need to speed up your store's loading time and increase storage space? Contact us!",
-          "button": "Contact us",
-          "usageTitle": "Used Storage Space",
-          "usage": "{used} GB used out of {total} GB"
-        },
-        "warning": {
-          "title": "Improve your store's performance",
-          "description": "Need to speed up your store's loading time and increase storage space? Contact us!",
-          "button": "Contact us",
-          "usageTitle": "Storage Space Almost Full",
-          "usage": "{used} GB used out of {total} GB"
-        },
-        "danger": {
-          "title": "Improve your store's performance",
-          "description": "Need to speed up your store's loading time and increase storage space? Contact us!",
-          "button": "Contact us",
-          "usageTitle": "Storage Space Full",
-          "usage": "{used} GB used out of {total} GB"
-        },
-        "buttonSupport": "Contact Support"
-      },
       "workshop": {
         "title": "Take part in our workshops",
         "subtitle": "1h - Every week",

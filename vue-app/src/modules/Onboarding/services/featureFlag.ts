@@ -26,4 +26,3 @@ export const isFeatureActive = (feature: FeatureFlag, countryCode: string) => {
 export const isFormFeedBackEnabled = import.meta.env.VITE_FORM_FEEDBACK_ENABLED === "true" ? true : false;
 export const isPromoBannerEnabled = import.meta.env.VITE_PROMO_BANNER_ENABLED === "true" ? true : false;
 export const isDynamicBlocEnabled = import.meta.env.VITE_DYNAMIC_BLOC_ENABLED === "true" ? true : false;
-export const isDiskUsageEnabled = import.meta.env.VITE_DISK_USAGE_ENABLED === "true" ? true : false;

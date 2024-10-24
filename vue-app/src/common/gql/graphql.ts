@@ -1227,18 +1227,6 @@ export type HostedShop = {
   subscriptionId: Scalars["ID"]["output"];
 };
 
-export type HostedShopDomainInfos = {
-  __typename?: "HostedShopDomainInfos";
-  boUrl?: Maybe<Scalars["String"]["output"]>;
-  currentShopDomain?: Maybe<Scalars["String"]["output"]>;
-  domains?: Maybe<Array<Maybe<HostedDomain>>>;
-  hasBeenChanged: Scalars["Boolean"]["output"];
-  instanceId: Scalars["ID"]["output"];
-  originShopDomain: Scalars["String"]["output"];
-  shopCountry: Scalars["String"]["output"];
-  trialRenewed?: Maybe<Scalars["Boolean"]["output"]>;
-};
-
 export type HostedShopLinkingFailedEvent = {
   __typename?: "HostedShopLinkingFailedEvent";
   hosting: HostedHosting;
@@ -2269,7 +2257,6 @@ export type Query = {
    *
    */
   getShopData?: Maybe<ShopResponse>;
-  getShopDomainInfos: HostedShopDomainInfos;
   /**
    *
    * >**Method**: `GET`
@@ -2404,10 +2391,6 @@ export type QueryGetProductComponentsArgs = {
 
 export type QueryGetShopDataArgs = {
   shopUid: Scalars["String"]["input"];
-};
-
-export type QueryGetShopDomainInfosArgs = {
-  input?: InputMaybe<HostedShopOrInstanceIdInput>;
 };
 
 export type QueryGetShopJobsDlqArgs = {
@@ -3360,15 +3343,6 @@ export type UpdateSubscription_Response =
   | UpdateSubscription_403_Response
   | UpdateSubscription_404_Response;
 
-export type GetShopDomainInfosQueryVariables = Exact<{
-  shopId: Scalars["ID"]["input"];
-}>;
-
-export type GetShopDomainInfosQuery = {
-  __typename?: "Query";
-  getShopDomainInfos: { __typename?: "HostedShopDomainInfos"; instanceId: string };
-};
-
 export type GetInstanceDetailsQueryVariables = Exact<{
   instanceId: Scalars["String"]["input"];
 }>;
@@ -3444,53 +3418,6 @@ export type GetHomepageDynamicDataQuery = {
     }>;
   };
 };
-
-export const GetShopDomainInfosDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "GetShopDomainInfos" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "shopId" } },
-          type: { kind: "NonNullType", type: { kind: "NamedType", name: { kind: "Name", value: "ID" } } },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getShopDomainInfos" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "input" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "shopId" },
-                      value: { kind: "Variable", name: { kind: "Name", value: "shopId" } },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [{ kind: "Field", name: { kind: "Name", value: "instanceId" } }],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GetShopDomainInfosQuery, GetShopDomainInfosQueryVariables>;
 export const GetInstanceDetailsDocument = {
   kind: "Document",
   definitions: [
