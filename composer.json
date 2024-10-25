@@ -7,8 +7,7 @@
     "php": ">=8.1",
     "prestashop/module-lib-service-container": "^2.0",
     "symfony/string": "<6.0",
-    "prestashop/prestashop-accounts-installer": "^1.0",
-    "prestashopcorp/module-lib-billing": "^3.3"
+    "prestashop/prestashop-accounts-installer": "^1.0"
   },
   "require-dev": {
     "prestashop/php-dev-tools": "^4",
