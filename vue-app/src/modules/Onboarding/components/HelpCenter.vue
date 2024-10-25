@@ -27,20 +27,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
 import i18n from "@/i18n";
 import trackWithContext from "@/common/tracking/track";
-import { useSubscriptionStore } from "../stores/useSubscriptionStore";
-
-const subscriptionStore = useSubscriptionStore();
-
-const hostedOrClassic = computed(() => (subscriptionStore.subscription ? "hosted" : "classic"));
 
 const handleDocumentationClick = async () => {
   await trackWithContext("Access To Help Center Edition Home Clicked", {
     shopUrl: window.location.origin,
     timestamp: new Date(),
-    version: hostedOrClassic.value,
+    version: 'classic',
   });
 
   window.open(i18n.global.t("onb.homepage.help.url"));

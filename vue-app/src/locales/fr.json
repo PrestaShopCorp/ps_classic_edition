@@ -144,12 +144,6 @@
         "description": "Profitez de toutes les semaines de nos ateliers en ligne pour aborder plusieurs thématiques sur la configuration du back-office",
         "button": "Découvrir les ateliers disponibles"
       },
-      "call-back": {
-        "title": "Démarrez sur de bonnes bases",
-        "subtitle": "1h - Un conseiller vous appelle",
-        "description": "Profitez d'une heure avec un conseiller PrestaShop pour configurer au mieux votre boutique et assurer votre succès.",
-        "button": "Configurer ma boutique avec un conseiller"
-      },
       "update-modal": {
         "update-running": "Mise à jour en cours",
         "update-required": "Mise à jour nécessaire pour {moduleName}",

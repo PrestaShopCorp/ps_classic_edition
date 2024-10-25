@@ -89,32 +89,22 @@ class AdminPsEditionBasicHomepageController extends AdminPsEditionBasicControlle
         /** @var ModuleService $moduleService */
         $moduleService = $this->get('PrestaShop\Module\PsEditionBasic\Service\ModuleService');
 
-        $callBackModuleUrl = $this->buildAdminUrl('ps_edition_basic_call_back');
         $setupGuideApiUrl = $this->buildAdminUrl('ps_edition_basic_setup_guide_api_index');
         $setupGuideApiUrlEdit = $this->buildAdminUrl('ps_edition_basic_setup_guide_api_edit');
         $setupGuideApiUrlModalHidden = $this->buildAdminUrl('ps_edition_basic_setup_guide_api_modal_hidden');
         $cacheClearApiUrl = $this->buildAdminUrl('ps_edition_basic_clean_mbo_cache');
-        $getSubscriptionApiUrl = $this->buildAdminUrl('ps_edition_basic_get_subscription');
         $psAcademyApiUrl = $this->buildAdminUrl('ps_edition_basic_ps_academy');
-        try {
-            $smbEditionManageSubscriptionApiUrl = $this->buildAdminUrl('smb_edition_manage_subscription');
-        } catch (\Exception $e) {
-            $smbEditionManageSubscriptionApiUrl = '';
-        }
 
         return $this->render('@Modules/ps_edition_basic/views/templates/admin/homepage.html.twig', [
             'layoutTitle' => $this->layoutTitle(),
             'urlAccountsCdn' => $accountsService ? $accountsService->getAccountsCdn() : '',
             'enableSidebar' => true,
             'jsContext' => json_encode([
-                'CALL_BACK_MODULE_URL' => $callBackModuleUrl,
                 'SETUP_GUIDE_API_URL' => $setupGuideApiUrl,
                 'SETUP_GUIDE_API_URL_EDIT' => $setupGuideApiUrlEdit,
                 'SETUP_GUIDE_API_URL_MODAL_HIDDEN' => $setupGuideApiUrlModalHidden,
                 'CACHE_CLEAR_API_URL' => $cacheClearApiUrl,
-                'GET_SUBSCRIPTION_API_URL' => $getSubscriptionApiUrl,
                 'PS_EDITION_BASIC_PS_ACADEMY_API_URL' => $psAcademyApiUrl,
-                'SMB_EDITION_MANAGE_SUBSCRIPTION_API_URL' => $smbEditionManageSubscriptionApiUrl,
                 'MAINTENANCE_URL' => $this->generateUrl('admin_maintenance'),
                 'moduleName' => $modulePsEditionBasic->displayName,
                 'moduleSlug' => $modulePsEditionBasic->name,
@@ -126,7 +116,6 @@ class AdminPsEditionBasicHomepageController extends AdminPsEditionBasicControlle
                 'psAccountID' => $psAccountID,
                 'shopName' => (string) $this->getConfiguration()->get('PS_SHOP_NAME', ''),
                 'isShopEnabled' => (bool) $this->getConfiguration()->get('PS_SHOP_ENABLE', false),
-                'psSubscriptionID' => (string) $this->getConfiguration()->get('PS_SHOP_SUBSCRIPTION_ID', ''),
                 'callBack' => [
                     'isCalledBack' => (bool) $this->getConfiguration()->get('PS_IS_CALLED_BACK', false),
                 ],
@@ -136,26 +125,6 @@ class AdminPsEditionBasicHomepageController extends AdminPsEditionBasicControlle
                 'modulesTabs' => $this->filter_modules_tabs_recursive($tabs, array_merge(PS_EDITION_BASIC_SETTINGS_WHITE_LIST, PS_EDITION_BASIC_MENU_WHITE_LIST)),
             ]),
         ]);
-    }
-
-    /**
-     * Handle the call back requests
-     *
-     * @return JsonResponse
-     */
-    public function getSubscription(): JsonResponse
-    {
-        try {
-            $billingService = $this->get('ps_billings.service');
-            $response = $billingService->getCurrentSubscription();
-            if ($response['success']) {
-                return new JsonResponse($response['body']);
-            } else {
-                return new JsonResponse(['error' => 'No subscription found'], JsonResponse::HTTP_NOT_FOUND);
-            }
-        } catch (\Exception $e) {
-            return new JsonResponse(['error' => $e], JsonResponse::HTTP_NOT_FOUND);
-        }
     }
 
     private function buildAdminUrl(string $routeName): string

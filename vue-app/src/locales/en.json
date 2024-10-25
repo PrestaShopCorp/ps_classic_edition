@@ -144,12 +144,6 @@
         "description": "Take advantage of our online workshops every week to discuss several topics on the configuration of the back office",
         "button": "Discover available workshops"
       },
-      "call-back": {
-        "title": "Get off to a good start",
-        "subtitle": "1h - A consultant calls you",
-        "description": "Take advantage of one hour with a PrestaShop consultant to configure your store and ensure your success.",
-        "button": "Configure my store with a consultant"
-      },
       "update-modal": {
         "update-running": "Update in progress",
         "update-required": "Update needed for {moduleName}",

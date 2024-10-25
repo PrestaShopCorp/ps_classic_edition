@@ -381,49 +381,6 @@ export type FirebaseTokenResponse = {
   userToken: Scalars["String"]["output"];
 };
 
-export type HomepageDynamicBloc = {
-  __typename?: "HomepageDynamicBloc";
-  id: Scalars["ID"]["output"];
-  image: HomepageDynamicBlocImage;
-  isActive: Scalars["Boolean"]["output"];
-  link: HomepageDynamicBlocLink;
-  subTitle: Array<LangObject>;
-  text: Array<LangObject>;
-  title: Array<LangObject>;
-};
-
-export type HomepageDynamicBlocImage = {
-  __typename?: "HomepageDynamicBlocImage";
-  id: Scalars["ID"]["output"];
-  src: Array<LangObject>;
-};
-
-export type HomepageDynamicBlocLink = {
-  __typename?: "HomepageDynamicBlocLink";
-  href: Array<LangObject>;
-  icon: Scalars["String"]["output"];
-  id: Scalars["ID"]["output"];
-  referrerpolicy: Scalars["String"]["output"];
-  rel: Scalars["String"]["output"];
-  target: Scalars["String"]["output"];
-  text: Array<LangObject>;
-};
-
-export type HomepageDynamicData = {
-  __typename?: "HomepageDynamicData";
-  blocs: Array<HomepageDynamicBloc>;
-  formFeedback: HomepageFormFeedback;
-  id: Scalars["ID"]["output"];
-  promoBanners: Array<HomepagePromoBanner>;
-};
-
-export type HomepageFormFeedback = {
-  __typename?: "HomepageFormFeedback";
-  id: Scalars["ID"]["output"];
-  link: HomepageDynamicBlocLink;
-  text: Array<LangObject>;
-};
-
 export type HomepagePromoBanner = {
   __typename?: "HomepagePromoBanner";
   condition: HomepagePromoCondition;

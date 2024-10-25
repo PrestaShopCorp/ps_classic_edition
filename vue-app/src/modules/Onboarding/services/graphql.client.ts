@@ -1,10 +1,6 @@
 import { useContext } from "@/common/composables/use-context";
-import {
-  QUERY_GET_HOMEPAGE_DYNAMIC_DATA,
-} from "@/common/graphql/queries";
 import { request, type Variables } from "graphql-request";
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
-import type { Subscription } from "../stores/useSubscriptionStore";
 
 const { context } = useContext();
 const client = <T, U extends Variables>(document: TypedDocumentNode<T, U>, variables: U) => {
@@ -22,20 +18,5 @@ const client = <T, U extends Variables>(document: TypedDocumentNode<T, U>, varia
     document,
     variables,
     requestHeaders,
-  });
-};
-
-export const getHomepageDynamicBlocDatas = (subscription: Subscription) => {
-  const variables = {
-    subscriptionStartedAt: subscription?.started_at,
-    subscriptionBillingUnit: subscription?.billing_period_unit,
-    lang: context.value.locale,
-  };
-  return client(QUERY_GET_HOMEPAGE_DYNAMIC_DATA, variables).then((data) => {
-    return {
-      blocs: data.homepageDynamicData.blocs,
-      formFeedback: data.homepageDynamicData.formFeedback,
-      promoBanners: data.homepageDynamicData.promoBanners,
-    };
   });
 };

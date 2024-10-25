@@ -48,9 +48,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, watch, type PropType, onMounted, computed } from "vue";
+import { ref, watch, type PropType, onMounted } from "vue";
 import { storeToRefs } from "pinia";
-import { useSubscriptionStore } from "../../stores/useSubscriptionStore";
 import { useSetupGuideStore } from "@/modules/Onboarding/stores/useSetupGuideStore";
 import trackWithContext from "@/common/tracking/track";
 import SlideTransition from "@/common/components/SlideTransition.vue";
@@ -73,12 +72,9 @@ const { isExpandable, opened, step } = defineProps({
   },
 });
 
-const subscriptionStore = useSubscriptionStore();
 const setupGuideStore = useSetupGuideStore();
 const { markStepAsCompleted, setExpandStep } = setupGuideStore;
 const { expandedStep } = storeToRefs(setupGuideStore);
-
-const hostedOrClassic = computed(() => (subscriptionStore.subscription ? "hosted" : "classic"));
 
 const isExpanded = ref(opened === true ? opened : expandedStep.value === step.name);
 
@@ -89,7 +85,7 @@ const markAsCompleted = async (markAsCompletedStatus?: boolean) => {
     await trackWithContext(getTrackEvent(step.name as StepName, SetupGuideEvent.CHECK), {
       shopUrl: window.location.origin,
       timestamp: new Date(),
-      version: hostedOrClassic.value,
+      version: 'classic',
     });
   }
 };
@@ -110,7 +106,7 @@ const openDocumentationLink = async () => {
   await trackWithContext(getTrackEvent(step.name as StepName, SetupGuideEvent.DOCUMENTATION), {
     shopUrl: window.location.origin,
     timestamp: new Date(),
-    version: hostedOrClassic.value,
+    version: 'classic',
   });
 };
 
@@ -121,13 +117,13 @@ const openStep = async (buttonStep: SetupGuideButton) => {
     await trackWithContext(getTrackEvent(step.name as StepName, SetupGuideEvent.SKIPPED), {
       shopUrl: window.location.origin,
       timestamp: new Date(),
-      version: hostedOrClassic.value,
+      version: 'classic',
     });
   } else {
     await trackWithContext(getTrackEvent(step.name as StepName, SetupGuideEvent.CTA), {
       shopUrl: window.location.origin,
       timestamp: new Date(),
-      version: hostedOrClassic.value,
+      version: 'classic',
     });
     window.location.href = buttonStep.href;
   }

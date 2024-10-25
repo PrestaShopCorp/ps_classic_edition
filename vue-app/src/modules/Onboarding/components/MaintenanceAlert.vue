@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { computed } from "vue";
-import { useSubscriptionStore } from "../stores/useSubscriptionStore";
 import { useContext } from "@/common/composables/use-context";
 import trackWithContext from "@/common/tracking/track";
 
@@ -8,15 +6,11 @@ defineProps<{ isShopEnabled: boolean }>();
 
 const { context } = useContext();
 
-const subscriptionStore = useSubscriptionStore();
-
-const hostedOrClassic = computed(() => (subscriptionStore.subscription ? "hosted" : "classic"));
-
 const goMaintenance = async () => {
   await trackWithContext("Publish Store Banner Clicked", {
     shopUrl: window.location.origin,
     timestamp: new Date(),
-    version: hostedOrClassic.value,
+    version: 'classic',
   });
 
   window.location.href = context.value.MAINTENANCE_URL;

@@ -144,12 +144,6 @@
         "description": "Aproveche nuestros talleres en línea cada semana para discutir varios temas sobre la configuración del back office",
         "button": "Descubre los talleres disponibles"
       },
-      "call-back": {
-        "title": "Empezar con buen pie",
-        "subtitle": "1h - Un consejero a tu lado",
-        "description": "Aprovecha una hora con un consultor PrestaShop para configurar tu tienda y asegurar tu éxito.",
-        "button": "Configurar mi tienda con un consultor"
-      },
       "update-modal": {
         "update-running": "Actualización en progreso",
         "update-required": "Actualización necesaria para {moduleName}",

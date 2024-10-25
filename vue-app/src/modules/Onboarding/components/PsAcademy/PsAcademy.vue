@@ -1,20 +1,17 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
-import { useSubscriptionStore } from "../../stores/useSubscriptionStore";
 import { usePsAcademy, type PsAcademyCard } from "@/modules/Onboarding/stores/psAcademy";
 import { useContext } from "@/common/composables/use-context";
 import trackWithContext from "@/common/tracking/track";
 
 const { context } = useContext();
-const subscriptionStore = useSubscriptionStore();
 const psAcademyStore = usePsAcademy();
 const { sortedProducts, pages, loading } = storeToRefs(psAcademyStore);
 
 const psAcademyUrl = computed(
   () => `${import.meta.env.VITE_PS_ACADEMY_URL}/${context.value.locale === "en" ? "gb" : context.value.locale}`,
 );
-const hostedOrClassic = computed(() => (subscriptionStore.subscription ? "hosted" : "classic"));
 
 const currentIndex = ref(0);
 /**
@@ -44,7 +41,7 @@ const trackPSA = async (title?: string) => {
   const trackProps: Record<string, unknown> = {
     shopUrl: window.location.origin,
     timestamp: new Date(),
-    version: hostedOrClassic.value,
+    version: 'classic',
   };
 
   if (title && trackProps) {
