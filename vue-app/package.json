@@ -14,8 +14,6 @@
   },
   "dependencies": {
     "@babel/types": "^7.22.10",
-    "@graphql-codegen/cli": "^5.0.0",
-    "@graphql-codegen/client-preset": "^4.1.0",
     "@prestashopcorp/puik": "1.10.1",
     "@segment/analytics-next": "1.53.3",
     "@tsconfig/node18": "^18.2.0",
