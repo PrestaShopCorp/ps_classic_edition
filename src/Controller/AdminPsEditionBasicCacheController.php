@@ -23,10 +23,7 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsEditionBasic\Controller;
 
-use Context;
-use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
-use Psr\Container\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AdminPsEditionBasicCacheController extends FrameworkBundleAdminController
@@ -42,8 +39,8 @@ class AdminPsEditionBasicCacheController extends FrameworkBundleAdminController
 
         try {
             // Force MBO's getModulesList to call MBO's API
-            $languageIsoCode = Context::getContext()->language->getIsoCode();
-            $countryIsoCode = mb_strtolower(Context::getContext()->country->iso_code);
+            $languageIsoCode = \Context::getContext()->language->getIsoCode();
+            $countryIsoCode = mb_strtolower(\Context::getContext()->country->iso_code);
             $user = $this->get('mbo.addons.user.provider')->getUser();
             $userCacheKey = '';
             if ($user->isAuthenticated()) {

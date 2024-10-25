@@ -25,7 +25,6 @@ use PrestaShop\Module\PsEditionBasic\Install\Tabs\TabsInstaller;
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use PrestaShop\PrestaShop\Core\Cache\Clearer\CacheClearerInterface;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\Dotenv\Dotenv;
 
 define('PS_EDITION_BASIC_SETTINGS_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/settingsWhiteList.json'), true));
 define('PS_EDITION_BASIC_SETTINGS_BLACK_LIST', json_decode(file_get_contents(__DIR__ . '/settingsBlackList.json'), true));

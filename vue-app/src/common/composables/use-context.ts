@@ -49,10 +49,8 @@ const contextSchema = z
     psAccountID: z.string().default(""),
     shopName: z.string().default(""),
     isShopEnabled: z.boolean().default(false),
-    tabs: z.array(tabSchema).default([]),
     locale: z.string().default(""),
     shopCountry: z.string().default(""),
-    modulesTabs: z.array(tabSchema).default([]),
   })
   .required();
 

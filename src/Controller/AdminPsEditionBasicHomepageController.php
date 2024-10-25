@@ -24,10 +24,10 @@ declare(strict_types=1);
 namespace PrestaShop\Module\PsEditionBasic\Controller;
 
 use PrestaShop\Module\PsEditionBasic\Service\ModuleService;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminPsEditionBasicHomepageController extends AdminPsEditionBasicController
+class AdminPsEditionBasicHomepageController extends FrameworkBundleAdminController
 {
     public function indexAction(): Response
     {
@@ -52,14 +52,6 @@ class AdminPsEditionBasicHomepageController extends AdminPsEditionBasicControlle
         } else {
             $accountUserToken = '';
         }
-
-        //todo: remove all this horrible mess
-        /*$reflection = new \ReflectionClass($this->getContext()->controller);
-        $method = $reflection->getMethod('getTabs');
-        $method->setAccessible(true);
-        $tabs = $method->invoke($this->getContext()->controller);*/
-        $tabs = [];
-
 
         /* ----------------------- Allow auto install account ---------------------- */
         $accountsFacade = null;
@@ -119,12 +111,15 @@ class AdminPsEditionBasicHomepageController extends AdminPsEditionBasicControlle
                 'callBack' => [
                     'isCalledBack' => (bool) $this->getConfiguration()->get('PS_IS_CALLED_BACK', false),
                 ],
-                'tabs' => $this->filter_settings_tabs_recursive($tabs, PS_EDITION_BASIC_SETTINGS_WHITE_LIST, PS_EDITION_BASIC_SETTINGS_BLACK_LIST),
                 'locale' => $this->getContext()->language->iso_code,
                 'shopCountry' => $shopCountry,
-                'modulesTabs' => $this->filter_modules_tabs_recursive($tabs, array_merge(PS_EDITION_BASIC_SETTINGS_WHITE_LIST, PS_EDITION_BASIC_MENU_WHITE_LIST)),
             ]),
         ]);
+    }
+
+    protected function layoutTitle(): string
+    {
+        return $this->trans('Home', 'Modules.Editionbasic.Admin');
     }
 
     private function buildAdminUrl(string $routeName): string

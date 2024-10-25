@@ -23,12 +23,10 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsEditionBasic\Controller;
 
-use Context;
 use GuzzleHttp\Psr7\Request;
 use Prestashop\ModuleLibGuzzleAdapter\ClientFactory;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Dotenv\Dotenv;
 
 class AdminPsEditionBasicPsAcademyController extends FrameworkBundleAdminController
 {
@@ -62,7 +60,7 @@ class AdminPsEditionBasicPsAcademyController extends FrameworkBundleAdminControl
 
     private function createObjectFromResponse(array $response): array
     {
-        $context = Context::getContext();
+        $context = \Context::getContext();
         $locale = 'gb';
         if ($context->language->iso_code) {
             $locale = $context->language->iso_code;

@@ -22,10 +22,10 @@ function upgrade_module_2_0_0(ps_edition_basic $module): bool
     $result = true;
 
     // Remove tab to former settings page
-    $id_tab = (int) \Tab::getIdFromClassName('AdminPsEditionBasicSettingsController');
+    $id_tab = (int) Tab::getIdFromClassName('AdminPsEditionBasicSettingsController');
 
-    $tab = new \Tab($id_tab);
-    if (\Validate::isLoadedObject($tab)) {
+    $tab = new Tab($id_tab);
+    if (Validate::isLoadedObject($tab)) {
         $result = $result && $tab->delete();
     }
 
