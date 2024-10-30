@@ -23,3 +23,8 @@
     <script src="{{ urlAccountsCdn|e }}" rel="preload"></script>
     <div id="vue-app" data-context="{{ jsContext|e }}"></div>
 {% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="module" src="{{ asset('../modules/ps_edition_basic/views/js/vue/assets/index.js') }}"></script>
+{% endblock %}

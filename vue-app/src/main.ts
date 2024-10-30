@@ -5,10 +5,7 @@ import i18n from "@/i18n";
 import { useContext } from "@/common/composables/use-context";
 import { createPinia } from "pinia";
 import { router } from "@/router";
-import useCustomElements from "@/modules/Rebranding/composables/useCustomElements";
 import MinimizedSetupGuideContainer from "@/modules/Onboarding/components/MinimizedSetupGuide/MinimizedSetupGuideContainer.vue";
-
-useCustomElements();
 
 const mountEl = document.querySelector<HTMLDivElement>("#vue-app");
 const context = useContext();

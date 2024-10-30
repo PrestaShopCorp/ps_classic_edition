@@ -1,45 +1,5 @@
 {
   "onb": {
-    "settings": {
-      "description": "Configura il tuo negozio con pochi clic",
-      "modules_description": "Configura i moduli installati",
-      "AdminSmbEditionManageDomainNameController": {
-        "description": "Proteggi il dominio del tuo store per renderlo attendibile e facile da trovare per i clienti.",
-        "icon": "web"
-      },
-      "AdminPsxlegalassistantController": {
-        "description": "Segui il nostro assistente legale per definire le norme del tuo negozio.",
-        "icon": "collections_bookmark"
-      },
-      "AdminSmbEditionManageSubscriptionController": {
-        "description": "Gestisci il tuo abbonamento in base alle tue esigenze.",
-        "icon": "loyalty"
-      },
-      "AdminParentShipping": {
-        "description": "Scegli o combina i metodi di spedizione più adatti a te.",
-        "icon": "local_shipping"
-      },
-      "AdminParentPayment": {
-        "description": "Scegli i sistemi di pagamento disponibili presso uno dei fornitori di servizi di pagamento approvati da PrestaShop.",
-        "icon": "credit_card"
-      },
-      "AdminInternational": {
-        "description": "Indica i diversi paesi, le lingue e le valute che desideri attivare nel tuo store.",
-        "icon": "language"
-      },
-      "ShopParameters": {
-        "description": "Configura tutte le impostazioni tecniche per far funzionare il tuo negozio.",
-        "icon": "stars"
-      },
-      "AdminAdvancedParameters": {
-        "description": "Configura il funzionamento del tuo negozio.",
-        "icon": "settings_ethernet"
-      },
-      "AdminNtbackupandrestore": {
-        "description": "Ripristina il tuo negozio con pochi clic.",
-        "icon": "ripristinare"
-      }
-    },
     "homepage": {
       "title": "Ti diamo il benvenuto nell'area di creazione del tuo store",
       "maintenance": {
@@ -178,41 +138,11 @@
           "content": "Hai finito di configurare il tuo negozio!"
         }
       },
-      "disk-usage": {
-        "default": {
-          "title": "Migliora le prestazioni del tuo negozio",
-          "description": "Hai bisogno di velocizzare i tempi di caricamento del tuo negozio e di aumentare lo spazio di archiviazione? Contattateci!",
-          "button": "Contattaci",
-          "usageTitle": "Spazio di archiviazione utilizzato",
-          "usage": "{used} GB utilizzati su {total} GB"
-        },
-        "warning": {
-          "title": "Migliora le prestazioni del tuo negozio",
-          "description": "Hai bisogno di velocizzare i tempi di caricamento del tuo negozio e di aumentare lo spazio di archiviazione? Contattateci!",
-          "button": "Contattaci",
-          "usageTitle": "Spazio di archiviazione quasi pieno",
-          "usage": "{used} GB utilizzati su {total} GB"
-        },
-        "danger": {
-          "title": "Migliora le prestazioni del tuo negozio",
-          "description": "Hai bisogno di velocizzare i tempi di caricamento del tuo negozio e di aumentare lo spazio di archiviazione? Contattateci!",
-          "button": "Contattaci",
-          "usageTitle": "Spazio di archiviazione saturo",
-          "usage": "{used} GB utilizzati su {total} GB"
-        },
-        "buttonSupport": "Contatta il supporto"
-      },
       "workshop": {
         "title": "Partecipa ai nostri workshop",
         "subtitle": "1 ora - Ogni settimana",
         "description": "Approfitta dei nostri workshop online settimanali per discutere diversi argomenti sulla configurazione del back office",
         "button": "Scopri i workshop disponibili"
-      },
-      "call-back": {
-        "title": "Iniziare bene",
-        "subtitle": "1h - Un consulente vi chiama",
-        "description": "Approfittate di un'ora con un consulente PrestaShop per configurare il vostro negozio e garantirvi il successo.",
-        "button": "Configurare il mio negozio con un consulente"
       },
       "update-modal": {
         "update-running": "Aggiornamento in corso",

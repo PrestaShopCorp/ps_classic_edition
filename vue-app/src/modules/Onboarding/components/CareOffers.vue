@@ -1,15 +1,11 @@
 <script lang="ts" setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted } from "vue";
 import i18n from "@/i18n";
 import { register } from "swiper/element/bundle";
-import { useSubscriptionStore } from "../stores/useSubscriptionStore";
 import trackWithContext from "@/common/tracking/track";
 
 // register Swiper
 register();
-
-const subscriptionStore = useSubscriptionStore();
-const hostedOrClassic = computed(() => (subscriptionStore.subscription ? "hosted" : "classic"));
 
 const screenWidth = ref(screen.width);
 const slidesPerView = ref(2);
@@ -43,7 +39,7 @@ const trackCO = async (title?: string) => {
   const trackProps: Record<string, unknown> = {
     shopUrl: window.location.origin,
     timestamp: new Date(),
-    version: hostedOrClassic.value,
+    version: 'classic',
   };
 
   if (title && trackProps) {

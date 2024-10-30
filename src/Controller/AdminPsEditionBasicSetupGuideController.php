@@ -24,9 +24,7 @@ declare(strict_types=1);
 namespace PrestaShop\Module\PsEditionBasic\Controller;
 
 use PrestaShop\Module\PsEditionBasic\Presenter\SetupGuideDataPresenter;
-use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
-use Psr\Container\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 

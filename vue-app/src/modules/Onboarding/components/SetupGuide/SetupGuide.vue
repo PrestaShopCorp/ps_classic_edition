@@ -31,8 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from "vue";
-import { useSubscriptionStore } from "../../stores/useSubscriptionStore";
+import { ref, watch } from "vue";
 import { useSetupGuideStore } from "@/modules/Onboarding/stores/useSetupGuideStore";
 import trackWithContext from "@/common/tracking/track";
 import SetupGuideHeader from "@/modules/Onboarding/components/SetupGuide/SetupGuideHeader.vue";
@@ -41,11 +40,9 @@ import SetupGuideList from "@/modules/Onboarding/components/SetupGuide/SetupGuid
 import confetti from "canvas-confetti";
 import { PuikModalSize, PuikModalVariant } from "@prestashopcorp/puik/es";
 
-const subscriptionStore = useSubscriptionStore();
 const setupGuideStore = useSetupGuideStore();
 const { removeModal, steps } = setupGuideStore;
 const isModalOpen = ref(false);
-const hostedOrClassic = computed(() => (subscriptionStore.subscription ? "hosted" : "classic"));
 
 const setModalIsOpen = async (isOpened: boolean) => {
   isModalOpen.value = isOpened;
@@ -59,7 +56,7 @@ const setModalIsOpen = async (isOpened: boolean) => {
     await trackWithContext("Close Checklist BO Clicked", {
       shopUrl: window.location.origin,
       timestamp: new Date(),
-      version: hostedOrClassic.value,
+      version: 'classic',
     });
   }
 };
@@ -70,7 +67,7 @@ const setModalVisibility = async () => {
   await trackWithContext("Delete Checklist BO Clicked", {
     shopUrl: window.location.origin,
     timestamp: new Date(),
-    version: hostedOrClassic.value,
+    version: 'classic',
   });
 };
 

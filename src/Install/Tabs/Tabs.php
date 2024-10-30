@@ -66,23 +66,6 @@ class Tabs
                 'wording' => '',
                 'wording_domain' => 'Modules.Editionbasic.Admin',
             ],
-            [
-                'class_name' => 'AdminPsEditionBasicSettingsController',
-                'route_name' => 'ps_edition_basic_settings',
-                'name' => [
-                    'en' => 'Settings',
-                    'fr' => 'Paramètres',
-                    'it' => 'Impostazioni',
-                    'es' => 'Ajustes',
-                ],
-                'icon' => 'settings',
-                'parent' => 'CONFIGURE',
-                'position' => 0,
-                'active' => true,
-                'enabled' => true,
-                'wording' => '',
-                'wording_domain' => 'Modules.Editionbasic.Admin',
-            ],
         ];
     }
 }

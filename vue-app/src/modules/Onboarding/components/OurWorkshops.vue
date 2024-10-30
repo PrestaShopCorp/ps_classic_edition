@@ -29,20 +29,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import { useSubscriptionStore } from "../stores/useSubscriptionStore";
 import trackWithContext from "@/common/tracking/track";
 import constants from "@/common/constants";
-
-const subscriptionStore = useSubscriptionStore();
-
-const hostedOrClassic = computed(() => (subscriptionStore.subscription ? "hosted" : "classic"));
 
 const handleWorkshopClick = async () => {
   await trackWithContext("Access Our Workshops Edition Home Clicked", {
     shopUrl: window.location.origin,
     timestamp: new Date(),
-    version: hostedOrClassic.value,
+    version: 'classic',
   });
 
   window.open(constants.WORKSHOPS_URL);

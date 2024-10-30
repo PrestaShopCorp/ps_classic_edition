@@ -23,7 +23,6 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsEditionBasic\Service;
 
-use Context;
 use PrestaShop\Module\Mbo\Service\ModulesHelper;
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use PrestaShop\PrestaShop\Core\Module\ModuleManager;
@@ -53,7 +52,7 @@ class ModuleService
     public function __construct(
         ModuleManager $moduleManager,
         string $moduleName,
-        int $moduleId
+        int $moduleId,
     ) {
         $this->moduleManager = $moduleManager;
         $this->moduleName = $moduleName;
@@ -88,7 +87,7 @@ class ModuleService
     {
         $router = $this->get('router');
 
-        $context = Context::getContext();
+        $context = \Context::getContext();
 
         return substr(\Tools::getShopDomainSsl(true) . __PS_BASE_URI__, 0, -1) .
             $router->generate('admin_module_manage_action', [

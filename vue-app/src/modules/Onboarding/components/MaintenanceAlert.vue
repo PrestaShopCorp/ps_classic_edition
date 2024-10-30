@@ -1,26 +1,19 @@
 <script lang="ts" setup>
-import { computed } from "vue";
-import { useSubscriptionStore } from "../stores/useSubscriptionStore";
-import constants from "@/common/constants";
-import useTabs from "@/common/composables/use-tabs";
+import { useContext } from "@/common/composables/use-context";
 import trackWithContext from "@/common/tracking/track";
 
 defineProps<{ isShopEnabled: boolean }>();
 
-const { getAdminLink } = useTabs();
-
-const subscriptionStore = useSubscriptionStore();
-
-const hostedOrClassic = computed(() => (subscriptionStore.subscription ? "hosted" : "classic"));
+const { context } = useContext();
 
 const goMaintenance = async () => {
   await trackWithContext("Publish Store Banner Clicked", {
     shopUrl: window.location.origin,
     timestamp: new Date(),
-    version: hostedOrClassic.value,
+    version: 'classic',
   });
 
-  window.location.href = getAdminLink(constants.MAINTENANCE) ?? "";
+  window.location.href = context.value.MAINTENANCE_URL;
 };
 </script>
 

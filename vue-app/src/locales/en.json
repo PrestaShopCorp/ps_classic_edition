@@ -1,45 +1,5 @@
 {
   "onb": {
-    "settings": {
-      "description": "Configure your shop in a few clicks",
-      "modules_description": "Configure the modules you installed",
-      "AdminSmbEditionManageDomainNameController": {
-        "description": "Secure your store's domain so customers can trust it and find it easily.",
-        "icon": "web"
-      },
-      "AdminPsxlegalassistantController": {
-        "description": "Follow our legal assistant to create your own shop policies.",
-        "icon": "collections_bookmark"
-      },
-      "AdminSmbEditionManageSubscriptionController": {
-        "description": "Manage your subscription according to your needs.",
-        "icon": "loyalty"
-      },
-      "AdminParentShipping": {
-        "description": "Choose or combine the shipping methods that suit you best.",
-        "icon": "local_shipping"
-      },
-      "AdminParentPayment": {
-        "description": "Choose the payment methods available with one of the payment providers approved by PrestaShop.",
-        "icon": "credit_card"
-      },
-      "AdminInternational": {
-        "description": "Display the different countries, languages, and currencies you want to activate on your store.",
-        "icon": "language"
-      },
-      "ShopParameters": {
-        "description": "Configure all the technical settings to make your shop work.",
-        "icon": "stars"
-      },
-      "AdminAdvancedParameters": {
-        "description": "Configure the operation of your shop.",
-        "icon": "settings_ethernet"
-      },
-      "AdminNtbackupandrestore": {
-        "description": "Restore your shop in a few clicks.",
-        "icon": "restore"
-      }
-    },
     "homepage": {
       "title": "Welcome to the creation space of your shop",
       "maintenance": {
@@ -178,41 +138,11 @@
           "content": "You have finished setting up your store!"
         }
       },
-      "disk-usage": {
-        "default": {
-          "title": "Improve your store's performance",
-          "description": "Need to speed up your store's loading time and increase storage space? Contact us!",
-          "button": "Contact us",
-          "usageTitle": "Used Storage Space",
-          "usage": "{used} GB used out of {total} GB"
-        },
-        "warning": {
-          "title": "Improve your store's performance",
-          "description": "Need to speed up your store's loading time and increase storage space? Contact us!",
-          "button": "Contact us",
-          "usageTitle": "Storage Space Almost Full",
-          "usage": "{used} GB used out of {total} GB"
-        },
-        "danger": {
-          "title": "Improve your store's performance",
-          "description": "Need to speed up your store's loading time and increase storage space? Contact us!",
-          "button": "Contact us",
-          "usageTitle": "Storage Space Full",
-          "usage": "{used} GB used out of {total} GB"
-        },
-        "buttonSupport": "Contact Support"
-      },
       "workshop": {
         "title": "Take part in our workshops",
         "subtitle": "1h - Every week",
         "description": "Take advantage of our online workshops every week to discuss several topics on the configuration of the back office",
         "button": "Discover available workshops"
-      },
-      "call-back": {
-        "title": "Get off to a good start",
-        "subtitle": "1h - A consultant calls you",
-        "description": "Take advantage of one hour with a PrestaShop consultant to configure your store and ensure your success.",
-        "button": "Configure my store with a consultant"
       },
       "update-modal": {
         "update-running": "Update in progress",

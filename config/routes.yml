@@ -6,22 +6,6 @@ ps_edition_basic_homepage:
     _legacy_controller: "AdminPsEditionBasicHomepageController"
     _legacy_link: "AdminPsEditionBasicHomepageController"
 
-ps_edition_basic_settings:
-  path: pseditionbasic/settings
-  methods: [GET, POST]
-  defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicSettingsController::indexAction
-    _legacy_controller: "CONFIGURE"
-    _legacy_link: "CONFIGURE"
-
-ps_edition_basic_call_back:
-  path: pseditionbasic/call-back
-  methods: [GET, POST]
-  defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicCallBackController::handleRequest
-    _legacy_controller: "AdminPsEditionBasicCallBackController"
-    _legacy_link: "AdminPsEditionBasicCallBackController"
-
 ps_edition_basic_setup_guide_api:
   path: /pseditionbasic/setup-guide/api/
   methods: [GET, POST, PUT, PATCH]
@@ -59,14 +43,6 @@ ps_edition_basic_clean_mbo_cache:
     _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicCacheController::handleRequest
     _legacy_controller: "AdminPsEditionBasicCacheController"
     _legacy_link: "AdminPsEditionBasicCacheController"
-
-ps_edition_basic_get_subscription:
-  path: pseditionbasic/get-subscription
-  methods: [GET]
-  defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicHomepageController::getSubscription
-    _legacy_controller: "AdminPsEditionBasicHomepageController"
-    _legacy_link: "AdminPsEditionBasicHomepageController"
 
 ps_edition_basic_ps_academy:
   path: pseditionbasic/ps-academy

@@ -1,45 +1,5 @@
 {
   "onb": {
-    "settings": {
-      "description": "Configurez votre boutique en quelques clics",
-      "modules_description": "Configurez vos modules fraichement installés",
-      "AdminSmbEditionManageDomainNameController": {
-        "description": "Sécurisez le domaine de votre magasin pour que les clients puissent avoir confiance et le trouver facilement.",
-        "icon": "web"
-      },
-      "AdminPsxlegalassistantController": {
-        "description": "Suivez notre assistant juridique pour créer vos propres politiques de boutique.",
-        "icon": "collections_bookmark"
-      },
-      "AdminSmbEditionManageSubscriptionController": {
-        "description": "Gérez votre abonnement selon vos besoins.",
-        "icon": "loyalty"
-      },
-      "AdminParentShipping": {
-        "description": "Choisissez ou combinez les méthodes de livraison qui vous conviennent le mieux.",
-        "icon": "local_shipping"
-      },
-      "AdminParentPayment": {
-        "description": "Choisissez les méthodes de paiement disponibles avec l'un des fournisseurs de paiement approuvés par Prestashop.",
-        "icon": "credit_card"
-      },
-      "AdminInternational": {
-        "description": "Affichez les différents pays, langues et devises que vous souhaitez activer sur votre magasin.",
-        "icon": "language"
-      },
-      "ShopParameters": {
-        "description": "Configurez tous les paramètres techniques pour faire fonctionner votre magasin.",
-        "icon": "stars"
-      },
-      "AdminAdvancedParameters": {
-        "description": "Configurez le fonctionnement de votre boutique.",
-        "icon": "settings_ethernet"
-      },
-      "AdminNtbackupandrestore": {
-        "description": "Restaurez votre boutique en quelques clics.",
-        "icon": "restore"
-      }
-    },
     "homepage": {
       "title": "Bienvenue sur l'espace de création de votre boutique",
       "maintenance": {
@@ -178,41 +138,11 @@
           "content": "Vous avez terminé la configuration de votre boutique !"
         }
       },
-      "disk-usage": {
-        "default": {
-          "title": "Améliorez les performances de votre boutique",
-          "description": "Besoin d’accélérer le temps de chargement de votre boutique et d’augmenter l’espace de stockage ? Contactez-nous !",
-          "button": "Nous contacter",
-          "usageTitle": "Espace de stockage utilisé",
-          "usage": "{used} Go utilisés sur {total} Go"
-        },
-        "warning": {
-          "title": "Améliorez les performances de votre boutique",
-          "description": "Besoin d’accélérer le temps de chargement de votre boutique et d’augmenter l’espace de stockage ? Contactez-nous !",
-          "button": "Nous contacter",
-          "usageTitle": "Espace de stockage presque plein",
-          "usage": "{used} Go utilisés sur {total} Go"
-        },
-        "danger": {
-          "title": "Améliorez les performances de votre boutique",
-          "description": "Besoin d’accélérer le temps de chargement de votre boutique et d’augmenter l’espace de stockage ? Contactez-nous !",
-          "button": "Nous contacter",
-          "usageTitle": "Espace de stockage saturé",
-          "usage": "{used} Go utilisés sur {total} Go"
-        },
-        "buttonSupport": "Contacter le support"
-      },
       "workshop": {
         "title": "Participez à nos ateliers",
         "subtitle": "1h - Toutes les semaines",
         "description": "Profitez de toutes les semaines de nos ateliers en ligne pour aborder plusieurs thématiques sur la configuration du back-office",
         "button": "Découvrir les ateliers disponibles"
-      },
-      "call-back": {
-        "title": "Démarrez sur de bonnes bases",
-        "subtitle": "1h - Un conseiller vous appelle",
-        "description": "Profitez d'une heure avec un conseiller PrestaShop pour configurer au mieux votre boutique et assurer votre succès.",
-        "button": "Configurer ma boutique avec un conseiller"
       },
       "update-modal": {
         "update-running": "Mise à jour en cours",

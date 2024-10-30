@@ -25,16 +25,15 @@ use Symfony\Component\String\UnicodeString;
 
 trait UseHooks
 {
-    use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionAdminMenuTabsModifier;
-    use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionAdminControllerInitBefore;
-    use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionAdminBreadcrumbModifier;
-    use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionObjectLanguageAddAfter;
-    use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionAdminControllerSetMedia;
-    use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseDisplayBackOfficeHeader;
-    use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseDisplayAdminNavBarBeforeEnd;
-    use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseDisplayDashboardTop;
-    use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionObjectEmployeeAddAfter;
-    use \PrestaShop\Module\PsEditionBasic\Traits\Hooks\UseActionObjectEmployeeUpdateAfter;
+    use Hooks\UseActionAdminMenuTabsModifier;
+    use Hooks\UseActionAdminBreadcrumbModifier;
+    use Hooks\UseActionObjectLanguageAddAfter;
+    use Hooks\UseActionAdminControllerSetMedia;
+    use Hooks\UseDisplayBackOfficeHeader;
+    use Hooks\UseDisplayAdminNavBarBeforeEnd;
+    use Hooks\UseDisplayDashboardTop;
+    use Hooks\UseActionObjectEmployeeAddAfter;
+    use Hooks\UseActionObjectEmployeeUpdateAfter;
 
     /**
      * @var array An array of method that can be called to register media in the actionAdminControllerSetMedia hook

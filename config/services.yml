@@ -22,33 +22,9 @@ services:
     arguments:
       - "@ps_edition_basic.ps_accounts.installer"
 
-  PrestaShop\Module\PsEditionBasic\Service\ConfigurationService:
-    class: PrestaShop\Module\PsEditionBasic\Service\ConfigurationService
-
   PrestaShop\Module\PsEditionBasic\Service\ModuleService:
     class: PrestaShop\Module\PsEditionBasic\Service\ModuleService
     arguments:
       - "@prestashop.module.manager"
       - "@=service('ps_edition_basic.module').name"
       - "@=service('ps_edition_basic.module').addons_id"
-
-  # PS Billing
-  ps_billings.context_wrapper:
-    class: 'PrestaShopCorp\Billing\Wrappers\BillingContextWrapper'
-    arguments:
-      - "@ps_edition_basic.ps_accounts.facade"
-      - "@=service('smb_edition.context') ?: null"
-
-  ps_billings.facade:
-    class: 'PrestaShopCorp\Billing\Presenter\BillingPresenter'
-    arguments:
-      - "@ps_billings.context_wrapper"
-      - "@=service('smb_edition.module') ?: null"
-
-  # Remove this if you don't need BillingService
-  ps_billings.service:
-    class: PrestaShopCorp\Billing\Services\BillingService
-    public: true
-    arguments:
-      - "@ps_billings.context_wrapper"
-      - "@=service('smb_edition.module') ?: null"

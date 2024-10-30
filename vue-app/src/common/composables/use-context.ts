@@ -33,14 +33,12 @@ const tabSchema = baseTabSchema.extend({
 
 const contextSchema = z
   .object({
-    CALL_BACK_MODULE_URL: z.string().default(""),
     SETUP_GUIDE_API_URL: z.string().default(""),
     SETUP_GUIDE_API_URL_EDIT: z.string().default(""),
     SETUP_GUIDE_API_URL_MODAL_HIDDEN: z.string().default(""),
     CACHE_CLEAR_API_URL: z.string().default(""),
-    GET_SUBSCRIPTION_API_URL: z.string().default(""),
     PS_EDITION_BASIC_PS_ACADEMY_API_URL: z.string().default(""),
-    SMB_EDITION_MANAGE_SUBSCRIPTION_API_URL: z.string().default(""),
+    MAINTENANCE_URL: z.string().default(""),
     moduleVersion: z.string().default(""),
     moduleName: z.string().default(""),
     moduleSlug: z.string().default(""),
@@ -51,16 +49,8 @@ const contextSchema = z
     psAccountID: z.string().default(""),
     shopName: z.string().default(""),
     isShopEnabled: z.boolean().default(false),
-    psSubscriptionID: z.string().default(""),
-    callBack: z
-      .object({
-        isCalledBack: z.boolean().default(false),
-      })
-      .default({}),
-    tabs: z.array(tabSchema).default([]),
     locale: z.string().default(""),
     shopCountry: z.string().default(""),
-    modulesTabs: z.array(tabSchema).default([]),
   })
   .required();
 

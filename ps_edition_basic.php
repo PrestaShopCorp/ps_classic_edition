@@ -25,7 +25,6 @@ use PrestaShop\Module\PsEditionBasic\Install\Tabs\TabsInstaller;
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use PrestaShop\PrestaShop\Core\Cache\Clearer\CacheClearerInterface;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\Dotenv\Dotenv;
 
 define('PS_EDITION_BASIC_SETTINGS_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/settingsWhiteList.json'), true));
 define('PS_EDITION_BASIC_SETTINGS_BLACK_LIST', json_decode(file_get_contents(__DIR__ . '/settingsBlackList.json'), true));
@@ -58,11 +57,11 @@ class ps_edition_basic extends Module
     public function __construct()
     {
         $this->name = 'ps_edition_basic';
-        $this->version = '1.0.17';
+        $this->version = '2.0.0';
         $this->tab = 'administration';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
-        $this->ps_versions_compliancy = ['min' => '8.0.0', 'max' => _PS_VERSION_];
+        $this->ps_versions_compliancy = ['min' => '9.0.0', 'max' => _PS_VERSION_];
         $this->module_key = '5530785cbb44445d52d2a98f8ff6d309';
 
         parent::__construct();
@@ -99,20 +98,11 @@ class ps_edition_basic extends Module
 
     public function install(): bool
     {
-        $filePath = $this->getModulePath('smb_edition');
-        $moduleIsPresentOnDisk = file_exists($filePath);
-
-        // Activate new menu on edition shop
-        if ($moduleIsPresentOnDisk) {
-            Configuration::updateValue('SMB_IS_NEW_MENU_ENABLED', true);
-        } else {
-            // Deactivate on basic shop
-            Configuration::updateValue('SMB_IS_NEW_MENU_ENABLED', false);
-        }
-
-        return parent::install()
+        return
+            parent::install()
             && (new TabsInstaller($this->name))->installTabs()
-            && $this->registerHook($this->getHooksNames());
+            && $this->registerHook($this->getHooksNames())
+        ;
     }
 
     public function postInstall(): bool
@@ -148,18 +138,6 @@ class ps_edition_basic extends Module
         (new TabsInstaller($this->name))->installTabs();
 
         return parent::enable($force_all);
-    }
-
-    public function disable($force_all = false): bool
-    {
-        return parent::disable($force_all);
-    }
-
-    private function addAdminThemeMedia(): void
-    {
-        $this->context->controller->addCSS($this->getParameter('ps_edition_basic.edition_basic_admin_css'));
-        $this->context->controller->addJS($this->getPathUri() . 'views/js/favicon.js');
-        // Hide minified setup guide if not in edition shop
     }
 
     public function getParameter(string $key)// @phpstan-ignore-line
