@@ -7,12 +7,17 @@ import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), Components({ resolvers: [PuikResolver()] }), cssInjectedByJsPlugin()],
+  plugins: [
+    vue(),
+    Components({ resolvers: [PuikResolver()] }),
+    cssInjectedByJsPlugin(),
+  ],
   server: {
     origin: "http://localhost:5173",
   },
+  base: '/modules/ps_edition_basic/views/js/vue/',
   build: {
-    outDir: '../views/js/vue',
+    outDir: "../views/js/vue",
     emptyOutDir: true,
     rollupOptions: {
       output: {

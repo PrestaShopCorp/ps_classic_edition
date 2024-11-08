@@ -5,3 +5,4 @@ views/templates/admin/overrides/new-theme/page_header_toolbar.tpl
 vendor
 node_modules
 .hintrc
+.env
