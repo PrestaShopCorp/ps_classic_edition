@@ -181,4 +181,12 @@ watch(
     isExpanded.value = newValue === step.name;
   },
 );
+
+
+onMounted(() => {
+  if (step.name === "account") {
+    const isOnboardingCompleted = (window as any).psaccountsVue?.isOnboardingCompleted();
+    markStepAsCompleted(step.name, isOnboardingCompleted);
+  }
+});
 </script>
