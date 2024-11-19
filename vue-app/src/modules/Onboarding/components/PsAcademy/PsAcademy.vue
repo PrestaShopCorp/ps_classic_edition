@@ -9,9 +9,7 @@ const { context } = useContext();
 const psAcademyStore = usePsAcademy();
 const { sortedProducts, pages, loading } = storeToRefs(psAcademyStore);
 
-const psAcademyUrl = computed(
-  () => `${import.meta.env.VITE_PS_ACADEMY_URL}/${context.value.locale === "en" ? "gb" : context.value.locale}`,
-);
+const psAcademyUrl = "https://prestashop-academy.com/";
 
 const currentIndex = ref(0);
 /**

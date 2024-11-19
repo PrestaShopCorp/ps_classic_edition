@@ -1,5 +1,0 @@
-parameters:
-  # Default values
-  env(PS_EDITION_BASIC_PS_ACADEMY_URL): 'https://preprod-academy.prestashop-test.com/'
-  env(PS_EDITION_BASIC_PS_ACADEMY_KEY): ''
-
