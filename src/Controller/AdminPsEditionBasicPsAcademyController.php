@@ -23,30 +23,29 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsEditionBasic\Controller;
 
-use GuzzleHttp\Psr7\Request;
-use Prestashop\ModuleLibGuzzleAdapter\ClientFactory;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class AdminPsEditionBasicPsAcademyController extends FrameworkBundleAdminController
 {
-    public function __construct(
-        protected string $psAcademyUrl,
-        protected string $psAcademyKey,
-    ) {
+    public function __construct(private HttpClientInterface $httpClient)
+    {
     }
 
     private function getProductsId(): array
     {
-        $client = (new ClientFactory())->getClient();
-        $requestVideoHosted = new Request('GET', $this->psAcademyUrl . '/api/products?filter[mpn]=[videoHosted]&ws_key=' . $this->psAcademyKey . '&output_format=JSON');
-        $requestLiveHosted = new Request('GET', $this->psAcademyUrl . '/api/products?filter[mpn]=[liveHosted]&ws_key=' . $this->psAcademyKey . '&output_format=JSON');
+        $responseVideoHosted = $this->httpClient->request(
+            'GET',
+            'https://prestashop-academy.com/api/products?filter[mpn]=[videoHosted]&ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON'
+        );
+        $responseLiveHosted = $this->httpClient->request(
+            'GET',
+            'https://prestashop-academy.com/api/products?filter[mpn]=[liveHosted]&ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON'
+        );
 
-        $responseVideoHosted = $client->sendRequest($requestVideoHosted);
-        $responseLiveHosted = $client->sendRequest($requestLiveHosted);
-
-        $responseContentsVideoHosted = json_decode($responseVideoHosted->getBody()->getContents(), true);
-        $responseContentsLiveHosted = json_decode($responseLiveHosted->getBody()->getContents(), true);
+        $responseContentsVideoHosted = json_decode($responseVideoHosted->getContent(), true);
+        $responseContentsLiveHosted = json_decode($responseLiveHosted->getContent(), true);
 
         $httpStatusCodeVideoHosted = $responseVideoHosted->getStatusCode();
         $httpStatusCodeLiveHosted = $responseLiveHosted->getStatusCode();
@@ -78,18 +77,16 @@ class AdminPsEditionBasicPsAcademyController extends FrameworkBundleAdminControl
             'it' => 3,
         ];
 
-        $client = (new ClientFactory())->getClient();
-        $requestCategory = new Request('GET', $this->psAcademyUrl . '/api/categories/' . $response['id_category_default'] . '?ws_key=' . $this->psAcademyKey . '&output_format=JSON');
-        $responseCategory = $client->sendRequest($requestCategory);
+        $responseCategory = $this->httpClient->request('GET', 'https://prestashop-academy.com/api/categories/' . $response['id_category_default'] . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON');
         $httpStatusCode = $responseCategory->getStatusCode();
 
         if ($httpStatusCode > 300) {
             return [];
         }
-        $responseContents = json_decode($responseCategory->getBody()->getContents(), true);
+        $responseContents = json_decode($responseCategory->getContent(), true);
         $category = $responseContents['category']['link_rewrite'][$langIds[$locale]]['value'];
         $link_rewrite = $response['link_rewrite'][$langIds[$locale]]['value'];
-        $productUrl = $this->psAcademyUrl . '/' . $locale . '/' . $category . '/' . $response['id'] . '-' . $link_rewrite . '.html';
+        $productUrl = 'https://prestashop-academy.com/' . $locale . '/' . $category . '/' . $response['id'] . '-' . $link_rewrite . '.html';
 
         $tmp = [
             'name' => $response['name'][$langIds[$locale]]['value'],
@@ -108,16 +105,14 @@ class AdminPsEditionBasicPsAcademyController extends FrameworkBundleAdminControl
     public function getProducts(): JsonResponse
     {
         $ids = $this->getProductsId();
-        $client = (new ClientFactory())->getClient();
         $products = [];
 
         if (!empty($ids)) {
             foreach ($ids as $id) {
-                $request = new Request('GET', $this->psAcademyUrl . '/api/products/' . $id . '?ws_key=' . $this->psAcademyKey . '&output_format=JSON');
-                $response = $client->sendRequest($request);
+                $response = $this->httpClient->request('GET', 'https://prestashop-academy.com/api/products/' . $id . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON');
                 $httpStatusCode = $response->getStatusCode();
                 if ($httpStatusCode <= 300) {
-                    $responseContents = json_decode($response->getBody()->getContents(), true);
+                    $responseContents = json_decode($response->getContent(), true);
                     $tempObject = $this->createObjectFromResponse($responseContents['product']);
                     array_push($products, $tempObject);
                 }
