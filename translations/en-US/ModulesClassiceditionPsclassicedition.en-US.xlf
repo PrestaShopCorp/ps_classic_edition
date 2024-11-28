@@ -2,14 +2,14 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file original="admin-dev" source-language="en-US" target-language="en-US" datatype="plaintext">
     <body>
-      <trans-unit id="ed56c088e223462171cc99f1a9b37785">
-        <source>PrestaShop Edition Basic</source>
-        <target>PrestaShop Edition Basic</target>
+      <trans-unit id="6149631c687b5866fcbd9133254e1015">
+        <source>PrestaShop Classic Edition</source>
+        <target>PrestaShop Classic Edition</target>
         <note>Line: </note>
       </trans-unit>
-      <trans-unit id="6a90fc4626c573c45b029834f434f30a">
-        <source>PrestaShop Edition Basic.</source>
-        <target>PrestaShop Edition Basic.</target>
+      <trans-unit id="4c6c4199f559fc0cb998c11097002ee7">
+        <source>PrestaShop Classic Edition.</source>
+        <target>PrestaShop Classic Edition.</target>
         <note>Line: </note>
       </trans-unit>
     </body>

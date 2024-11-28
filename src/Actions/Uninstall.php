@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Actions;
+namespace PrestaShop\Module\PsClassicEdition\Actions;
 
 class Uninstall
 {
@@ -44,7 +44,7 @@ class Uninstall
     {
         $result = true;
 
-        foreach (['HOME', 'AdminPsEditionBasicHomepageController', 'AdminPsEditionBasicSettingsController'] as $tabItemClassName) {
+        foreach (['HOME', 'AdminPsClassicEditionHomepageController', 'AdminPsClassicEditionSettingsController'] as $tabItemClassName) {
             $id_tab = (int) \Tab::getIdFromClassName($tabItemClassName);
 
             $tab = new \Tab($id_tab);

@@ -37,7 +37,7 @@ const contextSchema = z
     SETUP_GUIDE_API_URL_EDIT: z.string().default(""),
     SETUP_GUIDE_API_URL_MODAL_HIDDEN: z.string().default(""),
     CACHE_CLEAR_API_URL: z.string().default(""),
-    PS_EDITION_BASIC_PS_ACADEMY_API_URL: z.string().default(""),
+    PS_CLASSIC_EDITION_PS_ACADEMY_API_URL: z.string().default(""),
     MAINTENANCE_URL: z.string().default(""),
     moduleVersion: z.string().default(""),
     moduleName: z.string().default(""),

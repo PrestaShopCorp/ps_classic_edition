@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Traits\Hooks;
+namespace PrestaShop\Module\PsClassicEdition\Traits\Hooks;
 
 use PrestaShop\PrestaShop\Adapter\Configuration;
 
@@ -34,6 +34,6 @@ trait UseActionObjectLanguageAddAfter
         // If new country is added we want to update module tabs.
         /** @var Configuration $configuration */
         $configuration = $this->get('prestashop.adapter.legacy.configuration');
-        $configuration->set(self::PS_EDITION_BASIC_MODULE_TABS_LANG_UPDATE_REQUIRED, '1');
+        $configuration->set(self::PS_CLASSIC_EDITION_MODULE_TABS_LANG_UPDATE_REQUIRED, '1');
     }
 }

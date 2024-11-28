@@ -21,13 +21,13 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Controller;
+namespace PrestaShop\Module\PsClassicEdition\Controller;
 
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class AdminPsEditionBasicPsAcademyController extends FrameworkBundleAdminController
+class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminController
 {
     public function __construct(private HttpClientInterface $httpClient)
     {

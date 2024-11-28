@@ -1,6 +1,6 @@
-# ps_edition_basic
+# ps_classic_edition
 
-PrestaShop Edition Basic module
+PrestaShop Classic Edition module
 
 ## Initialization
 

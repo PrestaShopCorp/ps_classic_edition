@@ -20,9 +20,9 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Presenter;
+namespace PrestaShop\Module\PsClassicEdition\Presenter;
 
-use PrestaShop\Module\PsEditionBasic\Helper\SetupGuideHelper;
+use PrestaShop\Module\PsClassicEdition\Helper\SetupGuideHelper;
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use PrestaShopBundle\Translation\TranslatorInterface;
 use Psr\Container\ContainerInterface;

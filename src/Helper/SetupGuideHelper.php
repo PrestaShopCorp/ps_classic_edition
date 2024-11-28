@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Helper;
+namespace PrestaShop\Module\PsClassicEdition\Helper;
 
 class SetupGuideHelper
 {

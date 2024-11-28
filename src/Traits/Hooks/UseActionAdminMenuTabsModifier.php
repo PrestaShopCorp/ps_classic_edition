@@ -19,7 +19,7 @@
  */
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Traits\Hooks;
+namespace PrestaShop\Module\PsClassicEdition\Traits\Hooks;
 
 trait UseActionAdminMenuTabsModifier
 {
@@ -42,7 +42,7 @@ trait UseActionAdminMenuTabsModifier
         if (in_array('SELL', array_column($navItems, 'class_name'))) {
             $navItems = $this->flatSecondLevelRemovingFirstLevel($navItems);
         }
-        $navItems = $this->pickTabs($navItems, PS_EDITION_BASIC_MENU_WHITE_LIST);
+        $navItems = $this->pickTabs($navItems, PS_CLASSIC_EDITION_MENU_WHITE_LIST);
         $navItems = $this->removeUnactivatedSubTabs($navItems);
 
         $this->context->smarty->assign('tabs_simplify', $navItems);

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "494cbea7b3f2c49492748a4fc7574311",
+    "content-hash": "adff8c7e96f5071bdcc006e6e7290700",
     "packages": [
         {
             "name": "prestashop/module-lib-cache-directory-provider",

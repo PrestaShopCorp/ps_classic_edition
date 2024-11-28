@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Install\Tabs;
+namespace PrestaShop\Module\PsClassicEdition\Install\Tabs;
 
 class TabsInstaller
 {
@@ -77,7 +77,7 @@ class TabsInstaller
         $tab->updatePosition(false, 1);
 
         // Update employees default tab
-        $tab = new \Tab(\Tab::getIdFromClassName('AdminPsEditionBasicHomepageController'));
+        $tab = new \Tab(\Tab::getIdFromClassName('AdminPsClassicEditionHomepageController'));
         \Db::getInstance()->execute('UPDATE ' . _DB_PREFIX_ . "employee SET default_tab = '$tab->id';");
 
         return $result;

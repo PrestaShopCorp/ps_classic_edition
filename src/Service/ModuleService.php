@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Service;
+namespace PrestaShop\Module\PsClassicEdition\Service;
 
 use PrestaShop\Module\Mbo\Service\ModulesHelper;
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;

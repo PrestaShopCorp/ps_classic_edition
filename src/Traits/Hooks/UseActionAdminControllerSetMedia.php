@@ -21,9 +21,9 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Traits\Hooks;
+namespace PrestaShop\Module\PsClassicEdition\Traits\Hooks;
 
-use PrestaShop\Module\PsEditionBasic\Install\Tabs\Tabs;
+use PrestaShop\Module\PsClassicEdition\Install\Tabs\Tabs;
 use PrestaShop\PrestaShop\Adapter\Configuration;
 
 trait UseActionAdminControllerSetMedia
@@ -35,11 +35,10 @@ trait UseActionAdminControllerSetMedia
     {
         /** @var Configuration $configuration */
         $configuration = $this->get('prestashop.adapter.legacy.configuration');
-        (int) $configuration->get(self::PS_EDITION_BASIC_MODULE_TABS_LANG_UPDATE_REQUIRED);
+        (int) $configuration->get(self::PS_CLASSIC_EDITION_MODULE_TABS_LANG_UPDATE_REQUIRED);
 
         // If new language is added we want to update module tabs.
-        // dd((int) $configuration->get(self::PS_EDITION_BASIC_MODULE_TABS_LANG_UPDATE_REQUIRED));
-        if ((int) $configuration->get(self::PS_EDITION_BASIC_MODULE_TABS_LANG_UPDATE_REQUIRED)) {
+        if ((int) $configuration->get(self::PS_CLASSIC_EDITION_MODULE_TABS_LANG_UPDATE_REQUIRED)) {
             $this->updateModuleTabsNames();
         }
     }
@@ -70,6 +69,6 @@ trait UseActionAdminControllerSetMedia
         /** @var Configuration $configuration */
         $configuration = $this->get('prestashop.adapter.legacy.configuration');
 
-        $configuration->set(self::PS_EDITION_BASIC_MODULE_TABS_LANG_UPDATE_REQUIRED, '0');
+        $configuration->set(self::PS_CLASSIC_EDITION_MODULE_TABS_LANG_UPDATE_REQUIRED, '0');
     }
 }

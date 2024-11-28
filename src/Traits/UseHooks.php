@@ -19,7 +19,7 @@
  */
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Traits;
+namespace PrestaShop\Module\PsClassicEdition\Traits;
 
 use Symfony\Component\String\UnicodeString;
 

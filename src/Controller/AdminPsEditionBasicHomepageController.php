@@ -21,20 +21,20 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Controller;
+namespace PrestaShop\Module\PsClassicEdition\Controller;
 
-use PrestaShop\Module\PsEditionBasic\Service\ModuleService;
+use PrestaShop\Module\PsClassicEdition\Service\ModuleService;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminPsEditionBasicHomepageController extends FrameworkBundleAdminController
+class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminController
 {
     public function indexAction(): Response
     {
         if (intval($this->getContext()->employee->id_profile) !== 1) {
             \Tools::redirectAdmin($this->getContext()->link->getAdminLink('AdminDashboard'));
         }
-        $modulePsEditionBasic = $this->get('ps_edition_basic.module');
+        $modulePsClassicEdition = $this->get('ps_classic_edition.module');
 
         if ($this->has('PrestaShop\Module\PsAccounts\Service\PsAccountsService')) {
             $psAccountService = $this->get('PrestaShop\Module\PsAccounts\Service\PsAccountsService');
@@ -57,12 +57,12 @@ class AdminPsEditionBasicHomepageController extends FrameworkBundleAdminControll
         $accountsFacade = null;
         $accountsService = null;
         try {
-            $accountsInstaller = $this->get('ps_edition_basic.ps_accounts.installer');
+            $accountsInstaller = $this->get('ps_classic_edition.ps_accounts.installer');
             $accountsInstaller->install();
-            $accountsFacade = $this->get('ps_edition_basic.ps_accounts.facade');
+            $accountsFacade = $this->get('ps_classic_edition.ps_accounts.facade');
             \Media::addJsDef([
                 'contextPsAccounts' => $accountsFacade->getPsAccountsPresenter()
-                    ->present($modulePsEditionBasic->name),
+                    ->present($modulePsClassicEdition->name),
             ]);
             $accountsService = $accountsFacade->getPsAccountsService();
         } catch (\Exception $e) {
@@ -79,15 +79,15 @@ class AdminPsEditionBasicHomepageController extends FrameworkBundleAdminControll
         $shopCountry = strtolower($shopCountry);
 
         /** @var ModuleService $moduleService */
-        $moduleService = $this->get('PrestaShop\Module\PsEditionBasic\Service\ModuleService');
+        $moduleService = $this->get('PrestaShop\Module\PsClassicEdition\Service\ModuleService');
 
-        $setupGuideApiUrl = $this->buildAdminUrl('ps_edition_basic_setup_guide_api_index');
-        $setupGuideApiUrlEdit = $this->buildAdminUrl('ps_edition_basic_setup_guide_api_edit');
-        $setupGuideApiUrlModalHidden = $this->buildAdminUrl('ps_edition_basic_setup_guide_api_modal_hidden');
-        $cacheClearApiUrl = $this->buildAdminUrl('ps_edition_basic_clean_mbo_cache');
-        $psAcademyApiUrl = $this->buildAdminUrl('ps_edition_basic_ps_academy');
+        $setupGuideApiUrl = $this->buildAdminUrl('ps_classic_edition_setup_guide_api_index');
+        $setupGuideApiUrlEdit = $this->buildAdminUrl('ps_classic_edition_setup_guide_api_edit');
+        $setupGuideApiUrlModalHidden = $this->buildAdminUrl('ps_classic_edition_setup_guide_api_modal_hidden');
+        $cacheClearApiUrl = $this->buildAdminUrl('ps_classic_edition_clean_mbo_cache');
+        $psAcademyApiUrl = $this->buildAdminUrl('ps_classic_edition_ps_academy');
 
-        return $this->render('@Modules/ps_edition_basic/views/templates/admin/homepage.html.twig', [
+        return $this->render('@Modules/ps_classic_edition/views/templates/admin/homepage.html.twig', [
             'layoutTitle' => $this->layoutTitle(),
             'urlAccountsCdn' => $accountsService ? $accountsService->getAccountsCdn() : '',
             'enableSidebar' => true,
@@ -96,11 +96,11 @@ class AdminPsEditionBasicHomepageController extends FrameworkBundleAdminControll
                 'SETUP_GUIDE_API_URL_EDIT' => $setupGuideApiUrlEdit,
                 'SETUP_GUIDE_API_URL_MODAL_HIDDEN' => $setupGuideApiUrlModalHidden,
                 'CACHE_CLEAR_API_URL' => $cacheClearApiUrl,
-                'PS_EDITION_BASIC_PS_ACADEMY_API_URL' => $psAcademyApiUrl,
+                'PS_CLASSIC_EDITION_PS_ACADEMY_API_URL' => $psAcademyApiUrl,
                 'MAINTENANCE_URL' => $this->generateUrl('admin_maintenance'),
-                'moduleName' => $modulePsEditionBasic->displayName,
-                'moduleSlug' => $modulePsEditionBasic->name,
-                'moduleVersion' => $modulePsEditionBasic->version,
+                'moduleName' => $modulePsClassicEdition->displayName,
+                'moduleSlug' => $modulePsClassicEdition->name,
+                'moduleVersion' => $modulePsClassicEdition->version,
                 'moduleIsUpdatable' => $moduleService->getModuleIsUpdatable(),
                 'moduleUpdateLink' => $moduleService->getUpdateLink(),
                 'userToken' => $accountUserToken,
@@ -119,7 +119,7 @@ class AdminPsEditionBasicHomepageController extends FrameworkBundleAdminControll
 
     protected function layoutTitle(): string
     {
-        return $this->trans('Home', 'Modules.Editionbasic.Admin');
+        return $this->trans('Home', 'Modules.Classicedition.Admin');
     }
 
     private function buildAdminUrl(string $routeName): string

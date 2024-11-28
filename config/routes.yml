@@ -1,53 +1,53 @@
-ps_edition_basic_homepage:
-  path: pseditionbasic/homepage
+ps_classic_edition_homepage:
+  path: psclassicedition/homepage
   methods: [GET, POST]
   defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicHomepageController::indexAction
-    _legacy_controller: "AdminPsEditionBasicHomepageController"
-    _legacy_link: "AdminPsEditionBasicHomepageController"
+    _controller: PrestaShop\Module\PsClassicEdition\Controller\AdminPsClassicEditionHomepageController::indexAction
+    _legacy_controller: "AdminPsClassicEditionHomepageController"
+    _legacy_link: "AdminPsClassicEditionHomepageController"
 
-ps_edition_basic_setup_guide_api:
-  path: /pseditionbasic/setup-guide/api/
+ps_classic_edition_setup_guide_api:
+  path: /psclassicedition/setup-guide/api/
   methods: [GET, POST, PUT, PATCH]
 
-ps_edition_basic_setup_guide_api_index:
-  path: pseditionbasic/setup-guide/api/index
+ps_classic_edition_setup_guide_api_index:
+  path: psclassicedition/setup-guide/api/index
   methods: [GET]
   defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicSetupGuideController::fetchInitialDatas
+    _controller: PrestaShop\Module\PsClassicEdition\Controller\AdminPsClassicEditionSetupGuideController::fetchInitialDatas
 
-ps_edition_basic_setup_guide_api_edit:
-  path: pseditionbasic/setup-guide/api/edit
+ps_classic_edition_setup_guide_api_edit:
+  path: psclassicedition/setup-guide/api/edit
   methods: [PATCH]
   defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicSetupGuideController::editStep
+    _controller: PrestaShop\Module\PsClassicEdition\Controller\AdminPsClassicEditionSetupGuideController::editStep
 
-ps_edition_basic_setup_guide_api_modal_hidden:
-  path: pseditionbasic/setup-guide/api/modal-hidden
+ps_classic_edition_setup_guide_api_modal_hidden:
+  path: psclassicedition/setup-guide/api/modal-hidden
   methods: [POST]
   defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicSetupGuideController::storeModalIsHidden
+    _controller: PrestaShop\Module\PsClassicEdition\Controller\AdminPsClassicEditionSetupGuideController::storeModalIsHidden
 
-ps_edition_basic_setup_guide_api_delete:
-  path: pseditionbasic/setup-guide/api/delete/{stepName}
+ps_classic_edition_setup_guide_api_delete:
+  path: psclassicedition/setup-guide/api/delete/{stepName}
   methods: [DELETE]
   defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicSetupGuideController::deleteStep
+    _controller: PrestaShop\Module\PsClassicEdition\Controller\AdminPsClassicEditionSetupGuideController::deleteStep
   requirements:
     stepName: "[a-z-]+"
 
-ps_edition_basic_clean_mbo_cache:
-  path: pseditionbasic/cache-clear
+ps_classic_edition_clean_mbo_cache:
+  path: psclassicedition/cache-clear
   methods: [PATCH]
   defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicCacheController::handleRequest
-    _legacy_controller: "AdminPsEditionBasicCacheController"
-    _legacy_link: "AdminPsEditionBasicCacheController"
+    _controller: PrestaShop\Module\PsClassicEdition\Controller\AdminPsClassicEditionCacheController::handleRequest
+    _legacy_controller: "AdminPsClassicEditionCacheController"
+    _legacy_link: "AdminPsClassicEditionCacheController"
 
-ps_edition_basic_ps_academy:
-  path: pseditionbasic/ps-academy
+ps_classic_edition_ps_academy:
+  path: psclassicedition/ps-academy
   methods: [GET]
   defaults:
-    _controller: PrestaShop\Module\PsEditionBasic\Controller\AdminPsEditionBasicPsAcademyController::getProducts
-    _legacy_controller: "AdminPsEditionBasicPsAcademyController"
-    _legacy_link: "AdminPsEditionBasicPsAcademyController"
+    _controller: PrestaShop\Module\PsClassicEdition\Controller\AdminPsClassicEditionPsAcademyController::getProducts
+    _legacy_controller: "AdminPsClassicEditionPsAcademyController"
+    _legacy_link: "AdminPsClassicEditionPsAcademyController"

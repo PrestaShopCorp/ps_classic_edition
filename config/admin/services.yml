@@ -2,10 +2,10 @@ imports:
   - { resource: ../services.yml }
 
 services:
-  PrestaShop\Module\PsEditionBasic\Controller\:
-    resource: "%kernel.project_dir%/modules/ps_edition_basic/src/Controller/*"
+  PrestaShop\Module\PsClassicEdition\Controller\:
+    resource: "%kernel.project_dir%/modules/ps_classic_edition/src/Controller/*"
     autoconfigure: true
     autowire: true
     exclude:
       # Exclude this protection file that contains no class and breaks the service loading process
-      - "%kernel.project_dir%/modules/ps_edition_basic/src/Controller/index.php"
+      - "%kernel.project_dir%/modules/ps_classic_edition/src/Controller/index.php"
