@@ -6,14 +6,14 @@ parameters:
     level: 6
     paths:
         - src
-        - ps_edition_basic.php
+        - ps_classic_edition.php
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
     dynamicConstantNames:
-        - PS_EDITION_BASIC_SETTINGS_WHITE_LIST
-        - PS_EDITION_BASIC_SETTINGS_BLACK_LIST
-        - PS_EDITION_BASIC_MENU_WHITE_LIST
+        - PS_CLASSIC_EDITION_SETTINGS_WHITE_LIST
+        - PS_CLASSIC_EDITION_SETTINGS_BLACK_LIST
+        - PS_CLASSIC_EDITION_MENU_WHITE_LIST
     ignoreErrors:
-        - '#Constant PS_EDITION_BASIC_SETTINGS_WHITE_LIST not found.#'
-        - '#Constant PS_EDITION_BASIC_SETTINGS_BLACK_LIST not found.#'
-        - '#Constant PS_EDITION_BASIC_MENU_WHITE_LIST not found.#'
+        - '#Constant PS_CLASSIC_EDITION_SETTINGS_WHITE_LIST not found.#'
+        - '#Constant PS_CLASSIC_EDITION_SETTINGS_BLACK_LIST not found.#'
+        - '#Constant PS_CLASSIC_EDITION_MENU_WHITE_LIST not found.#'

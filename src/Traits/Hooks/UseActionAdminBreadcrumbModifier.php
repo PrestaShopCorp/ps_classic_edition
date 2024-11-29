@@ -19,7 +19,7 @@
  */
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Traits\Hooks;
+namespace PrestaShop\Module\PsClassicEdition\Traits\Hooks;
 
 trait UseActionAdminBreadcrumbModifier
 {
@@ -52,7 +52,7 @@ trait UseActionAdminBreadcrumbModifier
         }
 
         foreach ($tabs as $tab) {
-            if (in_array($tab['class_name'], PS_EDITION_BASIC_SETTINGS_WHITE_LIST)) {
+            if (in_array($tab['class_name'], PS_CLASSIC_EDITION_SETTINGS_WHITE_LIST)) {
                 array_unshift($breadcrumb, [
                     'href' => $this->context->link->getAdminLink('CONFIGURE'),
                     'name' => 'Paramètres',

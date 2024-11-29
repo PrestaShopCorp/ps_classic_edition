@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Install\Tabs;
+namespace PrestaShop\Module\PsClassicEdition\Install\Tabs;
 
 class Tabs
 {
@@ -47,11 +47,11 @@ class Tabs
                 'active' => true,
                 'enabled' => true,
                 'wording' => '',
-                'wording_domain' => 'Modules.Editionbasic.Admin',
+                'wording_domain' => 'Modules.Classicedition.Admin',
             ],
             [
-                'class_name' => 'AdminPsEditionBasicHomepageController',
-                'route_name' => 'ps_edition_basic_homepage',
+                'class_name' => 'AdminPsClassicEditionHomepageController',
+                'route_name' => 'ps_classic_edition_homepage',
                 'name' => [
                     'en' => 'Home',
                     'fr' => 'Accueil',
@@ -64,7 +64,7 @@ class Tabs
                 'active' => true,
                 'enabled' => true,
                 'wording' => '',
-                'wording_domain' => 'Modules.Editionbasic.Admin',
+                'wording_domain' => 'Modules.Classicedition.Admin',
             ],
         ];
     }

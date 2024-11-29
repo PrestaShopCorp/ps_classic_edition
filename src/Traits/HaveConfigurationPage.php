@@ -1,6 +1,6 @@
 <?php
 
-namespace PrestaShop\Module\PsEditionBasic\Traits;
+namespace PrestaShop\Module\PsClassicEdition\Traits;
 
 trait HaveConfigurationPage
 {
@@ -34,7 +34,7 @@ trait HaveConfigurationPage
                         'label' => $this->trans(
                             'Activate new menu and breadcrumb',
                             [],
-                            'Modules.Editionbasic.Admin'
+                            'Modules.Classicedition.Admin'
                         ),
                         'name' => 'SMB_IS_NEW_MENU_ENABLED',
                         'required' => true,
@@ -105,7 +105,7 @@ trait HaveConfigurationPage
             $configValue = (bool) \Tools::getValue('SMB_IS_NEW_MENU_ENABLED');
             \Configuration::updateValue('SMB_IS_NEW_MENU_ENABLED', $configValue);
 
-            $output = $this->displayConfirmation($this->trans('Settings updated', [], 'Modules.Editionbasic.Admin'));
+            $output = $this->displayConfirmation($this->trans('Settings updated', [], 'Modules.Classicedition.Admin'));
         }
 
         return $output;

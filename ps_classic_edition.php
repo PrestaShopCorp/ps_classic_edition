@@ -20,15 +20,15 @@
 
 declare(strict_types=1);
 
-use PrestaShop\Module\PsEditionBasic\Actions\Uninstall;
-use PrestaShop\Module\PsEditionBasic\Install\Tabs\TabsInstaller;
+use PrestaShop\Module\PsClassicEdition\Actions\Uninstall;
+use PrestaShop\Module\PsClassicEdition\Install\Tabs\TabsInstaller;
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use PrestaShop\PrestaShop\Core\Cache\Clearer\CacheClearerInterface;
 use Psr\Container\ContainerInterface;
 
-define('PS_EDITION_BASIC_SETTINGS_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/settingsWhiteList.json'), true));
-define('PS_EDITION_BASIC_SETTINGS_BLACK_LIST', json_decode(file_get_contents(__DIR__ . '/settingsBlackList.json'), true));
-define('PS_EDITION_BASIC_MENU_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/menuWhiteList.json'), true));
+define('PS_CLASSIC_EDITION_SETTINGS_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/settingsWhiteList.json'), true));
+define('PS_CLASSIC_EDITION_SETTINGS_BLACK_LIST', json_decode(file_get_contents(__DIR__ . '/settingsBlackList.json'), true));
+define('PS_CLASSIC_EDITION_MENU_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/menuWhiteList.json'), true));
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -38,12 +38,12 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 
-class ps_edition_basic extends Module
+class ps_classic_edition_ extends Module
 {
-    use PrestaShop\Module\PsEditionBasic\Traits\UseHooks;
-    use PrestaShop\Module\PsEditionBasic\Traits\HaveConfigurationPage;
+    use PrestaShop\Module\PsClassicEdition\Traits\UseHooks;
+    use PrestaShop\Module\PsClassicEdition\Traits\HaveConfigurationPage;
 
-    private const PS_EDITION_BASIC_MODULE_TABS_LANG_UPDATE_REQUIRED = 'PS_EDITION_BASIC_MODULE_TABS_LANG_UPDATE_REQUIRED';
+    private const PS_CLASSIC_EDITION_MODULE_TABS_LANG_UPDATE_REQUIRED = 'PS_CLASSIC_EDITION_MODULE_TABS_LANG_UPDATE_REQUIRED';
 
     private string $userflow_id;
 
@@ -56,7 +56,7 @@ class ps_edition_basic extends Module
 
     public function __construct()
     {
-        $this->name = 'ps_edition_basic';
+        $this->name = 'ps_classic_edition';
         $this->version = '2.0.0';
         $this->tab = 'administration';
         $this->author = 'PrestaShop';
@@ -66,8 +66,8 @@ class ps_edition_basic extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->trans('PrestaShop Edition Basic', [], 'Modules.Editionbasic.Admin');
-        $this->description = $this->trans('PrestaShop Edition Basic.', [], 'Modules.Editionbasic.Admin');
+        $this->displayName = $this->trans('PrestaShop Classic Edition', [], 'Modules.Classicedition.Admin');
+        $this->description = $this->trans('PrestaShop Classic Edition.', [], 'Modules.Classicedition.Admin');
         $this->userflow_id = 'ct_55jfryadgneorc45cjqxpbf6o4';
         $this->bootstrap = true;
     }

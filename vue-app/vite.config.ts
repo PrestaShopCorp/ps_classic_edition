@@ -15,7 +15,7 @@ export default defineConfig({
   server: {
     origin: "http://localhost:5173",
   },
-  base: '/modules/ps_edition_basic/views/js/vue/',
+  base: '/modules/ps_classic_edition/views/js/vue/',
   build: {
     outDir: "../views/js/vue",
     emptyOutDir: true,

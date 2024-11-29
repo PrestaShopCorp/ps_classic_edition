@@ -21,12 +21,12 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Controller;
+namespace PrestaShop\Module\PsClassicEdition\Controller;
 
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class AdminPsEditionBasicCacheController extends FrameworkBundleAdminController
+class AdminPsClassicEditionCacheController extends FrameworkBundleAdminController
 {
     /**
      * Handle the call back requests

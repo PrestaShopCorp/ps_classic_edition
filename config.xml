@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-    <name>ps_edition_basic</name>
-    <displayName><![CDATA[PrestaShop Edition Basic]]></displayName>
+    <name>ps_classic_edition</name>
+    <displayName><![CDATA[PrestaShop Classic Edition]]></displayName>
     <version><![CDATA[2.0.0]]></version>
-    <description><![CDATA[PrestaShop Edition Basic.]]></description>
+    <description><![CDATA[PrestaShop Classic Edition.]]></description>
     <author><![CDATA[PrestaShop]]></author>
     <tab><![CDATA[administration]]></tab>
     <is_configurable>1</is_configurable>

@@ -17,7 +17,7 @@ export const usePsAcademy = defineStore("psAcademy", () => {
   const loading = ref<boolean>(true);
 
   const getProducts = async () => {
-    const response = await fetch(context.value.PS_EDITION_BASIC_PS_ACADEMY_API_URL);
+    const response = await fetch(context.value.PS_CLASSIC_EDITION_PS_ACADEMY_API_URL);
     return response.json();
   };
 

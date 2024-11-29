@@ -2,5 +2,5 @@ services:
   _defaults:
     public: true
 
-  ps_edition_basic.presenter.setupGuideData:
-    class: 'PrestaShop\Module\PsEditionBasic\Presenter\SetupGuideDataPresenter'
+  ps_classic_edition.presenter.setupGuideData:
+    class: 'PrestaShop\Module\PsClassicEdition\Presenter\SetupGuideDataPresenter'

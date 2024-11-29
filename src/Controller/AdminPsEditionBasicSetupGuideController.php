@@ -21,14 +21,14 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsEditionBasic\Controller;
+namespace PrestaShop\Module\PsClassicEdition\Controller;
 
-use PrestaShop\Module\PsEditionBasic\Presenter\SetupGuideDataPresenter;
+use PrestaShop\Module\PsClassicEdition\Presenter\SetupGuideDataPresenter;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdminPsEditionBasicSetupGuideController extends FrameworkBundleAdminController
+class AdminPsClassicEditionSetupGuideController extends FrameworkBundleAdminController
 {
     /**
      * Get the steps for the setup guide
@@ -113,6 +113,6 @@ class AdminPsEditionBasicSetupGuideController extends FrameworkBundleAdminContro
 
     private function setupGuideDataPresenterService(): SetupGuideDataPresenter
     {
-        return $this->get('ps_edition_basic.presenter.setupGuideData');
+        return $this->get('ps_classic_edition.presenter.setupGuideData');
     }
 }
