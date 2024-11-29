@@ -4,7 +4,7 @@
       :step="step"
       :isOpened="isExpanded"
       :isExpandable="isExpandable"
-      @markAsCompleted="markAsCompleted"
+      @markAsCompleted="markAsCompleted(step.isCompleted)"
       @open="toggleExpanded"
     />
     <slide-transition :id="step.name" :opened="isExpanded">
@@ -181,9 +181,4 @@ watch(
     isExpanded.value = newValue === step.name;
   },
 );
-
-onMounted(() => {
-  const isOnboardingCompleted = (window as any).psaccountsVue?.isOnboardingCompleted();
-  markStepAsCompleted("account", isOnboardingCompleted);
-});
 </script>

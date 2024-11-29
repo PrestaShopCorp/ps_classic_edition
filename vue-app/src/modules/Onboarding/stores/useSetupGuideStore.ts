@@ -42,7 +42,6 @@ export const useSetupGuideStore = defineStore({
 
         return step;
       });
-
       fetch(`${context.value.SETUP_GUIDE_API_URL_EDIT}`, {
         method: "PATCH",
         body: JSON.stringify({

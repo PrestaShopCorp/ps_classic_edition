@@ -5,7 +5,7 @@
     "dist/assets"
   ],
   "scripts": {
-    "dev": "vite build --watch",
+    "dev": "NODE_ENV=development vite build --watch",
     "build": "run-p type-check \"build-only -- {1}\" --",
     "preview": "vite preview",
     "test": "vitest --passWithNoTests",
