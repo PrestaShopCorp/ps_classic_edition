@@ -38,7 +38,7 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 
-class ps_classic_edition_ extends Module
+class ps_classic_edition extends Module
 {
     use PrestaShop\Module\PsClassicEdition\Traits\UseHooks;
     use PrestaShop\Module\PsClassicEdition\Traits\HaveConfigurationPage;
