@@ -36,8 +36,8 @@ export const useSetupGuideStore = defineStore({
           if (completedStatus === undefined) {
             completedStatus = !step.isUserCompleted;
           }
-          step.isCompleted = completedStatus;
-          step.isUserCompleted = completedStatus;
+          step.isCompleted = !completedStatus;
+          step.isUserCompleted = !completedStatus;
         }
 
         return step;
