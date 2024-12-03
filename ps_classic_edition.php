@@ -25,6 +25,7 @@ use PrestaShop\Module\PsClassicEdition\Install\Tabs\TabsInstaller;
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use PrestaShop\PrestaShop\Core\Cache\Clearer\CacheClearerInterface;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\Dotenv\Dotenv;
 
 define('PS_CLASSIC_EDITION_SETTINGS_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/settingsWhiteList.json'), true));
 define('PS_CLASSIC_EDITION_SETTINGS_BLACK_LIST', json_decode(file_get_contents(__DIR__ . '/settingsBlackList.json'), true));
@@ -37,6 +38,13 @@ if (!defined('_PS_VERSION_')) {
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
+
+(new Dotenv())
+    // DO NOT use putEnv
+    ->usePutenv(false)
+    // Loads .env file from the root of module
+    ->loadEnv(__DIR__ . '/.env')
+;
 
 class ps_classic_edition extends Module
 {
