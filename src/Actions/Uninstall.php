@@ -60,6 +60,15 @@ class Uninstall
             }
         }
 
+        // Reset Dashboard initial position
+        if (!empty($dashboardTab->id)) {
+            $dashboardTab->id_parent = 0;
+            $dashboardTab->save();
+            // Must be done in two calls because the position is forced when the parent is changed
+            $dashboardTab->position = 0;
+            $dashboardTab->save();
+        }
+
         return $result;
     }
 }
