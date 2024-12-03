@@ -76,9 +76,17 @@ class TabsInstaller
         $tab->save();
         $tab->updatePosition(false, 1);
 
-        // Update employees default tab
-        $tab = new \Tab(\Tab::getIdFromClassName('AdminPsClassicEditionHomepageController'));
-        \Db::getInstance()->execute('UPDATE ' . _DB_PREFIX_ . "employee SET default_tab = '$tab->id';");
+        $updateTabEnvVariables = $_ENV['PS_CLASSIC_EDITION_UPDATE_HOMEPAGE'] ?? $_SERVER['PS_CLASSIC_EDITION_UPDATE_HOMEPAGE'] ?? getenv('PS_CLASSIC_EDITION_HOMEPAGE') ?? true;
+        $updateTabEnvVariables = filter_var($updateTabEnvVariables, FILTER_VALIDATE_BOOLEAN);
+
+        if ($updateTabEnvVariables) {
+            // Update employees default tab if they were using the dashboard and they are admin
+            $homepageTab = new \Tab(\Tab::getIdFromClassName('AdminPsClassicEditionHomepageController'));
+            $dashboardTab = new \Tab(\Tab::getIdFromClassName('AdminDashboard'));
+            if (!empty($homepageTab->id) && !empty($dashboardTab->id)) {
+                \Db::getInstance()->execute('UPDATE ' . _DB_PREFIX_ . "employee SET default_tab = '$homepageTab->id' WHERE id_profile = '1' AND default_tab = '$dashboardTab->id';");
+            }
+        }
 
         return $result;
     }
