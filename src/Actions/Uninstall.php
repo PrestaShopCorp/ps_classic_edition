@@ -44,6 +44,13 @@ class Uninstall
     {
         $result = true;
 
+        // Update employees default tab to dashboard if they wre on classic homepage
+        $homepageTab = new \Tab(\Tab::getIdFromClassName('AdminPsClassicEditionHomepageController'));
+        $dashboardTab = new \Tab(\Tab::getIdFromClassName('AdminDashboard'));
+        if (!empty($homepageTab->id) && !empty($dashboardTab->id)) {
+            \Db::getInstance()->execute('UPDATE ' . _DB_PREFIX_ . "employee SET default_tab = '$dashboardTab->id' WHERE default_tab = '$homepageTab->id';");
+        }
+
         foreach (['HOME', 'AdminPsClassicEditionHomepageController', 'AdminPsClassicEditionSettingsController'] as $tabItemClassName) {
             $id_tab = (int) \Tab::getIdFromClassName($tabItemClassName);
 
