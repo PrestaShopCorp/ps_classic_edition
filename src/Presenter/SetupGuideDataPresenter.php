@@ -35,20 +35,6 @@ class SetupGuideDataPresenter
     protected $container;
 
     /**
-     * @param string $serviceName
-     *
-     * @return object
-     */
-    public function get($serviceName)
-    {
-        if (null === $this->container) {
-            $this->container = SymfonyContainer::getInstance();
-        }
-
-        return $this->container->get($serviceName);
-    }
-
-    /**
      * @var TranslatorInterface
      */
     public $translator;
@@ -69,53 +55,21 @@ class SetupGuideDataPresenter
 
         $response = [];
 
-        try {
-            if (\Module::isInstalled('smb_edition') && \Module::isEnabled('smb_edition') && $router->generate('smb_edition_manage_domain_name')) {
-                array_push($response, $this->buildStep(
-                    'domain',
-                    'onb.homepage.setupGuide.domain.title',
-                    [
-                        [
-                            'description' => 'onb.homepage.setupGuide.domain.description',
-                            'documentation' => [
-                                'cta' => 'onb.homepage.setupGuide.domain.documentation.cta',
-                                'href' => 'onb.homepage.setupGuide.domain.documentation.href',
-                            ],
-                            'buttons' => [
-                                [
-                                    'cta' => 'onb.homepage.setupGuide.domain.button.skip',
-                                    'href' => '#',
-                                    'variant' => 'secondary',
-                                    'skip' => true,
-                                ],
-                                [
-                                    'cta' => 'onb.homepage.setupGuide.domain.button.cta',
-                                    'href' => $router->generate('smb_edition_manage_domain_name'),
-                                    'userflow_id' => 'dbef1ad6-d589-4991-9f95-918190d153a9',
-                                ],
-                            ],
-                        ],
-                    ]
-                ));
-            } else {
-                array_push($response, $this->buildStep(
-                    'account',
-                    'onb.homepage.setupGuide.account.title',
-                    [
-                        [
-                            'description' => '',
-                            'documentation' => [
-                                'cta' => 'onb.homepage.setupGuide.account.documentation.cta',
-                                'href' => 'onb.homepage.setupGuide.account.documentation.href',
-                            ],
-                            'buttons' => [],
-                        ],
+        array_push($response, $this->buildStep(
+            'account',
+            'onb.homepage.setupGuide.account.title',
+            [
+                [
+                    'description' => '',
+                    'documentation' => [
+                        'cta' => 'onb.homepage.setupGuide.account.documentation.cta',
+                        'href' => 'onb.homepage.setupGuide.account.documentation.href',
                     ],
-                    true
-                ));
-            }
-        } catch (\Exception $e) {
-        }
+                    'buttons' => [],
+                ],
+            ],
+            true
+        ));
 
         array_push($response, $this->buildStep(
             'product',
@@ -276,14 +230,66 @@ class SetupGuideDataPresenter
      */
     public function buildStep(string $name, string $title, array $content = [], bool $disabledForUser = false): array
     {
+        if (strtolower($name) === 'account') {
+            $isAutoCompleted = $isCompleted = $this->checkAccountAssociation();
+            $isUserCompleted = false;
+        } else {
+            $isCompleted = SetupGuideHelper::isStepCompleted($name);
+            $isUserCompleted = SetupGuideHelper::isStepUserCompleted($name);
+            $isAutoCompleted = SetupGuideHelper::isStepAutoCompleted($name);
+        }
+
         return [
             'name' => $name,
             'title' => $title,
             'content' => $content,
             'disabledForUser' => $disabledForUser,
-            'isCompleted' => SetupGuideHelper::isStepCompleted($name),
-            'isUserCompleted' => SetupGuideHelper::isStepUserCompleted($name),
-            'isAutoCompleted' => SetupGuideHelper::isStepAutoCompleted($name),
+            'isCompleted' => $isCompleted,
+            'isUserCompleted' => $isUserCompleted,
+            'isAutoCompleted' => $isAutoCompleted,
         ];
+    }
+
+    /**
+     * @param string $serviceName
+     *
+     * @return object
+     */
+    private function get($serviceName)
+    {
+        if (null === $this->container) {
+            $this->container = SymfonyContainer::getInstance();
+        }
+
+        return $this->container->get($serviceName);
+    }
+
+    /**
+     * @param string $serviceName
+     *
+     * @return bool
+     */
+    private function has($serviceName): bool
+    {
+        if (null === $this->container) {
+            $this->container = SymfonyContainer::getInstance();
+        }
+
+        return $this->container->has($serviceName);
+    }
+
+    private function checkAccountAssociation(): bool
+    {
+        try {
+            if ($this->has('PrestaShop\Module\PsAccounts\Service\PsAccountsService')) {
+                $psAccountService = $this->get('PrestaShop\Module\PsAccounts\Service\PsAccountsService');
+
+                return !empty($psAccountService->getShopUuid());
+            }
+        } catch (\Throwable) {
+            return false;
+        }
+
+        return false;
     }
 }
