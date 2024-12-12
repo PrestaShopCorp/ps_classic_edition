@@ -22,6 +22,7 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsClassicEdition\Presenter;
 
+use PrestaShop\Module\PsAccounts\Service\PsAccountsService;
 use PrestaShop\Module\PsClassicEdition\Helper\SetupGuideHelper;
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use PrestaShopBundle\Translation\TranslatorInterface;
@@ -39,9 +40,15 @@ class SetupGuideDataPresenter
      */
     public $translator;
 
+    /**
+     * @var false|\Module
+     */
+    public $psAccounts;
+
     public function __construct()
     {
         $this->translator = \Context::getContext()->getTranslator();
+        $this->psAccounts = \Module::getInstanceByName('ps_accounts');
     }
 
     /**
@@ -278,14 +285,23 @@ class SetupGuideDataPresenter
         return $this->container->has($serviceName);
     }
 
+    /**
+     * @return PsAccountsService
+     */
+    private function getPsAccountsService(): PsAccountsService
+    {
+        return $this->psAccounts->getService('PrestaShop\Module\PsAccounts\Service\PsAccountsService');
+    }
+
+
     private function checkAccountAssociation(): bool
     {
         try {
-            if ($this->has('PrestaShop\Module\PsAccounts\Service\PsAccountsService')) {
-                $psAccountService = $this->get('PrestaShop\Module\PsAccounts\Service\PsAccountsService');
+            $psAccountService = $this->getPsAccountsService();
 
-                return !empty($psAccountService->getShopUuid());
-            }
+            return !empty($psAccountService->getShopUuid());
+        } catch (\Exception $e) {
+            return false;
         } catch (\Throwable) {
             return false;
         }
