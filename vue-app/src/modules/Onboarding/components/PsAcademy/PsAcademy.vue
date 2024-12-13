@@ -83,7 +83,7 @@ onMounted(async () => {
             icon="keyboard_arrow_left"
             font-size="16px"
             node-type="span"
-            class="btn-slider pr-[2px] mr-2"
+            class="btn-slider pr-[2px] mr-2 select-none"
             :class="currentIndex === 0 ? 'disable' : ''"
             @click="toPrevious"
           />
@@ -91,7 +91,7 @@ onMounted(async () => {
             icon="keyboard_arrow_right"
             font-size="16px"
             node-type="span"
-            class="btn-slider pl-[2px]"
+            class="btn-slider pl-[2px] select-none"
             :class="currentIndex === pages - 1 ? 'disable' : ''"
             @click="toNext"
           />
