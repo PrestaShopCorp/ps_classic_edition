@@ -24,7 +24,7 @@ export const usePsAcademy = defineStore("psAcademy", () => {
   const initProducts = async () => {
     loading.value = true;
     const products = await getProducts();
-    pages.value = products.length / 5;
+    pages.value = Math.ceil(products.length / 5);
 
     // Live product on index 0 and 1
     // Move second live product to index 5 to be in the big square of psacademy bloc
