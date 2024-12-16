@@ -17,7 +17,7 @@
         @click.stop=""
         @update:modelValue="$emit('markAsCompleted')"
       />
-      <span class="puik-h5 text-left">{{ $t(step.title) }}</span>
+      <span class="puik-h5 text-left text-primary-800">{{ $t(step.title) }}</span>
     </span>
     <span class="puik-icon text-xl font-normal" v-if="isExpandable">
       {{ isOpened ? "keyboard_arrow_up" : "keyboard_arrow_down" }}
