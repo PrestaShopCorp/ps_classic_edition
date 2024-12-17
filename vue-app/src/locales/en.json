@@ -1,14 +1,14 @@
 {
   "onb": {
     "homepage": {
-      "title": "Welcome to the creation space of your shop",
+      "title": "Welcome to the creation space of your store",
       "maintenance": {
-        "title": "Your shop is offline.",
+        "title": "Your store is offline.",
         "description": "Your visitors do not have access to your store. You can put it online from the maintenance page",
         "button": "Go to maintenance page",
         "maintenance": "Maintenance.",
         "online": {
-          "title": "Your shop is online.",
+          "title": "Your store is online.",
           "description": "Use maintenance mode when editing your store",
           "button": "Enter maintenance mode"
         }
@@ -55,7 +55,7 @@
           }
         },
         "account": {
-          "title": "Link your shop",
+          "title": "Link your store",
           "documentation": {
             "cta": "View documentation",
             "href": "https://help-center.prestashop.com/en/articles/13394091309074-how-does-the-prestashop-account-module-work"
