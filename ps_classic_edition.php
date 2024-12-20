@@ -83,9 +83,9 @@ class ps_classic_edition extends Module
     /**
      * @param string $serviceName
      *
-     * @return object
+     * @return object|null
      */
-    public function get($serviceName)
+    public function get(string $serviceName): ?object
     {
         if (null === $this->container) {
             $this->container = SymfonyContainer::getInstance();
