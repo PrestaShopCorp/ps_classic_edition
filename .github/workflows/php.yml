@@ -7,7 +7,7 @@ on:
   pull_request:
 
 concurrency:
-  group: ci-${{ github.ref_name }}
+  group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 env:
@@ -74,3 +74,42 @@ jobs:
       - name: Test
         run: |
           composer unit-tests
+
+  # Run PHPStan against the module and a PrestaShop release
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        presta-version: [ '9.0.x' ]
+        # The 8.4 compatibility is not available yet, this should be uncommented whe the phpstan docker is ready
+        # php-version: [ '8.1', '8.2', '8.3', '8.4' ]
+        php-version: [ '8.1', '8.2', '8.3' ]
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }})
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Add vendor folder in cache to make next builds faster
+      - name: Cache vendor folder
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: php-${{ hashFiles('composer.lock') }}
+
+      # Add composer local folder in cache to make next builds faster
+      - name: Cache composer folder
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache
+          key: php-composer-cache
+
+      - run: composer install
+
+      # Docker images prestashop/prestashop may be used, even if the shop remains uninstalled
+      - name: Execute PHPStan on PrestaShop (Tag ${{ matrix.presta-version }}-${{ matrix.php-version }}))
+        run: ./tests/phpstan.sh ${{ matrix.presta-version }} ${{ matrix.php-version }}

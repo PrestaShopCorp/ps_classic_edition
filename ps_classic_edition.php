@@ -126,14 +126,4 @@ class ps_classic_edition extends Module
 
         return parent::enable($force_all);
     }
-
-    public function getParameter(string $key)// @phpstan-ignore-line
-    {
-        return $this->getContainer()->hasParameter($key) ? $this->getContainer()->getParameter($key) : null;
-    }
-
-    private function getModulePath(string $name): string
-    {
-        return _PS_MODULE_DIR_ . $name . '/' . $name . '.php';
-    }
 }
