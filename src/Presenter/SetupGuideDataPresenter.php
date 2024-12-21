@@ -293,7 +293,6 @@ class SetupGuideDataPresenter
         return $this->psAccounts->getService('PrestaShop\Module\PsAccounts\Service\PsAccountsService');
     }
 
-
     private function checkAccountAssociation(): bool
     {
         try {
