@@ -22,9 +22,7 @@ declare(strict_types=1);
 
 use PrestaShop\Module\PsClassicEdition\Actions\Uninstall;
 use PrestaShop\Module\PsClassicEdition\Install\Tabs\TabsInstaller;
-use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use PrestaShop\PrestaShop\Core\Cache\Clearer\CacheClearerInterface;
-use Psr\Container\ContainerInterface;
 use Symfony\Component\Dotenv\Dotenv;
 
 define('PS_CLASSIC_EDITION_SETTINGS_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/settingsWhiteList.json'), true));
@@ -55,11 +53,6 @@ class ps_classic_edition extends Module
 
     private string $userflow_id;
 
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
     public int $addons_id = 91027;
 
     public function __construct()
@@ -78,20 +71,6 @@ class ps_classic_edition extends Module
         $this->description = $this->trans('PrestaShop Classic Edition.', [], 'Modules.Classicedition.Admin');
         $this->userflow_id = 'ct_55jfryadgneorc45cjqxpbf6o4';
         $this->bootstrap = true;
-    }
-
-    /**
-     * @param string $serviceName
-     *
-     * @return object|null
-     */
-    public function get(string $serviceName): ?object
-    {
-        if (null === $this->container) {
-            $this->container = SymfonyContainer::getInstance();
-        }
-
-        return $this->container->get($serviceName);
     }
 
     /**
@@ -146,15 +125,5 @@ class ps_classic_edition extends Module
         (new TabsInstaller($this->name))->installTabs();
 
         return parent::enable($force_all);
-    }
-
-    public function getParameter(string $key)// @phpstan-ignore-line
-    {
-        return $this->getContainer()->hasParameter($key) ? $this->getContainer()->getParameter($key) : null;
-    }
-
-    private function getModulePath(string $name): string
-    {
-        return _PS_MODULE_DIR_ . $name . '/' . $name . '.php';
     }
 }

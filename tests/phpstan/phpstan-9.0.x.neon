@@ -1,0 +1,12 @@
+parameters:
+  bootstrapFiles:
+    - bootstrap.php
+  paths:
+    - ../../src
+    - ../../ps_classic_edition.php
+    # Tests folder
+    - ..
+  dynamicConstantNames:
+    - _PS_VERSION_
+
+  level: 5
