@@ -76,7 +76,7 @@ class TabsInstaller
         $tab->save();
         $tab->updatePosition(false, 1);
 
-        $updateTabEnvVariables = $_ENV['PS_CLASSIC_EDITION_UPDATE_HOMEPAGE'] ?: $_SERVER['PS_CLASSIC_EDITION_UPDATE_HOMEPAGE'] ?: (getenv('PS_CLASSIC_EDITION_HOMEPAGE') ?: true);
+        $updateTabEnvVariables = $_ENV['PS_CLASSIC_EDITION_UPDATE_HOMEPAGE'] ?? $_SERVER['PS_CLASSIC_EDITION_UPDATE_HOMEPAGE'] ?? (getenv('PS_CLASSIC_EDITION_HOMEPAGE') ?: true);
         $updateTabEnvVariables = filter_var($updateTabEnvVariables, FILTER_VALIDATE_BOOLEAN);
 
         if ($updateTabEnvVariables) {
