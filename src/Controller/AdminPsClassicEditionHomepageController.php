@@ -41,11 +41,9 @@ class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminContro
         $psShopID = '';
         if ($this->has('PrestaShop\Module\PsAccounts\Service\PsAccountsService')) {
             $psAccountService = $this->get('PrestaShop\Module\PsAccounts\Service\PsAccountsService');
-            if ($psAccountService) {
-                $employeeAccount = $psAccountService->getEmployeeAccount();
-                $psAccountID = ($employeeAccount ? $employeeAccount->getUid() : $psAccountService->getUserUuid());
-                $psShopID = $psAccountService->getShopUuid();
-            }
+            $employeeAccount = $psAccountService->getEmployeeAccount();
+            $psAccountID = ($employeeAccount ? $employeeAccount->getUid() : $psAccountService->getUserUuid());
+            $psShopID = $psAccountService->getShopUuid();
         }
 
         if ($this->has('PrestaShop\Module\PsAccounts\Repository\UserTokenRepository')) {
