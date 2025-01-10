@@ -27,7 +27,7 @@
         "description": "¿Tienes preguntas o dudas sobre alguna funcionalidad? Consulta la documentación de nuestro",
         "help-center": "Centro de Ayuda.",
         "button": "Acceder a la documentación",
-        "url": "https://help-center.prestashop.com/es?utm_source=back-office&utm_medium=home"
+        "url": "https://help-center.prestashop.com/hc/es?utm_source=back-office&utm_medium=home"
       },
       "setupGuide": {
         "title": "Empieza a vender en {remainingSteps} pasos | Empieza a vender en {remainingSteps} paso | Empieza a vender en {remainingSteps} pasos",
@@ -47,7 +47,7 @@
           "description": "Personaliza tu nombre de dominio para impulsar el posicionamiento de tu tienda en los motores de búsqueda",
           "documentation": {
             "cta": "Ver documentación",
-            "href": "https://help-center.prestashop.com/en/articles/11530021421714-change-domain-name"
+            "href": "https://help-center.prestashop.com/hc/es/articles/11530021421714-Cambiar-el-nombre-de-dominio"
           },
           "button": {
             "skip": "Saltar este paso",
@@ -58,7 +58,7 @@
           "title": "Vincula tu tienda",
           "documentation": {
             "cta": "Ver documentación",
-            "href": "https://help-center.prestashop.com/en/articles/13394091309074-how-does-the-prestashop-account-module-work"
+            "href": "https://help-center.prestashop.com/hc/es/articles/13394091309074-Vincule-una-tienda-a-su-cuenta-PrestaShop"
           }
         },
         "product": {
@@ -66,7 +66,7 @@
           "description": "Amplía tu catálogo con tu primer producto",
           "documentation": {
             "cta": "Ver documentación",
-            "href": "https://help-center.prestashop.com/en/articles/11637213915666-add-a-new-product"
+            "href": "https://help-center.prestashop.com/hc/es/articles/11637213915666-A%C3%B1adir-un-nuevo-producto"
           },
           "button": {
             "cta": "Añadir un producto"
@@ -77,7 +77,7 @@
           "description": "Mejora la experiencia de compra de tus clientes ofreciendo múltiples opciones de pago en tu tienda",
           "documentation": {
             "cta": "Ver documentación",
-            "href": "https://help-center.prestashop.com/en/articles/11640755605778-setting-up-payment-methods"
+            "href": "https://help-center.prestashop.com/hc/es/articles/11640755605778-Configuraci%C3%B3n-de-los-m%C3%A9todos-de-pago"
           },
           "button": {
             "cta": "Configura tus opciones de pago"
@@ -88,7 +88,7 @@
           "description": "Configura las opciones de entrega para realizar tus envíos",
           "documentation": {
             "cta": "Ver documentación",
-            "href": "https://help-center.prestashop.com/en/articles/11615624974994-configure-delivery-methods"
+            "href": "https://help-center.prestashop.com/hc/es/articles/11615624974994-Configuraci%C3%B3n-de-los-m%C3%A9todos-de-entrega"
           },
           "button": {
             "skip": "Saltar este paso",
@@ -100,7 +100,7 @@
           "description": "Asegúrate de que tu tienda cumple con los requisitos legales antes de empezar a vender",
           "documentation": {
             "cta": "Ver documentación",
-            "href": "https://help-center.prestashop.com/en/articles/11644037761042-meeting-legal-obligations"
+            "href": "https://help-center.prestashop.com/hc/es/articles/11644037761042-Cumplir-las-obligaciones-legales"
           },
           "button": {
             "cta": "Cumpla con sus Obligaciones Legales"
@@ -112,7 +112,7 @@
           "description": "Añade logotipos para tu tienda (cabecera, correos electrónicos, factura y favicon)",
           "documentation": {
             "cta": "Ver documentación",
-            "href": "https://help-center.prestashop.com/en/articles/11674550243474-add-a-logo-and-favicon"
+            "href": "https://help-center.prestashop.com/hc/es/articles/115000595592-Cambiar-su-identidad-visual"
           },
           "button": {
             "cta": "Añadir un logotipo"
@@ -123,7 +123,7 @@
           "description": "Elige y personaliza un tema que defina el aspecto de tu tienda'",
           "documentation": {
             "cta": "Ver documentación",
-            "href": "https://help-center.prestashop.com/en/articles/11663976521490-choosing-and-configuring-a-theme"
+            "href": "https://help-center.prestashop.com/hc/es/articles/11663976521490-Elegir-y-configurar-un-tema"
           },
           "button": {
             "cta": "Selecciona y personaliza tu tema"
