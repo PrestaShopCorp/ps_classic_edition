@@ -3,7 +3,7 @@
     class="flex flex-row items-center shrink-0 px-4 py-6 gap-6 bg-green-100 sm:shrink sm:p-8 xl:py-[34px] 2xl:py-[38px]"
   >
     <div class="w-1/3">
-      <img class="mx-auto" src="@/modules/Onboarding/assets/img/question.svg" />
+      <img class="mx-auto" :src="logoUrl" />
     </div>
     <div class="w-2/3">
       <h3 class="puik-h4 font-bold md:custom-puik-h3">
@@ -29,6 +29,11 @@
 <script lang="ts" setup>
 import i18n from "@/i18n";
 import trackWithContext from "@/common/tracking/track";
+import {useContext} from "@/common/composables/use-context";
+
+const { context } = useContext();
+const logo = await import('@/modules/Onboarding/assets/img/question.svg');
+const logoUrl = context.value.baseUrl + '/../' + logo.default;
 
 const handleDocumentationClick = async () => {
   await trackWithContext("Access To Help Center Edition Home Clicked", {

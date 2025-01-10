@@ -25,11 +25,12 @@ namespace PrestaShop\Module\PsClassicEdition\Controller;
 
 use PrestaShop\Module\PsClassicEdition\Service\ModuleService;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminController
 {
-    public function indexAction(): Response
+    public function indexAction(Request $request): Response
     {
         if (intval($this->getContext()->employee->id_profile) !== 1) {
             \Tools::redirectAdmin($this->getContext()->link->getAdminLink('AdminDashboard'));
@@ -114,6 +115,7 @@ class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminContro
                 ],
                 'locale' => $this->getContext()->language->iso_code,
                 'shopCountry' => $shopCountry,
+                'baseUrl' => $request->getBaseUrl(),
             ]),
         ]);
     }
