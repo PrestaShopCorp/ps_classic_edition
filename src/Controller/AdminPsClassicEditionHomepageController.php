@@ -36,14 +36,15 @@ class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminContro
         }
         $modulePsClassicEdition = $this->get('ps_classic_edition.module');
 
+        $psAccountID = '';
+        $psShopID = '';
         if ($this->has('PrestaShop\Module\PsAccounts\Service\PsAccountsService')) {
             $psAccountService = $this->get('PrestaShop\Module\PsAccounts\Service\PsAccountsService');
-            $employeeAccount = $psAccountService->getEmployeeAccount();
-            $psAccountID = ($employeeAccount ? $employeeAccount->getUid() : $psAccountService->getUserUuid());
-            $psShopID = $psAccountService->getShopUuid();
-        } else {
-            $psAccountID = '';
-            $psShopID = '';
+            if ($psAccountService) {
+                $employeeAccount = $psAccountService->getEmployeeAccount();
+                $psAccountID = ($employeeAccount ? $employeeAccount->getUid() : $psAccountService->getUserUuid());
+                $psShopID = $psAccountService->getShopUuid();
+            }
         }
 
         if ($this->has('PrestaShop\Module\PsAccounts\Repository\UserTokenRepository')) {
@@ -104,8 +105,8 @@ class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminContro
                 'moduleIsUpdatable' => $moduleService->getModuleIsUpdatable(),
                 'moduleUpdateLink' => $moduleService->getUpdateLink(),
                 'userToken' => $accountUserToken,
-                'psAccountShopID' => $psShopID,
-                'psAccountID' => $psAccountID,
+                'psAccountShopID' => $psShopID ?: '',
+                'psAccountID' => $psAccountID ?: '',
                 'shopName' => (string) $this->getConfiguration()->get('PS_SHOP_NAME', ''),
                 'isShopEnabled' => (bool) $this->getConfiguration()->get('PS_SHOP_ENABLE', false),
                 'callBack' => [
