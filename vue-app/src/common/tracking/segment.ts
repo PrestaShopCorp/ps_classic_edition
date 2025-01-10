@@ -22,10 +22,11 @@ const titlecase: Plugin = {
 };
 
 const segment = new AnalyticsBrowser();
-
-segment.load({
-  writeKey: import.meta.env.VITE_SEGMENT_WRITE_KEY,
-  plugins: [titlecase],
-});
+if (import.meta.env.VITE_SEGMENT_WRITE_KEY) {
+  segment.load({
+    writeKey: import.meta.env.VITE_SEGMENT_WRITE_KEY,
+    plugins: [titlecase],
+  });
+}
 
 export default segment;
