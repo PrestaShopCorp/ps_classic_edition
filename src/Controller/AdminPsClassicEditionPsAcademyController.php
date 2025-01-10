@@ -24,13 +24,52 @@ declare(strict_types=1);
 namespace PrestaShop\Module\PsClassicEdition\Controller;
 
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminController
 {
-    public function __construct(private HttpClientInterface $httpClient)
+    public function __construct(
+        private HttpClientInterface $httpClient,
+        private FilesystemAdapter $cache,
+    ) {
+    }
+
+    /**
+     * Handle the call back requests
+     *
+     * @return JsonResponse
+     */
+    public function getProducts(): JsonResponse
     {
+        $products = [];
+        $cachedProducts = $this->cache->getItem('ps_academy_products');
+        if (!$cachedProducts->isHit()) {
+            $ids = $this->getProductsId();
+
+            if (!empty($ids)) {
+                foreach ($ids as $id) {
+                    $response = $this->httpClient->request('GET', 'https://prestashop-academy.com/api/products/' . $id . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON');
+                    $httpStatusCode = $response->getStatusCode();
+                    if ($httpStatusCode <= 300) {
+                        $responseContents = json_decode($response->getContent(), true);
+                        $tempObject = $this->createObjectFromResponse($responseContents['product']);
+                        array_push($products, $tempObject);
+                    }
+                }
+            }
+
+            if (!empty($products)) {
+                $cachedProducts->set($products);
+                $cachedProducts->expiresAfter(\DateInterval::createFromDateString('1 day'));
+                $this->cache->save($cachedProducts);
+            }
+        } else {
+            $products = $cachedProducts->get();
+        }
+
+        return new JsonResponse($products);
     }
 
     private function getProductsId(): array
@@ -95,30 +134,5 @@ class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminContr
         ];
 
         return $tmp;
-    }
-
-    /**
-     * Handle the call back requests
-     *
-     * @return JsonResponse
-     */
-    public function getProducts(): JsonResponse
-    {
-        $ids = $this->getProductsId();
-        $products = [];
-
-        if (!empty($ids)) {
-            foreach ($ids as $id) {
-                $response = $this->httpClient->request('GET', 'https://prestashop-academy.com/api/products/' . $id . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON');
-                $httpStatusCode = $response->getStatusCode();
-                if ($httpStatusCode <= 300) {
-                    $responseContents = json_decode($response->getContent(), true);
-                    $tempObject = $this->createObjectFromResponse($responseContents['product']);
-                    array_push($products, $tempObject);
-                }
-            }
-        }
-
-        return new JsonResponse($products);
     }
 }
