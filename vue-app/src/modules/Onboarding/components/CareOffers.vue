@@ -61,6 +61,7 @@ onMounted(() => {
     buttonSlideRight.addEventListener("click", goNext);
   }
 });
+
 </script>
 
 <template>

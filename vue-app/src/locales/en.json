@@ -27,7 +27,7 @@
         "description": "A question, a doubt about a feature? Consult the documentation of our",
         "help-center": "Help Center.",
         "button": "Access the documentation",
-        "url": "https://help-center.prestashop.com/en?utm_source=back-office&utm_medium=home"
+        "url": "https://help-center.prestashop.com/hc/en-us?utm_medium=home&utm_source=back-office"
       },
       "setupGuide": {
         "title": "Start selling in {remainingSteps} steps | Start selling in {remainingSteps} step | Start selling in {remainingSteps} steps",
@@ -47,7 +47,7 @@
           "description": "Customize your domain name to boost your store's search engine ranking.",
           "documentation": {
             "cta": "View documentation",
-            "href": "https://help-center.prestashop.com/en/articles/11530021421714-change-domain-name"
+            "href": "https://help-center.prestashop.com/hc/en-us/articles/11530021421714-Change-domain-name"
           },
           "button": {
             "skip": "Skip this step",
@@ -58,7 +58,7 @@
           "title": "Link your store",
           "documentation": {
             "cta": "View documentation",
-            "href": "https://help-center.prestashop.com/en/articles/13394091309074-how-does-the-prestashop-account-module-work"
+            "href": "https://help-center.prestashop.com/hc/en-us/articles/13394091309074-Link-a-store-to-your-PrestaShop-account"
           }
         },
         "product": {
@@ -66,7 +66,7 @@
           "description": "Expand your catalog with your very first product.",
           "documentation": {
             "cta": "View documentation",
-            "href": "https://help-center.prestashop.com/en/articles/11637213915666-add-a-new-product"
+            "href": "https://help-center.prestashop.com/hc/en-us/articles/11637213915666-Add-a-new-product"
           },
           "button": {
             "cta": "Add a Product"
@@ -77,7 +77,7 @@
           "description": "Enhance your customers' shopping experience by offering multiple payment options on your store.",
           "documentation": {
             "cta": "View documentation",
-            "href": "https://help-center.prestashop.com/en/articles/11640755605778-setting-up-payment-methods"
+            "href": "https://help-center.prestashop.com/hc/en-us/articles/11640755605778-Setting-up-payment-methods"
           },
           "button": {
             "cta": "Configure your Payment Options"
@@ -88,7 +88,7 @@
           "description": "Configure delivery options to send your shippings.",
           "documentation": {
             "cta": "View documentation",
-            "href": "https://help-center.prestashop.com/en/articles/11615624974994-configure-delivery-methods"
+            "href": "https://help-center.prestashop.com/hc/en-us/articles/11615624974994-Configure-delivery-methods"
           },
           "button": {
             "skip": "Skip this step",
@@ -100,7 +100,7 @@
           "description": "Ensure your store complies with legal requirements before you begin selling.",
           "documentation": {
             "cta": "View documentation",
-            "href": "https://help-center.prestashop.com/en/articles/11644037761042-meeting-legal-obligations"
+            "href": "https://help-center.prestashop.com/hc/en-us/articles/11644037761042-Meeting-legal-obligations"
           },
           "button": {
             "cta": "Meet your Legal Obligations"
@@ -112,7 +112,7 @@
           "description": "Add Logos for your store (Header, E-mails, Invoice, and Favicon)",
           "documentation": {
             "cta": "View documentation",
-            "href": "https://help-center.prestashop.com/en/articles/11674550243474-add-a-logo-and-favicon"
+            "href": "https://help-center.prestashop.com/hc/en-us/articles/115000595592-Change-your-visual-identity"
           },
           "button": {
             "cta": "Add a logo"
@@ -123,7 +123,7 @@
           "description": "Choose and customize a theme that defines the look of your store'",
           "documentation": {
             "cta": "View documentation",
-            "href": "https://help-center.prestashop.com/en/articles/11663976521490-choosing-and-configuring-a-theme"
+            "href": "https://help-center.prestashop.com/hc/en-us/articles/11663976521490-Choosing-and-configuring-a-theme"
           },
           "button": {
             "cta": "Select and Customize your Theme"

@@ -25,25 +25,25 @@ namespace PrestaShop\Module\PsClassicEdition\Controller;
 
 use PrestaShop\Module\PsClassicEdition\Service\ModuleService;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminController
 {
-    public function indexAction(): Response
+    public function indexAction(Request $request): Response
     {
         if (intval($this->getContext()->employee->id_profile) !== 1) {
             \Tools::redirectAdmin($this->getContext()->link->getAdminLink('AdminDashboard'));
         }
         $modulePsClassicEdition = $this->get('ps_classic_edition.module');
 
+        $psAccountID = '';
+        $psShopID = '';
         if ($this->has('PrestaShop\Module\PsAccounts\Service\PsAccountsService')) {
             $psAccountService = $this->get('PrestaShop\Module\PsAccounts\Service\PsAccountsService');
             $employeeAccount = $psAccountService->getEmployeeAccount();
             $psAccountID = ($employeeAccount ? $employeeAccount->getUid() : $psAccountService->getUserUuid());
             $psShopID = $psAccountService->getShopUuid();
-        } else {
-            $psAccountID = '';
-            $psShopID = '';
         }
 
         if ($this->has('PrestaShop\Module\PsAccounts\Repository\UserTokenRepository')) {
@@ -104,8 +104,8 @@ class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminContro
                 'moduleIsUpdatable' => $moduleService->getModuleIsUpdatable(),
                 'moduleUpdateLink' => $moduleService->getUpdateLink(),
                 'userToken' => $accountUserToken,
-                'psAccountShopID' => $psShopID,
-                'psAccountID' => $psAccountID,
+                'psAccountShopID' => $psShopID ?: '',
+                'psAccountID' => $psAccountID ?: '',
                 'shopName' => (string) $this->getConfiguration()->get('PS_SHOP_NAME', ''),
                 'isShopEnabled' => (bool) $this->getConfiguration()->get('PS_SHOP_ENABLE', false),
                 'callBack' => [
@@ -113,6 +113,7 @@ class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminContro
                 ],
                 'locale' => $this->getContext()->language->iso_code,
                 'shopCountry' => $shopCountry,
+                'baseUrl' => $request->getBaseUrl(),
             ]),
         ]);
     }

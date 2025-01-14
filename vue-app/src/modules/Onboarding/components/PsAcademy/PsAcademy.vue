@@ -50,6 +50,9 @@ const trackPSA = async (title?: string) => {
   await trackWithContext(event, trackProps);
 };
 
+const image = await import('@/modules/Onboarding/assets/img/thumbnail-psacademy.png');
+const imageUrl = context.value.baseUrl + '/../' + image.default;
+
 watch(currentIndex, () => {
   cardsToDisplay.value = sortedProducts.value.slice(currentIndex.value * 5, currentIndex.value * 5 + 5);
 });
@@ -127,7 +130,7 @@ onMounted(async () => {
               :class="i === 1 ? 'md:col-span-2 md:row-span-2' : 'md:col-span-1 md:row-span-1'"
             >
               <h3 class="text-sm font-bold">{{ cardsToDisplay[i - 1]?.name }}</h3>
-              <img v-if="i === 1" src="@/modules/Onboarding/assets/img/thumbnail-psacademy.png" class="pt-4" />
+              <img v-if="i === 1" :src="imageUrl" class="pt-4" />
               <p v-html="cardsToDisplay[i - 1]?.description" class="my-4 text-xs line-clamp-2"></p>
               <puik-button class="mt-auto text-black bg-primary-400" @click="trackPSA(cardsToDisplay[i - 1]?.name)">
                 <a :href="cardsToDisplay[i - 1]?.url" target="_blank" class="w-full flex justify-center">

@@ -51,6 +51,7 @@ const contextSchema = z
     isShopEnabled: z.boolean().default(false),
     locale: z.string().default(""),
     shopCountry: z.string().default(""),
+    baseUrl: z.string().default(""),
   })
   .required();
 
