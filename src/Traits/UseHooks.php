@@ -25,13 +25,9 @@ use Symfony\Component\String\UnicodeString;
 
 trait UseHooks
 {
-    use Hooks\UseActionAdminMenuTabsModifier;
-    use Hooks\UseActionAdminBreadcrumbModifier;
     use Hooks\UseActionObjectLanguageAddAfter;
     use Hooks\UseActionAdminControllerSetMedia;
     use Hooks\UseDisplayBackOfficeHeader;
-    use Hooks\UseDisplayAdminNavBarBeforeEnd;
-    use Hooks\UseDisplayDashboardTop;
     use Hooks\UseActionObjectEmployeeAddAfter;
     use Hooks\UseActionObjectEmployeeUpdateAfter;
 

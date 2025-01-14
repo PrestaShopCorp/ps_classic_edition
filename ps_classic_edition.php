@@ -47,7 +47,6 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 class ps_classic_edition extends Module
 {
     use PrestaShop\Module\PsClassicEdition\Traits\UseHooks;
-    use PrestaShop\Module\PsClassicEdition\Traits\HaveConfigurationPage;
 
     private const PS_CLASSIC_EDITION_MODULE_TABS_LANG_UPDATE_REQUIRED = 'PS_CLASSIC_EDITION_MODULE_TABS_LANG_UPDATE_REQUIRED';
 
@@ -111,8 +110,6 @@ class ps_classic_edition extends Module
      */
     public function uninstall(): bool
     {
-        Configuration::deleteByName('SMB_IS_NEW_MENU_ENABLED');
-
         return parent::uninstall()
             && (new Uninstall($this->name))->run();
     }
