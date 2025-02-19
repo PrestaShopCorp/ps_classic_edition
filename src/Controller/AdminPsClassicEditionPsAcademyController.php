@@ -23,16 +23,17 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsClassicEdition\Controller;
 
-use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminController
+class AdminPsClassicEditionPsAcademyController extends PrestaShopAdminController
 {
     public function __construct(
-        private HttpClientInterface $httpClient,
-        private FilesystemAdapter $cache,
+        private readonly HttpClientInterface $httpClient,
+        private readonly CacheInterface $cache,
     ) {
     }
 
@@ -98,10 +99,10 @@ class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminContr
 
     private function createObjectFromResponse(array $response): array
     {
-        $context = \Context::getContext();
         $locale = 'gb';
-        if ($context->language->iso_code) {
-            $locale = $context->language->iso_code;
+        $contextIsoCode = $this->getLanguageContext()->getIsoCode();
+        if ($contextIsoCode) {
+            $locale = $contextIsoCode;
 
             $availableLang = ['fr', 'it', 'es'];
             if ($locale === 'en' || !in_array($locale, $availableLang)) {
