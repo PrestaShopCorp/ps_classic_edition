@@ -20,6 +20,7 @@
 
 declare(strict_types=1);
 
+use Module;
 use PrestaShop\Module\PsClassicEdition\Actions\Uninstall;
 use PrestaShop\Module\PsClassicEdition\Install\Tabs\TabsInstaller;
 use PrestaShop\PrestaShop\Core\Cache\Clearer\CacheClearerInterface;
@@ -84,6 +85,8 @@ class ps_classic_edition extends Module
 
     public function install(): bool
     {
+        $this->uninstallBasicEditionModule();
+
         return
             parent::install()
             && (new TabsInstaller($this->name))->installTabs()
@@ -122,5 +125,13 @@ class ps_classic_edition extends Module
         (new TabsInstaller($this->name))->installTabs();
 
         return parent::enable($force_all);
+    }
+
+    protected function uninstallBasicEditionModule(): void
+    {
+        $oldModule = Module::getInstanceByName('ps_edition_basic');
+        if ($oldModule) {
+            $oldModule->uninstall();
+        }
     }
 }
