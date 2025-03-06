@@ -2,7 +2,6 @@
 import { ref, onMounted } from "vue";
 import i18n from "@/i18n";
 import { register } from "swiper/element/bundle";
-import trackWithContext from "@/common/tracking/track";
 
 // register Swiper
 register();
@@ -34,22 +33,6 @@ const handleResize = () => {
   slidesPerView.value = screenWidth.value <= 768 ? 1.2 : 2;
 };
 
-const trackCO = async (title?: string) => {
-  let event = "Offer Care BO Classic Clicked";
-  const trackProps: Record<string, unknown> = {
-    shopUrl: window.location.origin,
-    timestamp: new Date(),
-    version: 'classic',
-  };
-
-  if (title && trackProps) {
-    event = "Bloc Care BO Classic Clicked";
-    trackProps["title"] = title;
-  }
-
-  await trackWithContext(event, trackProps);
-};
-
 onMounted(() => {
   window.addEventListener("resize", handleResize);
 
@@ -77,7 +60,7 @@ onMounted(() => {
       <h3 class="puik-h3 font-semibold mt-2 leading-6 text-lg">
         {{ $t("onb.homepage.care-offers.description") }}
       </h3>
-      <puik-button variant="secondary" size="lg" rightIcon="keyboard_arrow_right" class="mt-3" @click="trackCO()">
+      <puik-button variant="secondary" size="lg" rightIcon="keyboard_arrow_right" class="mt-3">
         <a :href="i18n.global.t('onb.homepage.care-offers.link')" target="_blank">
           {{ $t("onb.homepage.care-offers.button") }}
         </a>
@@ -102,7 +85,7 @@ onMounted(() => {
             <span class="text-xs">{{ truncate(i18n.global.t("onb.homepage.care-offers.bloc-1.description")) }}</span>
             <div class="mt-auto">
               <a :href="i18n.global.t('onb.homepage.care-offers.bloc-1.link')" target="_blank">
-                <puik-button variant="tertiary" fluid="true" leftIcon="launch" @click="trackCO()">
+                <puik-button variant="tertiary" fluid="true" leftIcon="launch">
                   {{ $t("onb.homepage.care-offers.bloc-1.button") }}
                 </puik-button>
               </a>
@@ -123,7 +106,7 @@ onMounted(() => {
             <span class="text-xs">{{ truncate(i18n.global.t("onb.homepage.care-offers.bloc-2.description")) }}</span>
             <div class="mt-auto">
               <a :href="i18n.global.t('onb.homepage.care-offers.bloc-2.link')" target="_blank">
-                <puik-button variant="tertiary" fluid="true" leftIcon="launch" @click="trackCO()">
+                <puik-button variant="tertiary" fluid="true" leftIcon="launch">
                   {{ $t("onb.homepage.care-offers.bloc-2.button") }}
                 </puik-button>
               </a>
@@ -144,7 +127,7 @@ onMounted(() => {
             <span class="text-xs">{{ truncate(i18n.global.t("onb.homepage.care-offers.bloc-3.description")) }}</span>
             <div class="mt-auto">
               <a :href="i18n.global.t('onb.homepage.care-offers.bloc-3.link')" target="_blank">
-                <puik-button variant="tertiary" fluid="true" leftIcon="launch" @click="trackCO()">
+                <puik-button variant="tertiary" fluid="true" leftIcon="launch">
                   {{ $t("onb.homepage.care-offers.bloc-3.button") }}
                 </puik-button>
               </a>
@@ -165,7 +148,7 @@ onMounted(() => {
             <span class="text-xs">{{ truncate(i18n.global.t("onb.homepage.care-offers.bloc-4.description")) }}</span>
             <div class="mt-auto">
               <a :href="i18n.global.t('onb.homepage.care-offers.bloc-4.link')" target="_blank">
-                <puik-button variant="tertiary" fluid="true" leftIcon="launch" @click="trackCO()">
+                <puik-button variant="tertiary" fluid="true" leftIcon="launch">
                   {{ $t("onb.homepage.care-offers.bloc-4.button") }}
                 </puik-button>
               </a>

@@ -16,7 +16,6 @@
   "dependencies": {
     "@babel/types": "^7.22.10",
     "@prestashopcorp/puik": "1.10.1",
-    "@segment/analytics-next": "1.53.3",
     "@tsconfig/node18": "^18.2.0",
     "@types/jsdom": "^21.1.1",
     "@types/node": "^20.5.1",

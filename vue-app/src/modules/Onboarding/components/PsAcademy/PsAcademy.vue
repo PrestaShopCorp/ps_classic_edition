@@ -3,7 +3,6 @@ import { computed, onMounted, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { usePsAcademy, type PsAcademyCard } from "@/modules/Onboarding/stores/psAcademy";
 import { useContext } from "@/common/composables/use-context";
-import trackWithContext from "@/common/tracking/track";
 
 const { context } = useContext();
 const psAcademyStore = usePsAcademy();
@@ -34,22 +33,6 @@ const toNext = () => {
   }
 };
 
-const trackPSA = async (title?: string) => {
-  let event = "PS Academy BO Classic Clicked";
-  const trackProps: Record<string, unknown> = {
-    shopUrl: window.location.origin,
-    timestamp: new Date(),
-    version: 'classic',
-  };
-
-  if (title && trackProps) {
-    event = "Bloc Academy BO Classic";
-    trackProps["title"] = title;
-  }
-
-  await trackWithContext(event, trackProps);
-};
-
 const image = await import('@/modules/Onboarding/assets/img/thumbnail-psacademy.png');
 const imageUrl = context.value.baseUrl + '/../' + image.default;
 
@@ -73,7 +56,6 @@ onMounted(async () => {
           :href="psAcademyUrl"
           target="_blank"
           class="no-decoration flex items-center text-xl px-8"
-          @click="trackPSA()"
         >
           {{ $t("onb.homepage.psAcademy.header.seeAll") }}
           <puik-icon icon="chevron_right" node_type="span" class="ml-2" />
@@ -132,7 +114,7 @@ onMounted(async () => {
               <h3 class="text-sm font-bold">{{ cardsToDisplay[i - 1]?.name }}</h3>
               <img v-if="i === 1" :src="imageUrl" class="pt-4" />
               <p v-html="cardsToDisplay[i - 1]?.description" class="my-4 text-xs line-clamp-2"></p>
-              <puik-button class="mt-auto text-black bg-primary-400" @click="trackPSA(cardsToDisplay[i - 1]?.name)">
+              <puik-button class="mt-auto text-black bg-primary-400">
                 <a :href="cardsToDisplay[i - 1]?.url" target="_blank" class="w-full flex justify-center">
                   <puik-icon icon="open_in_new" font-size="16px" node-type="span" class="mr-2 mt-[1px]" />
                   {{ $t("onb.homepage.psAcademy.button") }}

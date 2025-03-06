@@ -28,7 +28,6 @@
 
 <script lang="ts" setup>
 import i18n from "@/i18n";
-import trackWithContext from "@/common/tracking/track";
 import {useContext} from "@/common/composables/use-context";
 
 const { context } = useContext();
@@ -36,12 +35,6 @@ const logo = await import('@/modules/Onboarding/assets/img/question.svg');
 const logoUrl = context.value.baseUrl + '/../' + logo.default;
 
 const handleDocumentationClick = async () => {
-  await trackWithContext("Access To Help Center Edition Home Clicked", {
-    shopUrl: window.location.origin,
-    timestamp: new Date(),
-    version: 'classic',
-  });
-
   window.open(i18n.global.t("onb.homepage.help.url"));
 };
 </script>
