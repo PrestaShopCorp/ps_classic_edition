@@ -1,5 +1,4 @@
 <template>
-  <update-is-needed v-if="updateIsRequired() && context.moduleIsUpdatable" />
   <div class="vue-edition-homepage max-w-[1134px] mx-auto">
     <div class="mb-4">
       <h2>{{ $t("onb.homepage.title") }}</h2>
@@ -26,7 +25,6 @@ import MaintenanceAlert from "@/modules/Onboarding/components/MaintenanceAlert.v
 import SetupGuide from "@/modules/Onboarding/components/SetupGuide/SetupGuide.vue";
 import HelpCenter from "@/modules/Onboarding/components/HelpCenter.vue";
 import OurWorkshops from "@/modules/Onboarding/components/OurWorkshops.vue";
-import UpdateIsNeeded from "@/modules/Onboarding/components/UpdateIsNeeded.vue";
 import CareOffers from "@/modules/Onboarding/components/CareOffers.vue";
 import PsAcademy from "@/modules/Onboarding/components/PsAcademy/PsAcademy.vue"
 import { useSetupGuideStore } from "@/modules/Onboarding/stores/useSetupGuideStore";
@@ -35,7 +33,7 @@ import {
   isFeatureActive,
 } from "../services/featureFlag";
 
-const { context, updateIsRequired } = useContext();
+const { context } = useContext();
 const setupGuideStore = useSetupGuideStore();
 const { isHidden, steps } = storeToRefs(setupGuideStore);
 

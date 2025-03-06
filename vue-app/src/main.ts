@@ -16,9 +16,6 @@ if (!mountEl || !mountEl.dataset.context) {
 try {
   if (mountEl && mountEl.dataset.context) {
     context.setContext(JSON.parse(mountEl.dataset.context));
-    if (context.updateIsRequired()) {
-      context.callForMboCacheClear();
-    }
   }
 } catch (err) {
   console.error("Context is not valid: " + err);

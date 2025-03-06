@@ -24,7 +24,6 @@ declare(strict_types=1);
 namespace PrestaShop\Module\PsClassicEdition\Controller;
 
 use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;

@@ -78,13 +78,9 @@ class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminContro
         }
         $shopCountry = strtolower($shopCountry);
 
-        /** @var ModuleService $moduleService */
-        $moduleService = $this->get('PrestaShop\Module\PsClassicEdition\Service\ModuleService');
-
         $setupGuideApiUrl = $this->buildAdminUrl('ps_classic_edition_setup_guide_api_index');
         $setupGuideApiUrlEdit = $this->buildAdminUrl('ps_classic_edition_setup_guide_api_edit');
         $setupGuideApiUrlModalHidden = $this->buildAdminUrl('ps_classic_edition_setup_guide_api_modal_hidden');
-        $cacheClearApiUrl = $this->buildAdminUrl('ps_classic_edition_clean_mbo_cache');
         $psAcademyApiUrl = $this->buildAdminUrl('ps_classic_edition_ps_academy');
 
         return $this->render('@Modules/ps_classic_edition/views/templates/admin/homepage.html.twig', [
@@ -95,14 +91,11 @@ class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminContro
                 'SETUP_GUIDE_API_URL' => $setupGuideApiUrl,
                 'SETUP_GUIDE_API_URL_EDIT' => $setupGuideApiUrlEdit,
                 'SETUP_GUIDE_API_URL_MODAL_HIDDEN' => $setupGuideApiUrlModalHidden,
-                'CACHE_CLEAR_API_URL' => $cacheClearApiUrl,
                 'PS_CLASSIC_EDITION_PS_ACADEMY_API_URL' => $psAcademyApiUrl,
                 'MAINTENANCE_URL' => $this->generateUrl('admin_maintenance'),
                 'moduleName' => $modulePsClassicEdition->displayName,
                 'moduleSlug' => $modulePsClassicEdition->name,
                 'moduleVersion' => $modulePsClassicEdition->version,
-                'moduleIsUpdatable' => $moduleService->getModuleIsUpdatable(),
-                'moduleUpdateLink' => $moduleService->getUpdateLink(),
                 'userToken' => $accountUserToken,
                 'psAccountShopID' => $psShopID ?: '',
                 'psAccountID' => $psAccountID ?: '',

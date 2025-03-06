@@ -36,14 +36,6 @@ ps_classic_edition_setup_guide_api_delete:
   requirements:
     stepName: "[a-z-]+"
 
-ps_classic_edition_clean_mbo_cache:
-  path: psclassicedition/cache-clear
-  methods: [PATCH]
-  defaults:
-    _controller: PrestaShop\Module\PsClassicEdition\Controller\AdminPsClassicEditionCacheController::handleRequest
-    _legacy_controller: "AdminPsClassicEditionCacheController"
-    _legacy_link: "AdminPsClassicEditionCacheController"
-
 ps_classic_edition_ps_academy:
   path: psclassicedition/ps-academy
   methods: [GET]
