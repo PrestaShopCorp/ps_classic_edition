@@ -12,6 +12,11 @@
         <target state="translated">PrestaShop Classic Edition.</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="83218ac34c1834c26781fe4bde918ee4">
+        <source>Welcome</source>
+        <target state="translated">Bienvenue</target>
+        <note>Line: </note>
+      </trans-unit>
       <trans-unit id="8cf04a9734132302f96da8e113e80ce5">
         <source>Home</source>
         <target state="translated">Accueil</target>
