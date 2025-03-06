@@ -23,69 +23,90 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsClassicEdition\Controller;
 
-use PrestaShop\Module\PsClassicEdition\Service\ModuleService;
-use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
+use PrestaShop\PrestaShop\Adapter\LegacyContext;
+use PrestaShop\PsAccountsInstaller\Installer\Facade\PsAccounts as PsAccountsFacade;
+use PrestaShop\PsAccountsInstaller\Installer\Installer;
+use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminController
+class AdminPsClassicEditionHomepageController extends PrestaShopAdminController
 {
-    public function indexAction(Request $request): Response
+    public static function getSubscribedServices(): array
     {
-        if (intval($this->getContext()->employee->id_profile) !== 1) {
-            \Tools::redirectAdmin($this->getContext()->link->getAdminLink('AdminDashboard'));
+        return parent::getSubscribedServices() + [
+            'psAccountService' => '?PrestaShop\Module\PsAccounts\Service\PsAccountsService',
+        ];
+    }
+
+    public function indexAction(
+        Request $request,
+        #[Autowire(service: 'ps_classic_edition.ps_accounts.installer')]
+        Installer $accountsInstaller,
+        #[Autowire(service: 'ps_classic_edition.ps_accounts.facade')]
+        PsAccountsFacade $psAccountsFacade,
+        #[Autowire(service: 'ps_classic_edition.module')]
+        \ps_classic_edition $modulePsClassicEdition,
+        LegacyContext $legacyContext,
+    ): Response {
+        if (!$this->getEmployeeContext()->isSuperAdmin()) {
+            return $this->redirect($legacyContext->getContext()->link->getAdminLink('AdminDashboard'));
         }
-        $modulePsClassicEdition = $this->get('ps_classic_edition.module');
 
         $psAccountID = '';
         $psShopID = '';
-        if ($this->has('PrestaShop\Module\PsAccounts\Service\PsAccountsService')) {
-            $psAccountService = $this->get('PrestaShop\Module\PsAccounts\Service\PsAccountsService');
-            $employeeAccount = $psAccountService->getEmployeeAccount();
-            $psAccountID = ($employeeAccount ? $employeeAccount->getUid() : $psAccountService->getUserUuid());
-            $psShopID = $psAccountService->getShopUuid();
-        }
-
-        if ($this->has('PrestaShop\Module\PsAccounts\Repository\UserTokenRepository')) {
-            $userTokenRepository = $this->get('PrestaShop\Module\PsAccounts\Repository\UserTokenRepository');
-            $accountUserToken = strval($userTokenRepository->getOrRefreshToken());
+        $accountUserToken = '';
+        $urlAccountsCdn = '';
+        $psAccountService = null;
+        if ($this->container->has('psAccountService')) {
+            $psAccountService = $this->container->get('psAccountService');
         } else {
-            $accountUserToken = '';
+            try {
+                // Install account module automatically
+                $accountsInstaller->install();
+                $psAccountService = $psAccountsFacade->getPsAccountsService();
+            } catch (\Throwable) {
+            }
         }
 
-        /* ----------------------- Allow auto install account ---------------------- */
-        $accountsFacade = null;
-        $accountsService = null;
-        try {
-            $accountsInstaller = $this->get('ps_classic_edition.ps_accounts.installer');
-            $accountsInstaller->install();
-            $accountsFacade = $this->get('ps_classic_edition.ps_accounts.facade');
-            \Media::addJsDef([
-                'contextPsAccounts' => $accountsFacade->getPsAccountsPresenter()
-                    ->present($modulePsClassicEdition->name),
-            ]);
-            $accountsService = $accountsFacade->getPsAccountsService();
-        } catch (\Exception $e) {
-            // Todo logs ?
+        if ($psAccountService) {
+            try {
+                $employeeAccount = $psAccountService->getEmployeeAccount();
+                $psAccountID = ($employeeAccount ? $employeeAccount->getUid() : $psAccountService->getUserUuid());
+                $psShopID = $psAccountService->getShopUuid();
+                $urlAccountsCdn = $psAccountService->getAccountsCdn();
+                // New method starting from PS Accounts 7.1.1
+                if (method_exists($psAccountService, 'getShopToken')) {
+                    $accountUserToken = strval($psAccountService->getShopToken());
+                } elseif (method_exists($psAccountService, 'getOrRefreshToken')) {
+                    $accountUserToken = strval($psAccountService->getOrRefreshToken());
+                }
+            } catch (\Throwable) {
+            }
         }
+        \Media::addJsDef([
+            'contextPsAccounts' => $psAccountsFacade->getPsAccountsPresenter()->present($modulePsClassicEdition->name),
+        ]);
 
         /**
          * @var string|string[]
          */
-        $shopCountry = $this->getContext()->country->iso_code;
+        $shopCountry = $this->getCountryContext()->getIsoCode();
         if (is_array($shopCountry)) { // Country might be an array
             $shopCountry = $shopCountry[array_key_first($shopCountry)] ?? '';
         }
         $shopCountry = strtolower($shopCountry);
 
-        $setupGuideApiUrl = $this->buildAdminUrl('ps_classic_edition_setup_guide_api_index');
-        $setupGuideApiUrlEdit = $this->buildAdminUrl('ps_classic_edition_setup_guide_api_edit');
-        $setupGuideApiUrlModalHidden = $this->buildAdminUrl('ps_classic_edition_setup_guide_api_modal_hidden');
-        $psAcademyApiUrl = $this->buildAdminUrl('ps_classic_edition_ps_academy');
+        $setupGuideApiUrl = $this->generateUrl('ps_classic_edition_setup_guide_api_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $setupGuideApiUrlEdit = $this->generateUrl('ps_classic_edition_setup_guide_api_edit', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $setupGuideApiUrlModalHidden = $this->generateUrl('ps_classic_edition_setup_guide_api_modal_hidden', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $psAcademyApiUrl = $this->generateUrl('ps_classic_edition_ps_academy', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         return $this->render('@Modules/ps_classic_edition/views/templates/admin/homepage.html.twig', [
-            'layoutTitle' => $this->layoutTitle(),
-            'urlAccountsCdn' => $accountsService ? $accountsService->getAccountsCdn() : '',
+            'layoutTitle' => $this->trans('Home', [], 'Modules.Classicedition.Admin'),
+            'urlAccountsCdn' => $urlAccountsCdn,
             'enableSidebar' => true,
             'jsContext' => json_encode([
                 'SETUP_GUIDE_API_URL' => $setupGuideApiUrl,
@@ -104,23 +125,10 @@ class AdminPsClassicEditionHomepageController extends FrameworkBundleAdminContro
                 'callBack' => [
                     'isCalledBack' => (bool) $this->getConfiguration()->get('PS_IS_CALLED_BACK', false),
                 ],
-                'locale' => $this->getContext()->language->iso_code,
+                'locale' => $this->getLanguageContext()->getIsoCode(),
                 'shopCountry' => $shopCountry,
                 'baseUrl' => $request->getBaseUrl(),
             ]),
         ]);
-    }
-
-    protected function layoutTitle(): string
-    {
-        return $this->trans('Home', 'Modules.Classicedition.Admin');
-    }
-
-    private function buildAdminUrl(string $routeName): string
-    {
-        $router = $this->get('router');
-        $scheme = isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'https://') === 0 ? 'https://' : 'http://';
-
-        return $scheme . $_SERVER['HTTP_HOST'] . $router->generate($routeName);
     }
 }
