@@ -105,7 +105,7 @@ class AdminPsClassicEditionSetupGuideController extends PrestaShopAdminControlle
     private function getInitialDatas(SetupGuideDataPresenter $setupGuideDataPresenter): array
     {
         return [
-            'isHidden' => (bool) $this->getConfiguration()->get('PS_SETUP_GUIDE_MODAL_IS_HIDDEN', false),
+            'isHidden' => (bool) $this->getConfiguration()->get('PS_SETUP_GUIDE_MODAL_IS_HIDDEN'),
             'steps' => $setupGuideDataPresenter->getSetupGuideData(),
         ];
     }

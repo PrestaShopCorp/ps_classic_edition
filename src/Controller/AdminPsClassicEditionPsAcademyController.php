@@ -26,6 +26,7 @@ namespace PrestaShop\Module\PsClassicEdition\Controller;
 use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class AdminPsClassicEditionPsAcademyController extends PrestaShopAdminController
@@ -43,9 +44,8 @@ class AdminPsClassicEditionPsAcademyController extends PrestaShopAdminController
      */
     public function getProducts(): JsonResponse
     {
-        $products = [];
-        $cachedProducts = $this->cache->getItem('ps_academy_products');
-        if (!$cachedProducts->isHit()) {
+        $cachedProducts = $this->cache->get('ps_academy_products', function (ItemInterface $item, bool &$save) {
+            $products = [];
             $ids = $this->getProductsId();
 
             if (!empty($ids)) {
@@ -61,15 +61,15 @@ class AdminPsClassicEditionPsAcademyController extends PrestaShopAdminController
             }
 
             if (!empty($products)) {
-                $cachedProducts->set($products);
-                $cachedProducts->expiresAfter(\DateInterval::createFromDateString('1 day'));
-                $this->cache->save($cachedProducts);
+                $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
+            } else {
+                $save = false;
             }
-        } else {
-            $products = $cachedProducts->get();
-        }
 
-        return new JsonResponse($products);
+            return $products;
+        });
+
+        return new JsonResponse($cachedProducts);
     }
 
     private function getProductsId(): array

@@ -82,10 +82,10 @@ class AdminPsClassicEditionHomepageController extends PrestaShopAdminController
                 'userToken' => $psAccountsSettings['accountUserToken'],
                 'psAccountShopID' => $psAccountsSettings['psShopID'],
                 'psAccountID' => $psAccountsSettings['psAccountID'],
-                'shopName' => (string) $this->getConfiguration()->get('PS_SHOP_NAME', ''),
-                'isShopEnabled' => (bool) $this->getConfiguration()->get('PS_SHOP_ENABLE', false),
+                'shopName' => (string) $this->getConfiguration()->get('PS_SHOP_NAME'),
+                'isShopEnabled' => (bool) $this->getConfiguration()->get('PS_SHOP_ENABLE'),
                 'callBack' => [
-                    'isCalledBack' => (bool) $this->getConfiguration()->get('PS_IS_CALLED_BACK', false),
+                    'isCalledBack' => (bool) $this->getConfiguration()->get('PS_IS_CALLED_BACK'),
                 ],
                 'locale' => $this->getLanguageContext()->getIsoCode(),
                 'shopCountry' => $shopCountry,
