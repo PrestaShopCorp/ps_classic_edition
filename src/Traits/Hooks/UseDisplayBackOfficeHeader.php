@@ -23,27 +23,41 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsClassicEdition\Traits\Hooks;
 
+use PrestaShop\Module\PsClassicEdition\Helper\PsAccountHelper;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 trait UseDisplayBackOfficeHeader
 {
     public function hookDisplayBackOfficeHeader(): string
     {
-        $router = \Context::getContext()->controller->getContainer()->get('router');
-        $setupGuideApiUrl = $router->generate('ps_classic_edition_setup_guide_api_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
-        $setupGuideApiUrlEdit = $router->generate('ps_classic_edition_setup_guide_api_edit', [], UrlGeneratorInterface::ABSOLUTE_URL);
-
         $controller = \Tools::getValue('controller');
         $minimizedGuideHtml = '';
         if ($controller !== 'AdminPsClassicEditionHomepageController') {
+            // Init URLs for setup guide
+            $router = \Context::getContext()->controller->getContainer()->get('router');
+            $setupGuideApiUrl = $router->generate('ps_classic_edition_setup_guide_api_index', [], UrlGeneratorInterface::ABSOLUTE_URL);
+            $setupGuideApiUrlEdit = $router->generate('ps_classic_edition_setup_guide_api_edit', [], UrlGeneratorInterface::ABSOLUTE_URL);
+
+            // Init accounts
+            $psAccountHelper = \Context::getContext()->controller->getContainer()->get(PsAccountHelper::class);
+            $psAccountsSettings = $psAccountHelper->loadAccountSettings();
+            $urlAccountsCdn = $psAccountsSettings['urlAccountsCdn'];
+            $accountsUserToken = $psAccountsSettings['accountUserToken'];
+            $psShopID = $psAccountsSettings['psShopID'];
+            $psAccountID = $psAccountsSettings['psAccountID'];
+
             // Include the minimized setup guide (only if some steps are still needed)
             $baseLink = \Context::getContext()->link->getAdminBaseLink();
             $minimizedGuideHtml = '<script type="module" src="' . $baseLink . '/modules/ps_classic_edition/views/js/vue/assets/index.js"></script>';
             $minimizedGuideHtml .= PHP_EOL . "
+            <script src=\"$urlAccountsCdn\" rel=\"preload\"></script>
             <script>
                 window.minimizedGuideContext = {
                     \"SETUP_GUIDE_API_URL\": \"$setupGuideApiUrl\",
-                    \"SETUP_GUIDE_API_URL_EDIT\": \"$setupGuideApiUrlEdit\"
+                    \"SETUP_GUIDE_API_URL_EDIT\": \"$setupGuideApiUrlEdit\",
+                    \"'userToken\": \"$accountsUserToken\",
+                    \"psAccountShopID\": \"$psShopID\",
+                    \"psAccountID\": \"$psAccountID\"
                 };
             </script>
             ";

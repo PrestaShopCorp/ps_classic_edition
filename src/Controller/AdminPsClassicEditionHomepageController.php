@@ -23,9 +23,8 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsClassicEdition\Controller;
 
+use PrestaShop\Module\PsClassicEdition\Helper\PsAccountHelper;
 use PrestaShop\PrestaShop\Adapter\LegacyContext;
-use PrestaShop\PsAccountsInstaller\Installer\Facade\PsAccounts as PsAccountsFacade;
-use PrestaShop\PsAccountsInstaller\Installer\Installer;
 use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,10 +42,7 @@ class AdminPsClassicEditionHomepageController extends PrestaShopAdminController
 
     public function indexAction(
         Request $request,
-        #[Autowire(service: 'ps_classic_edition.ps_accounts.installer')]
-        Installer $accountsInstaller,
-        #[Autowire(service: 'ps_classic_edition.ps_accounts.facade')]
-        PsAccountsFacade $psAccountsFacade,
+        PsAccountHelper $psAccountHelper,
         #[Autowire(service: 'ps_classic_edition.module')]
         \ps_classic_edition $modulePsClassicEdition,
         LegacyContext $legacyContext,
@@ -54,41 +50,6 @@ class AdminPsClassicEditionHomepageController extends PrestaShopAdminController
         if (!$this->getEmployeeContext()->isSuperAdmin()) {
             return $this->redirect($legacyContext->getContext()->link->getAdminLink('AdminDashboard'));
         }
-
-        $psAccountID = '';
-        $psShopID = '';
-        $accountUserToken = '';
-        $urlAccountsCdn = '';
-        $psAccountService = null;
-        if ($this->container->has('psAccountService')) {
-            $psAccountService = $this->container->get('psAccountService');
-        } else {
-            try {
-                // Install account module automatically
-                $accountsInstaller->install();
-                $psAccountService = $psAccountsFacade->getPsAccountsService();
-            } catch (\Throwable) {
-            }
-        }
-
-        if ($psAccountService) {
-            try {
-                $employeeAccount = $psAccountService->getEmployeeAccount();
-                $psAccountID = ($employeeAccount ? $employeeAccount->getUid() : $psAccountService->getUserUuid());
-                $psShopID = $psAccountService->getShopUuid();
-                $urlAccountsCdn = $psAccountService->getAccountsCdn();
-                // New method starting from PS Accounts 7.1.1
-                if (method_exists($psAccountService, 'getShopToken')) {
-                    $accountUserToken = strval($psAccountService->getShopToken());
-                } elseif (method_exists($psAccountService, 'getOrRefreshToken')) {
-                    $accountUserToken = strval($psAccountService->getOrRefreshToken());
-                }
-            } catch (\Throwable) {
-            }
-        }
-        \Media::addJsDef([
-            'contextPsAccounts' => $psAccountsFacade->getPsAccountsPresenter()->present($modulePsClassicEdition->name),
-        ]);
 
         /**
          * @var string|string[]
@@ -103,10 +64,11 @@ class AdminPsClassicEditionHomepageController extends PrestaShopAdminController
         $setupGuideApiUrlEdit = $this->generateUrl('ps_classic_edition_setup_guide_api_edit', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $setupGuideApiUrlModalHidden = $this->generateUrl('ps_classic_edition_setup_guide_api_modal_hidden', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $psAcademyApiUrl = $this->generateUrl('ps_classic_edition_ps_academy', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $psAccountsSettings = $psAccountHelper->loadAccountSettings();
 
         return $this->render('@Modules/ps_classic_edition/views/templates/admin/homepage.html.twig', [
             'layoutTitle' => $this->trans('Home', [], 'Modules.Classicedition.Admin'),
-            'urlAccountsCdn' => $urlAccountsCdn,
+            'urlAccountsCdn' => $psAccountsSettings['urlAccountsCdn'],
             'enableSidebar' => true,
             'jsContext' => json_encode([
                 'SETUP_GUIDE_API_URL' => $setupGuideApiUrl,
@@ -117,9 +79,9 @@ class AdminPsClassicEditionHomepageController extends PrestaShopAdminController
                 'moduleName' => $modulePsClassicEdition->displayName,
                 'moduleSlug' => $modulePsClassicEdition->name,
                 'moduleVersion' => $modulePsClassicEdition->version,
-                'userToken' => $accountUserToken,
-                'psAccountShopID' => $psShopID ?: '',
-                'psAccountID' => $psAccountID ?: '',
+                'userToken' => $psAccountsSettings['accountUserToken'],
+                'psAccountShopID' => $psAccountsSettings['psShopID'],
+                'psAccountID' => $psAccountsSettings['psAccountID'],
                 'shopName' => (string) $this->getConfiguration()->get('PS_SHOP_NAME', ''),
                 'isShopEnabled' => (bool) $this->getConfiguration()->get('PS_SHOP_ENABLE', false),
                 'callBack' => [

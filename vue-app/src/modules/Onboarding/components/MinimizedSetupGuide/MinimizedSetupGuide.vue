@@ -30,6 +30,10 @@ onMounted(async() => {
     } catch (e) {
       console.error("Setup Guide initial datas aren't valid:" + e);
     }
+
+    /* Initialize Account */
+    (window as any).psaccountsVue?.init();
+
     setLoading(false);
   }
 })

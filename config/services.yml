@@ -20,3 +20,7 @@ services:
     class: 'PrestaShop\PsAccountsInstaller\Installer\Facade\PsAccounts'
     arguments:
       - "@ps_classic_edition.ps_accounts.installer"
+
+  PrestaShop\Module\PsClassicEdition\Helper\PsAccountHelper:
+    autowire: true
+    public: true
