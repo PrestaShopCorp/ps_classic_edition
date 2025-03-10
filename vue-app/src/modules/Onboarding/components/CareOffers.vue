@@ -85,7 +85,7 @@ onMounted(() => {
             <span class="text-xs">{{ truncate(i18n.global.t("onb.homepage.care-offers.bloc-1.description")) }}</span>
             <div class="mt-auto">
               <a :href="i18n.global.t('onb.homepage.care-offers.bloc-1.link')" target="_blank">
-                <puik-button variant="tertiary" fluid="true" leftIcon="launch">
+                <puik-button variant="tertiary" :fluid="true" leftIcon="launch">
                   {{ $t("onb.homepage.care-offers.bloc-1.button") }}
                 </puik-button>
               </a>
@@ -106,7 +106,7 @@ onMounted(() => {
             <span class="text-xs">{{ truncate(i18n.global.t("onb.homepage.care-offers.bloc-2.description")) }}</span>
             <div class="mt-auto">
               <a :href="i18n.global.t('onb.homepage.care-offers.bloc-2.link')" target="_blank">
-                <puik-button variant="tertiary" fluid="true" leftIcon="launch">
+                <puik-button variant="tertiary" :fluid="true" leftIcon="launch">
                   {{ $t("onb.homepage.care-offers.bloc-2.button") }}
                 </puik-button>
               </a>
@@ -127,7 +127,7 @@ onMounted(() => {
             <span class="text-xs">{{ truncate(i18n.global.t("onb.homepage.care-offers.bloc-3.description")) }}</span>
             <div class="mt-auto">
               <a :href="i18n.global.t('onb.homepage.care-offers.bloc-3.link')" target="_blank">
-                <puik-button variant="tertiary" fluid="true" leftIcon="launch">
+                <puik-button variant="tertiary" :fluid="true" leftIcon="launch">
                   {{ $t("onb.homepage.care-offers.bloc-3.button") }}
                 </puik-button>
               </a>
@@ -148,7 +148,7 @@ onMounted(() => {
             <span class="text-xs">{{ truncate(i18n.global.t("onb.homepage.care-offers.bloc-4.description")) }}</span>
             <div class="mt-auto">
               <a :href="i18n.global.t('onb.homepage.care-offers.bloc-4.link')" target="_blank">
-                <puik-button variant="tertiary" fluid="true" leftIcon="launch">
+                <puik-button variant="tertiary" :fluid="true" leftIcon="launch">
                   {{ $t("onb.homepage.care-offers.bloc-4.button") }}
                 </puik-button>
               </a>
