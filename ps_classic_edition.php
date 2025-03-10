@@ -91,20 +91,6 @@ class ps_classic_edition extends Module
         ;
     }
 
-    public function postInstall(): bool
-    {
-        /** @var CacheClearerInterface */
-        $cacheClearer = null;
-        try {
-            $cacheClearer = $this->getContainer()->get('prestashop.adapter.cache.clearer.symfony_cache_clearer');
-            $cacheClearer->clear();
-        } catch (Exception $e) {
-            // TODO ?
-        }
-
-        return true;
-    }
-
     /**
      * @throws Exception
      */
