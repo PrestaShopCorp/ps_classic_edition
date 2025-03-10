@@ -42,5 +42,6 @@ const toggleIsOpen = () => {
 <style>
 #minimized-setup-guide-container {
   max-height: calc(100vh - 50px);
+  color: var(--cdk-primary-800);
 }
 </style>

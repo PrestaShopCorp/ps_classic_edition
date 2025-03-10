@@ -47,7 +47,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, watch, type PropType, onMounted } from "vue";
+import { ref, watch, type PropType } from "vue";
 import { storeToRefs } from "pinia";
 import { useSetupGuideStore } from "@/modules/Onboarding/stores/useSetupGuideStore";
 import SlideTransition from "@/common/components/SlideTransition.vue";
