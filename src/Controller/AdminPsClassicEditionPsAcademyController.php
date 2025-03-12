@@ -24,7 +24,7 @@ declare(strict_types=1);
 namespace PrestaShop\Module\PsClassicEdition\Controller;
 
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -32,7 +32,7 @@ class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminContr
 {
     public function __construct(
         private HttpClientInterface $httpClient,
-        private FilesystemAdapter $cache,
+        private CacheInterface $cache,
     ) {
     }
 
@@ -43,35 +43,44 @@ class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminContr
      */
     public function getProducts(): JsonResponse
     {
-        $products = [];
-        $cachedProducts = $this->cache->getItem('ps_academy_products');
-        if (!$cachedProducts->isHit()) {
-            $ids = $this->getProductsId();
-
-            if (!empty($ids)) {
-                foreach ($ids as $id) {
-                    $response = $this->httpClient->request('GET', 'https://prestashop-academy.com/api/products/' . $id . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON');
-                    $httpStatusCode = $response->getStatusCode();
-                    if ($httpStatusCode <= 300) {
-                        $responseContents = json_decode($response->getContent(), true);
-                        $tempObject = $this->createObjectFromResponse($responseContents['product']);
-                        array_push($products, $tempObject);
-                    }
-                }
-            }
-
-            if (!empty($products)) {
-                $cachedProducts->set($products);
-                $cachedProducts->expiresAfter(\DateInterval::createFromDateString('1 day'));
-                $this->cache->save($cachedProducts);
-            }
-        } else {
-            $products = $cachedProducts->get();
-        }
+        $products = $this->cache->get('ps_academy_products', function () {
+            return $this->fetchProducts();
+        });
 
         return new JsonResponse($products);
     }
 
+    /**
+     * Fetches the products from API
+     *
+     * @return array
+     */
+    private function fetchProducts(): array
+    {
+        $products = [];
+        $ids = $this->getProductsId();
+
+        if (!empty($ids)) {
+            foreach ($ids as $id) {
+                $response = $this->httpClient->request(
+                    'GET',
+                    'https://prestashop-academy.com/api/products/' . $id . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON'
+                );
+                if ($response->getStatusCode() < 300) {
+                    $responseContents = json_decode($response->getContent(), true);
+                    $products[] = $this->createObjectFromResponse($responseContents['product']);
+                }
+            }
+        }
+
+        return $products;
+    }
+
+    /**
+     * Retrieves product IDs from API
+     *
+     * @return array
+     */
     private function getProductsId(): array
     {
         $responseVideoHosted = $this->httpClient->request(
@@ -96,6 +105,13 @@ class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminContr
         return array_column(array_merge($responseContentsLiveHosted['products'], $responseContentsVideoHosted['products']), 'id');
     }
 
+    /**
+     * Converts API response to an array
+     *
+     * @param array $response
+     *
+     * @return array
+     */
     private function createObjectFromResponse(array $response): array
     {
         $context = \Context::getContext();
@@ -116,23 +132,25 @@ class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminContr
             'it' => 3,
         ];
 
-        $responseCategory = $this->httpClient->request('GET', 'https://prestashop-academy.com/api/categories/' . $response['id_category_default'] . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON');
+        $responseCategory = $this->httpClient->request(
+            'GET',
+            'https://prestashop-academy.com/api/categories/' . $response['id_category_default'] . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON'
+        );
         $httpStatusCode = $responseCategory->getStatusCode();
 
         if ($httpStatusCode > 300) {
             return [];
         }
+
         $responseContents = json_decode($responseCategory->getContent(), true);
         $category = $responseContents['category']['link_rewrite'][$langIds[$locale]]['value'];
         $link_rewrite = $response['link_rewrite'][$langIds[$locale]]['value'];
         $productUrl = 'https://prestashop-academy.com/' . $locale . '/' . $category . '/' . $response['id'] . '-' . $link_rewrite . '.html';
 
-        $tmp = [
+        return [
             'name' => $response['name'][$langIds[$locale]]['value'],
             'description' => $response['description'][$langIds[$locale]]['value'],
             'url' => $productUrl,
         ];
-
-        return $tmp;
     }
 }
