@@ -22,7 +22,6 @@ declare(strict_types=1);
 
 use PrestaShop\Module\PsClassicEdition\Actions\Uninstall;
 use PrestaShop\Module\PsClassicEdition\Install\Tabs\TabsInstaller;
-use PrestaShop\PrestaShop\Core\Cache\Clearer\CacheClearerInterface;
 use Symfony\Component\Dotenv\Dotenv;
 
 define('PS_CLASSIC_EDITION_SETTINGS_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/settingsWhiteList.json'), true));

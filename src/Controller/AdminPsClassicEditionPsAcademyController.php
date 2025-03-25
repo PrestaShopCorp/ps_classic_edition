@@ -44,13 +44,22 @@ class AdminPsClassicEditionPsAcademyController extends PrestaShopAdminController
      */
     public function getProducts(): JsonResponse
     {
-        $cachedProducts = $this->cache->get('ps_academy_products', function (ItemInterface $item, bool &$save) {
+        $isoCode = strtolower($this->getLanguageContext()->getIsoCode());
+        $psAcademyLangId = match ($isoCode) {
+            'fr' => 1,
+            'es' => 3,
+            'it' => 4,
+            // Default is en
+            default => 2,
+        };
+
+        $cachedProducts = $this->cache->get('ps_academy_products_' . $isoCode, function (ItemInterface $item, bool &$save) use ($psAcademyLangId) {
             $products = [];
-            $ids = $this->getProductsId();
+            $ids = $this->getProductsId($psAcademyLangId);
 
             if (!empty($ids)) {
                 foreach ($ids as $id) {
-                    $response = $this->httpClient->request('GET', 'https://prestashop-academy.com/api/products/' . $id . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON');
+                    $response = $this->httpClient->request('GET', 'https://prestashop-academy.com/api/products/' . $id . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON&id_lang=' . $psAcademyLangId);
                     $httpStatusCode = $response->getStatusCode();
                     if ($httpStatusCode <= 300) {
                         $responseContents = json_decode($response->getContent(), true);
@@ -72,15 +81,15 @@ class AdminPsClassicEditionPsAcademyController extends PrestaShopAdminController
         return new JsonResponse($cachedProducts);
     }
 
-    private function getProductsId(): array
+    private function getProductsId(int $psAcademyLangId): array
     {
         $responseVideoHosted = $this->httpClient->request(
             'GET',
-            'https://prestashop-academy.com/api/products?filter[mpn]=[videoHosted]&ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON'
+            'https://prestashop-academy.com/api/products?filter[mpn]=[videoHosted]&ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON&id_lang=' . $psAcademyLangId,
         );
         $responseLiveHosted = $this->httpClient->request(
             'GET',
-            'https://prestashop-academy.com/api/products?filter[mpn]=[liveHosted]&ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON'
+            'https://prestashop-academy.com/api/products?filter[mpn]=[liveHosted]&ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON&id_lang=' . $psAcademyLangId,
         );
 
         $responseContentsVideoHosted = json_decode($responseVideoHosted->getContent(), true);
