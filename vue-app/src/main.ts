@@ -9,43 +9,48 @@ import MinimizedSetupGuideContainer from "@/modules/Onboarding/components/Minimi
 
 const mountEl = document.querySelector<HTMLDivElement>("#vue-app");
 const context = useContext();
-if (!mountEl || !mountEl.dataset.context) {
-  console.error("Vue app mount element or context not found");
-}
-
-try {
-  if (mountEl && mountEl.dataset.context) {
-    context.setContext(JSON.parse(mountEl.dataset.context));
-    if (context.updateIsRequired()) {
-      context.callForMboCacheClear();
+let pinia;
+if (mountEl && mountEl.dataset.context) {
+  try {
+    if (mountEl && mountEl.dataset.context) {
+      context.setContext(JSON.parse(mountEl.dataset.context));
     }
+  } catch (err) {
+    console.error("Context is not valid: " + err);
   }
-} catch (err) {
-  console.error("Context is not valid: " + err);
+
+  const app = createApp(App);
+  pinia = createPinia();
+
+  app.use(pinia);
+  app.use(i18n);
+  app.use(router);
+  app.mount("#vue-app");
 }
 
-const app = createApp(App);
-const pinia = createPinia();
+let navPosition2 = document.querySelector<HTMLDivElement>(".header-right #header-notifications-container");
+if (!navPosition2) {
+  navPosition2 = document.querySelector<HTMLDivElement>("#header_infos ul.header-list");
+}
 
-app.use(pinia);
-app.use(i18n);
-app.use(router);
-app.mount("#vue-app");
-
-const navPosition2 = document.querySelector<HTMLDivElement>(".header-right #header-notifications-container");
 if (navPosition2) {
-  const setupGuideMinimizedContainer = document.createElement("div");
-  setupGuideMinimizedContainer.id = "setup-guide-minimized-container";
-  setupGuideMinimizedContainer.classList.add("puik-style");
-  navPosition2.parentNode?.insertBefore<HTMLDivElement>(setupGuideMinimizedContainer, navPosition2.nextSibling);
+  if (window.minimizedGuideContext && (!context.context.value || !context.context.value.SETUP_GUIDE_API_URL)) {
+    context.setContext(window.minimizedGuideContext);
+  }
 
-  const minimizedSetupGuide = createApp(MinimizedSetupGuideContainer);
+  if (context.context.value.SETUP_GUIDE_API_URL) {
+    const setupGuideMinimizedContainer = document.createElement("div");
+    setupGuideMinimizedContainer.id = "setup-guide-minimized-container";
+    setupGuideMinimizedContainer.classList.add("puik-style");
+    navPosition2.parentNode?.insertBefore<HTMLDivElement>(setupGuideMinimizedContainer, navPosition2.nextSibling);
 
-  minimizedSetupGuide.use(pinia);
-  minimizedSetupGuide.use(i18n);
-  minimizedSetupGuide.mount("#setup-guide-minimized-container");
+    const minimizedSetupGuide = createApp(MinimizedSetupGuideContainer);
+
+    if (!pinia) {
+      pinia = createPinia();
+    }
+    minimizedSetupGuide.use(pinia);
+    minimizedSetupGuide.use(i18n);
+    minimizedSetupGuide.mount("#setup-guide-minimized-container");
+  }
 }
-
-setTimeout(() => {
-  document.getElementById("header-userflow")?.remove();
-}, 100);

@@ -25,11 +25,7 @@ use Symfony\Component\String\UnicodeString;
 
 trait UseHooks
 {
-    use Hooks\UseActionObjectLanguageAddAfter;
-    use Hooks\UseActionAdminControllerSetMedia;
     use Hooks\UseDisplayBackOfficeHeader;
-    use Hooks\UseActionObjectEmployeeAddAfter;
-    use Hooks\UseActionObjectEmployeeUpdateAfter;
 
     /**
      * @var array An array of method that can be called to register media in the actionAdminControllerSetMedia hook

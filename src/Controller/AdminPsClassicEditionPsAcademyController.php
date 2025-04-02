@@ -23,16 +23,17 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsClassicEdition\Controller;
 
-use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminController
+class AdminPsClassicEditionPsAcademyController extends PrestaShopAdminController
 {
     public function __construct(
-        private HttpClientInterface $httpClient,
-        private FilesystemAdapter $cache,
+        private readonly HttpClientInterface $httpClient,
+        private readonly CacheInterface $cache,
     ) {
     }
 
@@ -43,14 +44,22 @@ class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminContr
      */
     public function getProducts(): JsonResponse
     {
-        $products = [];
-        $cachedProducts = $this->cache->getItem('ps_academy_products');
-        if (!$cachedProducts->isHit()) {
-            $ids = $this->getProductsId();
+        $isoCode = strtolower($this->getLanguageContext()->getIsoCode());
+        $psAcademyLangId = match ($isoCode) {
+            'fr' => 1,
+            'es' => 3,
+            'it' => 4,
+            // Default is en
+            default => 2,
+        };
+
+        $cachedProducts = $this->cache->get('ps_academy_products_' . $isoCode, function (ItemInterface $item, bool &$save) use ($psAcademyLangId) {
+            $products = [];
+            $ids = $this->getProductsId($psAcademyLangId);
 
             if (!empty($ids)) {
                 foreach ($ids as $id) {
-                    $response = $this->httpClient->request('GET', 'https://prestashop-academy.com/api/products/' . $id . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON');
+                    $response = $this->httpClient->request('GET', 'https://prestashop-academy.com/api/products/' . $id . '?ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON&id_lang=' . $psAcademyLangId);
                     $httpStatusCode = $response->getStatusCode();
                     if ($httpStatusCode <= 300) {
                         $responseContents = json_decode($response->getContent(), true);
@@ -61,26 +70,26 @@ class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminContr
             }
 
             if (!empty($products)) {
-                $cachedProducts->set($products);
-                $cachedProducts->expiresAfter(\DateInterval::createFromDateString('1 day'));
-                $this->cache->save($cachedProducts);
+                $item->expiresAfter(\DateInterval::createFromDateString('1 day'));
+            } else {
+                $save = false;
             }
-        } else {
-            $products = $cachedProducts->get();
-        }
 
-        return new JsonResponse($products);
+            return $products;
+        });
+
+        return new JsonResponse($cachedProducts);
     }
 
-    private function getProductsId(): array
+    private function getProductsId(int $psAcademyLangId): array
     {
         $responseVideoHosted = $this->httpClient->request(
             'GET',
-            'https://prestashop-academy.com/api/products?filter[mpn]=[videoHosted]&ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON'
+            'https://prestashop-academy.com/api/products?filter[mpn]=[videoHosted]&ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON&id_lang=' . $psAcademyLangId,
         );
         $responseLiveHosted = $this->httpClient->request(
             'GET',
-            'https://prestashop-academy.com/api/products?filter[mpn]=[liveHosted]&ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON'
+            'https://prestashop-academy.com/api/products?filter[mpn]=[liveHosted]&ws_key=QG8Z1KD7HAYMAPKK1FR2DKXUIF9LTRJE&output_format=JSON&id_lang=' . $psAcademyLangId,
         );
 
         $responseContentsVideoHosted = json_decode($responseVideoHosted->getContent(), true);
@@ -98,10 +107,10 @@ class AdminPsClassicEditionPsAcademyController extends FrameworkBundleAdminContr
 
     private function createObjectFromResponse(array $response): array
     {
-        $context = \Context::getContext();
         $locale = 'gb';
-        if ($context->language->iso_code) {
-            $locale = $context->language->iso_code;
+        $contextIsoCode = $this->getLanguageContext()->getIsoCode();
+        if ($contextIsoCode) {
+            $locale = $contextIsoCode;
 
             $availableLang = ['fr', 'it', 'es'];
             if ($locale === 'en' || !in_array($locale, $availableLang)) {

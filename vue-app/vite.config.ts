@@ -11,7 +11,7 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => ['prestashop-accounts'].includes(tag),
+          isCustomElement: (tag) => ['prestashop-accounts', 'swiper-slide', 'swiper-container'].includes(tag),
         }
       }
     }),

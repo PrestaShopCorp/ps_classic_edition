@@ -21,9 +21,6 @@ services:
     arguments:
       - "@ps_classic_edition.ps_accounts.installer"
 
-  PrestaShop\Module\PsClassicEdition\Service\ModuleService:
-    class: PrestaShop\Module\PsClassicEdition\Service\ModuleService
-    arguments:
-      - "@prestashop.module.manager"
-      - "@=service('ps_classic_edition.module').name"
-      - "@=service('ps_classic_edition.module').addons_id"
+  PrestaShop\Module\PsClassicEdition\Helper\PsAccountHelper:
+    autowire: true
+    public: true

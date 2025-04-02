@@ -1,18 +1,11 @@
 <script lang="ts" setup>
 import { useContext } from "@/common/composables/use-context";
-import trackWithContext from "@/common/tracking/track";
 
 defineProps<{ isShopEnabled: boolean }>();
 
 const { context } = useContext();
 
 const goMaintenance = async () => {
-  await trackWithContext("Publish Store Banner Clicked", {
-    shopUrl: window.location.origin,
-    timestamp: new Date(),
-    version: 'classic',
-  });
-
   window.location.href = context.value.MAINTENANCE_URL;
 };
 </script>

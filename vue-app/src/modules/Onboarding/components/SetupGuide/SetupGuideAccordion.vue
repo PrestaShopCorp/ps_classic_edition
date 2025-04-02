@@ -23,7 +23,6 @@
             <puik-link
               v-if="content.documentation"
               :href="$t(content.documentation.href)"
-              @click="openDocumentationLink"
               target="_blank"
               size="md"
             >
@@ -48,13 +47,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, watch, type PropType, onMounted } from "vue";
+import { ref, watch, type PropType } from "vue";
 import { storeToRefs } from "pinia";
 import { useSetupGuideStore } from "@/modules/Onboarding/stores/useSetupGuideStore";
-import trackWithContext from "@/common/tracking/track";
 import SlideTransition from "@/common/components/SlideTransition.vue";
 import SetupGuideAccordionHeader from "@/modules/Onboarding/components/SetupGuide/SetupGuideAccordionHeader.vue";
-import { SetupGuideEvent, SetupGuideStep as StepName } from "@/modules/Onboarding/enums/setupGuide.enum";
 import type { SetupGuideButton, SetupGuideStep } from "@/modules/Onboarding/types/setup-guide";
 
 const { isExpandable, opened, step } = defineProps({
@@ -81,13 +78,6 @@ const isExpanded = ref(opened === true ? opened : expandedStep.value === step.na
 const markAsCompleted = async (markAsCompletedStatus?: boolean) => {
   markStepAsCompleted(step.name, markAsCompletedStatus);
   toggleExpanded(false, true);
-  if ((markAsCompletedStatus === true || markAsCompletedStatus === undefined) && step.isCompleted) {
-    await trackWithContext(getTrackEvent(step.name as StepName, SetupGuideEvent.CHECK), {
-      shopUrl: window.location.origin,
-      timestamp: new Date(),
-      version: 'classic',
-    });
-  }
 };
 
 const toggleExpanded = (isExpandedStatus?: boolean, onSameStep?: boolean) => {
@@ -102,76 +92,13 @@ const toggleExpanded = (isExpandedStatus?: boolean, onSameStep?: boolean) => {
   isExpanded.value ? setExpandStep(null) : setExpandStep(step.name);
 };
 
-const openDocumentationLink = async () => {
-  await trackWithContext(getTrackEvent(step.name as StepName, SetupGuideEvent.DOCUMENTATION), {
-    shopUrl: window.location.origin,
-    timestamp: new Date(),
-    version: 'classic',
-  });
-};
-
 const openStep = async (buttonStep: SetupGuideButton) => {
   if (buttonStep.skip) {
     markAsCompleted(true);
     toggleExpanded(false, true);
-    await trackWithContext(getTrackEvent(step.name as StepName, SetupGuideEvent.SKIPPED), {
-      shopUrl: window.location.origin,
-      timestamp: new Date(),
-      version: 'classic',
-    });
   } else {
-    await trackWithContext(getTrackEvent(step.name as StepName, SetupGuideEvent.CTA), {
-      shopUrl: window.location.origin,
-      timestamp: new Date(),
-      version: 'classic',
-    });
     window.location.href = buttonStep.href;
   }
-};
-
-const getTrackEvent = (stepName: StepName, event: SetupGuideEvent) => {
-  let value = "";
-  switch (event) {
-    case SetupGuideEvent.CHECK:
-      value = " Done";
-      break;
-    case SetupGuideEvent.DOCUMENTATION:
-      value = " Help Clicked";
-      break;
-    case SetupGuideEvent.CTA:
-      value = " Button Clicked";
-      break;
-    case SetupGuideEvent.SKIPPED:
-      value = " Skipped";
-      break;
-  }
-
-  let trackEvent = "";
-  switch (stepName) {
-    case StepName.DOMAIN:
-      trackEvent = `Domain Checklist BO ${value}`;
-      break;
-    case StepName.ACCOUNT:
-      trackEvent = `Association Checklist BO ${value}`;
-      break;
-    case StepName.PRODUCT:
-      trackEvent = `Product Checklist BO ${value}`;
-      break;
-    case StepName.PAYMENT:
-      trackEvent = `Payment Checklist BO ${value}`;
-      break;
-    case StepName.SHIPPING:
-      trackEvent = `Shipping Checklist BO ${value}`;
-      break;
-    case StepName.LEGAL:
-      trackEvent = `Shipping Checklist BO ${value}`;
-      break;
-    case StepName.THEME:
-      trackEvent = `Appearance Checklist BO ${value}`;
-      break;
-  }
-
-  return trackEvent;
 };
 
 watch(

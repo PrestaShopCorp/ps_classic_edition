@@ -24,20 +24,21 @@ declare(strict_types=1);
 namespace PrestaShop\Module\PsClassicEdition\Controller;
 
 use PrestaShop\Module\PsClassicEdition\Presenter\SetupGuideDataPresenter;
-use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
+use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdminPsClassicEditionSetupGuideController extends FrameworkBundleAdminController
+class AdminPsClassicEditionSetupGuideController extends PrestaShopAdminController
 {
     /**
      * Get the steps for the setup guide
      *
      * @return JsonResponse
      */
-    public function fetchInitialDatas(): JsonResponse
-    {
-        return new JsonResponse($this->getInitialDatas());
+    public function fetchInitialDatas(
+        SetupGuideDataPresenter $setupGuideDataPresenter,
+    ): JsonResponse {
+        return new JsonResponse($this->getInitialDatas($setupGuideDataPresenter));
     }
 
     /**
@@ -101,18 +102,11 @@ class AdminPsClassicEditionSetupGuideController extends FrameworkBundleAdminCont
         ]);
     }
 
-    private function getInitialDatas(): array
+    private function getInitialDatas(SetupGuideDataPresenter $setupGuideDataPresenter): array
     {
-        $setupGuideData = $this->setupGuideDataPresenterService();
-
         return [
-            'isHidden' => (bool) $this->getConfiguration()->get('PS_SETUP_GUIDE_MODAL_IS_HIDDEN', false),
-            'steps' => $setupGuideData->getSetupGuideData(),
+            'isHidden' => (bool) $this->getConfiguration()->get('PS_SETUP_GUIDE_MODAL_IS_HIDDEN'),
+            'steps' => $setupGuideDataPresenter->getSetupGuideData(),
         ];
-    }
-
-    private function setupGuideDataPresenterService(): SetupGuideDataPresenter
-    {
-        return $this->get('ps_classic_edition.presenter.setupGuideData');
     }
 }

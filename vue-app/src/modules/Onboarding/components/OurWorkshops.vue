@@ -29,7 +29,6 @@
 </template>
 
 <script lang="ts" setup>
-import trackWithContext from "@/common/tracking/track";
 import constants from "@/common/constants";
 import {useContext} from "@/common/composables/use-context";
 
@@ -38,12 +37,6 @@ const logo = await import('@/modules/Onboarding/assets/img/ateliers.svg');
 const logoUrl = context.value.baseUrl + '/../' + logo.default;
 
 const handleWorkshopClick = async () => {
-  await trackWithContext("Access Our Workshops Edition Home Clicked", {
-    shopUrl: window.location.origin,
-    timestamp: new Date(),
-    version: 'classic',
-  });
-
   window.open(constants.WORKSHOPS_URL);
 };
 </script>

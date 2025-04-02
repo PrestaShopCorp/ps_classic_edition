@@ -23,16 +23,15 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsClassicEdition\Install\Tabs;
 
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Tab;
+
 class TabsInstaller
 {
-    /**
-     * @var string
-     */
-    private $moduleName;
-
-    public function __construct(string $moduleName)
-    {
-        $this->moduleName = $moduleName;
+    public function __construct(
+        private string $moduleName,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     public function installTabs(): bool
@@ -40,7 +39,6 @@ class TabsInstaller
         $result = true;
 
         $tabs = Tabs::getTabs();
-
         foreach ($tabs as $tabItem) {
             $tabId = \Tab::getIdFromClassName($tabItem['class_name']);
 
@@ -56,13 +54,13 @@ class TabsInstaller
             $tab->active = $tabItem['active'];
             $tab->enabled = $tabItem['enabled'];
             $tab->module = $this->moduleName;
+            $tab->wording = $tabItem['wording'];
+            $tab->wording_domain = $tabItem['wording_domain'];
             $tab->name = [];
-
-            $names = $tabItem['name'];
 
             $languages = \Language::getLanguages(false);
             foreach ($languages as $language) {
-                $tab->name[(int) $language['id_lang']] = $names[$language['iso_code']] ?? $names['en'];
+                $tab->name[(int) $language['id_lang']] = $this->translator->trans($tabItem['wording'], [], $tabItem['wording_domain'], $language['locale']);
             }
 
             $result = $result && $tab->save();

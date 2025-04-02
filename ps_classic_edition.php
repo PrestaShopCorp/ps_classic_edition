@@ -22,7 +22,6 @@ declare(strict_types=1);
 
 use PrestaShop\Module\PsClassicEdition\Actions\Uninstall;
 use PrestaShop\Module\PsClassicEdition\Install\Tabs\TabsInstaller;
-use PrestaShop\PrestaShop\Core\Cache\Clearer\CacheClearerInterface;
 use Symfony\Component\Dotenv\Dotenv;
 
 define('PS_CLASSIC_EDITION_SETTINGS_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/settingsWhiteList.json'), true));
@@ -47,8 +46,6 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 class ps_classic_edition extends Module
 {
     use PrestaShop\Module\PsClassicEdition\Traits\UseHooks;
-
-    private const PS_CLASSIC_EDITION_MODULE_TABS_LANG_UPDATE_REQUIRED = 'PS_CLASSIC_EDITION_MODULE_TABS_LANG_UPDATE_REQUIRED';
 
     private string $userflow_id;
 
@@ -84,25 +81,13 @@ class ps_classic_edition extends Module
 
     public function install(): bool
     {
+        $this->uninstallBasicEditionModule();
+
         return
             parent::install()
-            && (new TabsInstaller($this->name))->installTabs()
+            && (new TabsInstaller($this->name, $this->getTranslator()))->installTabs()
             && $this->registerHook($this->getHooksNames())
         ;
-    }
-
-    public function postInstall(): bool
-    {
-        /** @var CacheClearerInterface */
-        $cacheClearer = null;
-        try {
-            $cacheClearer = $this->getContainer()->get('prestashop.adapter.cache.clearer.symfony_cache_clearer');
-            $cacheClearer->clear();
-        } catch (Exception $e) {
-            // TODO ?
-        }
-
-        return true;
     }
 
     /**
@@ -119,8 +104,16 @@ class ps_classic_edition extends Module
      */
     public function enable($force_all = false): bool
     {
-        (new TabsInstaller($this->name))->installTabs();
+        (new TabsInstaller($this->name, $this->getTranslator()))->installTabs();
 
         return parent::enable($force_all);
+    }
+
+    protected function uninstallBasicEditionModule(): void
+    {
+        $oldModule = Module::getInstanceByName('ps_edition_basic');
+        if ($oldModule) {
+            $oldModule->uninstall();
+        }
     }
 }

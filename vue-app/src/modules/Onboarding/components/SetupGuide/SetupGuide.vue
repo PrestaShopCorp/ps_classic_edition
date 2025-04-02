@@ -33,7 +33,6 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import { useSetupGuideStore } from "@/modules/Onboarding/stores/useSetupGuideStore";
-import trackWithContext from "@/common/tracking/track";
 import SetupGuideHeader from "@/modules/Onboarding/components/SetupGuide/SetupGuideHeader.vue";
 import SetupGuideProgressBar from "@/modules/Onboarding/components/SetupGuide/SetupGuideProgressBar.vue";
 import SetupGuideList from "@/modules/Onboarding/components/SetupGuide/SetupGuideList.vue";
@@ -51,24 +50,11 @@ const setModalIsOpen = async (isOpened: boolean) => {
   if (!headlessui_portal_root?.classList.contains("puik-style")) {
     headlessui_portal_root?.classList.add("puik-style");
   }
-
-  if (isOpened) {
-    await trackWithContext("Close Checklist BO Clicked", {
-      shopUrl: window.location.origin,
-      timestamp: new Date(),
-      version: 'classic',
-    });
-  }
 };
 
 const setModalVisibility = async () => {
   setModalIsOpen(false);
   removeModal();
-  await trackWithContext("Delete Checklist BO Clicked", {
-    shopUrl: window.location.origin,
-    timestamp: new Date(),
-    version: 'classic',
-  });
 };
 
 const throwConfetti = () => {
