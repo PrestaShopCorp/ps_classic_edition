@@ -3,14 +3,7 @@ module.exports = {
     tailwindcss: {},
     autoprefixer: {},
     "postcss-prefix-selector": {
-      prefix: ".puik-style",
-      transform: function (prefix, selector, prefixedSelector, path) {
-        if (path.match(/(puik|edition-app)/)) {
-          return prefixedSelector;
-        } else {
-          return selector;
-        }
-      },
+      prefix: ".puik-style"
     },
   },
 };
