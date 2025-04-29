@@ -67,7 +67,7 @@ class AdminPsClassicEditionHomepageController extends PrestaShopAdminController
         $psAccountsSettings = $psAccountHelper->loadAccountSettings();
 
         return $this->render('@Modules/ps_classic_edition/views/templates/admin/homepage.html.twig', [
-            'layoutTitle' => $this->trans('Home', [], 'Modules.Classicedition.Admin'),
+            'layoutTitle' => $this->trans('Care Center', [], 'Modules.Classicedition.Admin'),
             'urlAccountsCdn' => $psAccountsSettings['urlAccountsCdn'],
             'enableSidebar' => true,
             'jsContext' => json_encode([

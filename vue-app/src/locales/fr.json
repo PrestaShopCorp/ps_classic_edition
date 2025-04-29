@@ -133,6 +133,12 @@
         "description": "Profitez de toutes les semaines de nos ateliers en ligne pour aborder plusieurs thématiques sur la configuration du back-office",
         "button": "Découvrir les ateliers disponibles"
       },
+      "contact-us": {
+        "title": "Contattaci",
+        "subtitle": "contattaci subtitle",
+        "description": "Contact Us description",
+        "button": "Contact Us call to action"
+      },
       "update-modal": {
         "update-running": "Mise à jour en cours",
         "update-required": "Mise à jour nécessaire pour {moduleName}",

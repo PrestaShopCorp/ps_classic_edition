@@ -133,6 +133,12 @@
         "description": "Aproveche nuestros talleres en línea cada semana para discutir varios temas sobre la configuración del back office",
         "button": "Descubre los talleres disponibles"
       },
+      "contact-us": {
+        "title": "Contacta con nosotros",
+        "subtitle": "Contact Us subtitle",
+        "description": "Contact Us description",
+        "button": "Contact Us call to action"
+      },
       "update-modal": {
         "update-running": "Actualización en progreso",
         "update-required": "Actualización necesaria para {moduleName}",
