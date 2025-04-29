@@ -2,17 +2,6 @@
   "onb": {
     "homepage": {
       "title": "Ti diamo il benvenuto nell'area di creazione del tuo store",
-      "maintenance": {
-        "title": "Il tuo store è offline.",
-        "description": "I visitatori non hanno accesso al tuo store. Puoi metterlo online dalla pagina",
-        "button": "Vai alla pagina di manutenzione",
-        "maintenance": "Manutenzione.",
-        "online": {
-          "title": "Il tuo store è online.",
-          "description": "Utilizza la modalità di manutenzione per modificare il tuo store",
-          "button": "Passa alla modalità di manutenzione"
-        }
-      },
       "shopInfos": {
         "title": "Informazioni sul tuo store",
         "domainName": "NOME DI DOMINIO: ",

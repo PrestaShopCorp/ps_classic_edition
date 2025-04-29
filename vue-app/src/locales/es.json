@@ -2,17 +2,6 @@
   "onb": {
     "homepage": {
       "title": "Te damos la bienvenida al espacio para crear tu tienda",
-      "maintenance": {
-        "title": "Tu tienda está desconectada.",
-        "description": "Tus visitantes no pueden acceder a tu tienda. Puedes ponerla online desde la página",
-        "button": "Ir a la página de mantenimiento",
-        "maintenance": "Mantenimiento.",
-        "online": {
-          "title": "Tu tienda está online.",
-          "description": "Utiliza el modo de mantenimiento al modificar la tienda",
-          "button": "Cambiar al modo de mantenimiento"
-        }
-      },
       "shopInfos": {
         "title": "Información de la tienda",
         "domainName": "NOMBRE DEL DOMINIO: ",

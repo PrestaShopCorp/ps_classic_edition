@@ -2,17 +2,6 @@
   "onb": {
     "homepage": {
       "title": "Welcome to the creation space of your store",
-      "maintenance": {
-        "title": "Your store is offline.",
-        "description": "Your visitors do not have access to your store. You can put it online from the maintenance page",
-        "button": "Go to maintenance page",
-        "maintenance": "Maintenance.",
-        "online": {
-          "title": "Your store is online.",
-          "description": "Use maintenance mode when editing your store",
-          "button": "Enter maintenance mode"
-        }
-      },
       "shopInfos": {
         "title": "Information about your store",
         "domainName": "DOMAIN NAME : ",

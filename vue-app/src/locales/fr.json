@@ -2,17 +2,6 @@
   "onb": {
     "homepage": {
       "title": "Bienvenue sur l'espace de création de votre boutique",
-      "maintenance": {
-        "title": "Votre boutique est hors ligne.",
-        "description": "Vos visiteurs n’ont pas accès à votre boutique. Vous pouvez la mettre en ligne depuis la page",
-        "button": "Aller à la page Maintenance",
-        "maintenance": "Maintenance.",
-        "online": {
-          "title": "Votre boutique est en ligne.",
-          "description": "Utilisez le mode maintenance lorsque vous modifiez votre boutique",
-          "button": "Passer en mode maintenance"
-        }
-      },
       "shopInfos": {
         "title": "Informations sur votre boutique",
         "domainName": "NOM DE DOMAINE : ",

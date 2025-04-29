@@ -3,7 +3,6 @@
     <div class="mb-4">
       <h2>{{ $t("onb.homepage.title") }}</h2>
     </div>
-    <maintenance-alert :is-shop-enabled="context.isShopEnabled" />
     <div class="onb__homepage__shop-info"></div>
     <div class="grid gap-4 items-stretch mt-4 md:grid-cols-2 grid-rows-1">
       <setup-guide v-if="!isHidden && steps.length" />
@@ -21,7 +20,6 @@
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
 import { useContext } from "@/common/composables/use-context";
-import MaintenanceAlert from "@/modules/Onboarding/components/MaintenanceAlert.vue";
 import SetupGuide from "@/modules/Onboarding/components/SetupGuide/SetupGuide.vue";
 import HelpCenter from "@/modules/Onboarding/components/HelpCenter.vue";
 import OurWorkshops from "@/modules/Onboarding/components/OurWorkshops.vue";
