@@ -133,6 +133,12 @@
         "description": "Aproveche nuestros talleres en línea cada semana para discutir varios temas sobre la configuración del back office",
         "button": "Descubre los talleres disponibles"
       },
+      "contact-us": {
+        "title": "¿Necesita ayuda?",
+        "description": "No dude en contactar con nuestro equipo de soporte.",
+        "button": "Póngase en contacto con nosotros",
+        "url": "https://prestashop-academy.com/es/contactenos"
+      },
       "update-modal": {
         "update-running": "Actualización en progreso",
         "update-required": "Actualización necesaria para {moduleName}",

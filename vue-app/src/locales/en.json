@@ -1,7 +1,7 @@
 {
   "onb": {
     "homepage": {
-      "title": "Welcome to the creation space of your store",
+      "title": "Our care team helps you with your business",
       "shopInfos": {
         "title": "Information about your store",
         "domainName": "DOMAIN NAME : ",
@@ -132,6 +132,12 @@
         "subtitle": "1h - Every week",
         "description": "Take advantage of our online workshops every week to discuss several topics on the configuration of the back office",
         "button": "Discover available workshops"
+      },
+      "contact-us": {
+        "title": "Need some assistance?",
+        "description": "Don't hesitate to contact our support team.",
+        "button": "Contact Us",
+        "url": "https://prestashop-academy.com/gb/contact-us"
       },
       "update-modal": {
         "update-running": "Update in progress",
