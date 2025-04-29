@@ -49,8 +49,6 @@ class ps_classic_edition extends Module
 
     private string $userflow_id;
 
-    public int $addons_id = 91027;
-
     public function __construct()
     {
         $this->name = 'ps_classic_edition';
@@ -83,11 +81,20 @@ class ps_classic_edition extends Module
     {
         $this->uninstallBasicEditionModule();
 
-        return
+        $installed =
             parent::install()
             && (new TabsInstaller($this->name, $this->getTranslator()))->installTabs()
             && $this->registerHook($this->getHooksNames())
         ;
+        if (!$installed) {
+            return false;
+        }
+
+        // We hide the setup guide by default on install, if we want to enable it again later
+        // we'll just have to remove this line
+        Configuration::updateGlobalValue('PS_SETUP_GUIDE_MODAL_IS_HIDDEN', 1);
+
+        return true;
     }
 
     /**

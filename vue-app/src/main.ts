@@ -38,7 +38,7 @@ if (navPosition2) {
     context.setContext(window.minimizedGuideContext);
   }
 
-  if (context.context.value.SETUP_GUIDE_API_URL) {
+  if (context.context.value.SETUP_GUIDE_API_URL && !context.context.value.SETUP_GUIDE_MODAL_IS_HIDDEN) {
     const setupGuideMinimizedContainer = document.createElement("div");
     setupGuideMinimizedContainer.id = "setup-guide-minimized-container";
     setupGuideMinimizedContainer.classList.add("puik-style");
