@@ -162,6 +162,16 @@
         <target state="translated">Settings updated</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="981d0481276dad6df56cb70e95eafb14">
+        <source>PrestaShop distribution:</source>
+        <target state="translated">PrestaShop distribution:</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="224ba70d3a567aa327af41e8b6d79430">
+        <source>PrestaShop distribution version:</source>
+        <target state="translated">PrestaShop distribution version:</target>
+        <note>Line: </note>
+      </trans-unit>
     </body>
   </file>
 </xliff>
