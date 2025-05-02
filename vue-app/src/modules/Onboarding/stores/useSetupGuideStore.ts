@@ -17,17 +17,25 @@ export const useSetupGuideStore = defineStore({
 
   actions: {
     async fetchInitialDatas() {
-      try {
-        const initialDatas = SetupGuideAPISchema.parse(
-          await fetch(context.value.SETUP_GUIDE_API_URL).then((response) => response.json()),
-        );
+      if (context.value.SETUP_GUIDE_MODAL_IS_HIDDEN) {
         this.$patch({
           dataIsAlreadyFetched: true,
-          isHidden: initialDatas.isHidden,
-          steps: initialDatas.steps,
+          isHidden: true,
+          steps: [],
         });
-      } catch (err) {
-        console.error("API Schema is not valid: " + err);
+      } else {
+        try {
+          const initialDatas = SetupGuideAPISchema.parse(
+              await fetch(context.value.SETUP_GUIDE_API_URL).then((response) => response.json()),
+          );
+          this.$patch({
+            dataIsAlreadyFetched: true,
+            isHidden: initialDatas.isHidden,
+            steps: initialDatas.steps,
+          });
+        } catch (err) {
+          console.error("API Schema is not valid: " + err);
+        }
       }
     },
     markStepAsCompleted(stepName: string, completedStatus?: boolean) {

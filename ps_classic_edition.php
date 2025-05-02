@@ -22,7 +22,6 @@ declare(strict_types=1);
 
 use PrestaShop\Module\PsClassicEdition\Actions\Uninstall;
 use PrestaShop\Module\PsClassicEdition\Install\Tabs\TabsInstaller;
-use Symfony\Component\Dotenv\Dotenv;
 
 define('PS_CLASSIC_EDITION_SETTINGS_WHITE_LIST', json_decode(file_get_contents(__DIR__ . '/settingsWhiteList.json'), true));
 define('PS_CLASSIC_EDITION_SETTINGS_BLACK_LIST', json_decode(file_get_contents(__DIR__ . '/settingsBlackList.json'), true));
@@ -36,20 +35,11 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 
-(new Dotenv())
-    // DO NOT use putEnv
-    ->usePutenv(false)
-    // Loads .env file from the root of module
-    ->loadEnv(__DIR__ . '/.env')
-;
-
 class ps_classic_edition extends Module
 {
     use PrestaShop\Module\PsClassicEdition\Traits\UseHooks;
 
     private string $userflow_id;
-
-    public int $addons_id = 91027;
 
     public function __construct()
     {
@@ -83,11 +73,20 @@ class ps_classic_edition extends Module
     {
         $this->uninstallBasicEditionModule();
 
-        return
+        $installed =
             parent::install()
             && (new TabsInstaller($this->name, $this->getTranslator()))->installTabs()
             && $this->registerHook($this->getHooksNames())
         ;
+        if (!$installed) {
+            return false;
+        }
+
+        // We hide the setup guide by default on install, if we want to enable it again later
+        // we'll just have to remove this line
+        Configuration::updateGlobalValue('PS_SETUP_GUIDE_MODAL_IS_HIDDEN', 1);
+
+        return true;
     }
 
     /**

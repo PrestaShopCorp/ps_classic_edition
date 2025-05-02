@@ -67,15 +67,15 @@ class AdminPsClassicEditionHomepageController extends PrestaShopAdminController
         $psAccountsSettings = $psAccountHelper->loadAccountSettings();
 
         return $this->render('@Modules/ps_classic_edition/views/templates/admin/homepage.html.twig', [
-            'layoutTitle' => $this->trans('Home', [], 'Modules.Classicedition.Admin'),
+            'layoutTitle' => $this->trans('Care Center', [], 'Modules.Classicedition.Admin'),
             'urlAccountsCdn' => $psAccountsSettings['urlAccountsCdn'],
             'enableSidebar' => true,
             'jsContext' => json_encode([
                 'SETUP_GUIDE_API_URL' => $setupGuideApiUrl,
                 'SETUP_GUIDE_API_URL_EDIT' => $setupGuideApiUrlEdit,
                 'SETUP_GUIDE_API_URL_MODAL_HIDDEN' => $setupGuideApiUrlModalHidden,
+                'SETUP_GUIDE_MODAL_IS_HIDDEN' => (bool) $this->getConfiguration()->get('PS_SETUP_GUIDE_MODAL_IS_HIDDEN'),
                 'PS_CLASSIC_EDITION_PS_ACADEMY_API_URL' => $psAcademyApiUrl,
-                'MAINTENANCE_URL' => $this->generateUrl('admin_maintenance'),
                 'moduleName' => $modulePsClassicEdition->displayName,
                 'moduleSlug' => $modulePsClassicEdition->name,
                 'moduleVersion' => $modulePsClassicEdition->version,
@@ -83,7 +83,6 @@ class AdminPsClassicEditionHomepageController extends PrestaShopAdminController
                 'psAccountShopID' => $psAccountsSettings['psShopID'],
                 'psAccountID' => $psAccountsSettings['psAccountID'],
                 'shopName' => (string) $this->getConfiguration()->get('PS_SHOP_NAME'),
-                'isShopEnabled' => (bool) $this->getConfiguration()->get('PS_SHOP_ENABLE'),
                 'callBack' => [
                     'isCalledBack' => (bool) $this->getConfiguration()->get('PS_IS_CALLED_BACK'),
                 ],

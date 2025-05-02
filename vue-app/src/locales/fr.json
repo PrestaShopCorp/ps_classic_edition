@@ -2,17 +2,6 @@
   "onb": {
     "homepage": {
       "title": "Bienvenue sur l'espace de création de votre boutique",
-      "maintenance": {
-        "title": "Votre boutique est hors ligne.",
-        "description": "Vos visiteurs n’ont pas accès à votre boutique. Vous pouvez la mettre en ligne depuis la page",
-        "button": "Aller à la page Maintenance",
-        "maintenance": "Maintenance.",
-        "online": {
-          "title": "Votre boutique est en ligne.",
-          "description": "Utilisez le mode maintenance lorsque vous modifiez votre boutique",
-          "button": "Passer en mode maintenance"
-        }
-      },
       "shopInfos": {
         "title": "Informations sur votre boutique",
         "domainName": "NOM DE DOMAINE : ",
@@ -143,6 +132,12 @@
         "subtitle": "1h - Toutes les semaines",
         "description": "Profitez de toutes les semaines de nos ateliers en ligne pour aborder plusieurs thématiques sur la configuration du back-office",
         "button": "Découvrir les ateliers disponibles"
+      },
+      "contact-us": {
+        "title": "Besoin d'assistance?",
+        "description": "N'hésitez pas à contacter notre équipe de support",
+        "button": "Contactez-nous",
+        "url": "https://prestashop-academy.com/fr/nous-contacter"
       },
       "update-modal": {
         "update-running": "Mise à jour en cours",

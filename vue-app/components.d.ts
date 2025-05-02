@@ -7,7 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    PuikAlert: typeof import('@prestashopcorp/puik/es')['PuikAlert']
     PuikButton: typeof import('@prestashopcorp/puik/es')['PuikButton']
     PuikCard: typeof import('@prestashopcorp/puik/es')['PuikCard']
     PuikCheckbox: typeof import('@prestashopcorp/puik/es')['PuikCheckbox']

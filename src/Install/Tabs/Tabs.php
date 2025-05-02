@@ -46,12 +46,12 @@ class Tabs
             [
                 'class_name' => 'AdminPsClassicEditionHomepageController',
                 'route_name' => 'ps_classic_edition_homepage',
-                'icon' => 'home',
+                'icon' => 'support_agent',
                 'parent' => 'HOME',
                 'position' => 0,
                 'active' => true,
                 'enabled' => true,
-                'wording' => 'Home',
+                'wording' => 'Care Center',
                 'wording_domain' => 'Modules.Classicedition.Admin',
             ],
         ];
