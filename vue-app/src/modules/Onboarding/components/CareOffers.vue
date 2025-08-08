@@ -60,11 +60,11 @@ onMounted(() => {
       <h3 class="puik-h3 font-semibold mt-2 leading-6 text-lg">
         {{ $t("onb.homepage.care-offers.description") }}
       </h3>
-      <puik-button variant="secondary" size="lg" rightIcon="keyboard_arrow_right" class="mt-3">
-        <a :href="i18n.global.t('onb.homepage.care-offers.link')" target="_blank">
+      <a :href="i18n.global.t('onb.homepage.care-offers.link')" target="_blank">
+        <puik-button variant="secondary" size="lg" rightIcon="keyboard_arrow_right" class="mt-3">
           {{ $t("onb.homepage.care-offers.button") }}
-        </a>
-      </puik-button>
+        </puik-button>
+      </a>
     </div>
 
     <!-- droite -->
