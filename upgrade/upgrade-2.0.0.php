@@ -17,17 +17,15 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
-function upgrade_module_2_0_0(ps_classic_edition_ $module): bool
+function upgrade_module_2_0_0(ps_classic_edition $module): bool
 {
-    $result = true;
-
     // Remove tab to former settings page
     $id_tab = (int) Tab::getIdFromClassName('AdminPsClassicEditionSettingsController');
 
     $tab = new Tab($id_tab);
     if (Validate::isLoadedObject($tab)) {
-        $result = $result && $tab->delete();
+        return $tab->delete();
     }
 
-    return $result;
+    return true;
 }
