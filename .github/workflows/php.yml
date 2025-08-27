@@ -1,10 +1,5 @@
-# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
-
 name: PHP
-
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 
 concurrency:
   group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -29,37 +24,17 @@ jobs:
       - name: PHP syntax checker 8.4
         uses: prestashop/github-action-php-lint/8.4@master
 
-  linter:
-    name: CS fixer validate composer and lint
+  php-cs-fixer:
+    name: PHP-CS-Fixer
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: tleon/.github/actions/php-ci/php-cs@Issue-39300-improve-module-ci
         with:
           php-version: ${{ env.PHP_VERSION }}
-
-      - name: Validate
-        run: |
-          composer validate --strict
-
-      - name: Composer Install
-        run: COMPOSER_PROCESS_TIMEOUT=600 composer install --ansi --prefer-dist --no-interaction --no-progress
-
-      - name: Format
-        run: |
-          composer php-cs-fixer
-
-      - name: Lint
-        run: |
-          composer php-lint
 
   unit-tests:
     name: Unit tests
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -71,45 +46,21 @@ jobs:
       - name: Composer Install
         run: COMPOSER_PROCESS_TIMEOUT=600 composer install --ansi --prefer-dist --no-interaction --no-progress
 
-      - name: Test
-        run: |
-          composer unit-tests
+      - name: Run Unit Tests
+        run: composer unit-tests
 
-  # Run PHPStan against the module and a PrestaShop release
   phpstan:
     name: PHPStan
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        presta-version: [ '9.0.x' ]
-        # The 8.4 compatibility is not available yet, this should be uncommented whe the phpstan docker is ready
-        # php-version: [ '8.1', '8.2', '8.3', '8.4' ]
-        php-version: [ '8.1', '8.2', '8.3' ]
+        presta_version: ['9.0.x']
+        php_version: ['8.1', '8.2', '8.3']
+      fail-fast: false
     steps:
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: tleon/.github/actions/php-ci/phpstan@Issue-39300-improve-module-ci
         with:
-          php-version: ${{ matrix.php-version }})
-
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      # Add vendor folder in cache to make next builds faster
-      - name: Cache vendor folder
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: php-${{ hashFiles('composer.lock') }}
-
-      # Add composer local folder in cache to make next builds faster
-      - name: Cache composer folder
-        uses: actions/cache@v3
-        with:
-          path: ~/.composer/cache
-          key: php-composer-cache
-
-      - run: composer install
-
-      # Docker images prestashop/prestashop may be used, even if the shop remains uninstalled
-      - name: Execute PHPStan on PrestaShop (Tag ${{ matrix.presta-version }}-${{ matrix.php-version }}))
-        run: ./tests/phpstan.sh ${{ matrix.presta-version }} ${{ matrix.php-version }}
+          php-version: ${{ matrix.php_version }}
+          presta-version: ${{ matrix.presta_version }}
+          module-name: ps_classic_edition
+          phpstan-config: tests/phpstan/phpstan-${{ matrix.presta_version }}.neon
