@@ -17,7 +17,7 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
-function upgrade_module_0_2_2(ps_classic_edition_ $module): bool
+function upgrade_module_0_2_2(ps_classic_edition $module): bool
 {
-    return $module->install(true);
+    return $module->install();
 }
