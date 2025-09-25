@@ -8,7 +8,7 @@ const { context } = useContext();
 const psAcademyStore = usePsAcademy();
 const { sortedProducts, pages, loading } = storeToRefs(psAcademyStore);
 
-const psAcademyUrl = "https://prestashop-academy.com/";
+const psAcademyUrl = "https://care-center.prestashop.com/";
 
 const currentIndex = ref(0);
 /**
