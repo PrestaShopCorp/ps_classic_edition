@@ -39,6 +39,9 @@ class PsAccountHelper
     ) {
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function loadAccountSettings(): array
     {
         $psAccountID = '';
