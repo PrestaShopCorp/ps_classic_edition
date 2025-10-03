@@ -34,7 +34,11 @@ const toNext = () => {
 };
 
 const image = await import('@/modules/Onboarding/assets/img/thumbnail-psacademy.png');
-const imageUrl = context.value.baseUrl + '/../' + image.default;
+
+// Remove the last part of the URL (/admin{thing}) to get the base URL in order to be compatible
+// with subdirectory installations.
+const baseUrl = context.value.baseUrl.replace('/index.php', '');
+const imageUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/')) + image.default;
 
 watch(currentIndex, () => {
   cardsToDisplay.value = sortedProducts.value.slice(currentIndex.value * 5, currentIndex.value * 5 + 5);
@@ -85,7 +89,7 @@ onMounted(async () => {
     </div>
     <!-- END HEADER -->
     <!-- CARDS -->
-    <div class="overflow-hidden w-full md:max-h-[400px]">
+    <div class="overflow-hidden w-full">
       <PuikSkeletonLoaderGroup
         v-if="loading"
         class="relative opacity-60 flex flex-nowrap overflow-hidden md:grid md:grid-cols-4 md:grid-rows-2 gap-2"
