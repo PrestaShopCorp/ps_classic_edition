@@ -29,7 +29,7 @@ trait UseHooks
     use Hooks\UseDisplayAdminStoreInformation;
 
     /**
-     * @var array An array of method that can be called to register media in the actionAdminControllerSetMedia hook
+     * @var array<string> An array of method that can be called to register media in the actionAdminControllerSetMedia hook
      *
      * @see UseActionAdminControllerSetMedia
      */

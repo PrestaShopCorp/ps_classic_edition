@@ -102,6 +102,9 @@ class AdminPsClassicEditionSetupGuideController extends PrestaShopAdminControlle
         ]);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function getInitialDatas(SetupGuideDataPresenter $setupGuideDataPresenter): array
     {
         return [
