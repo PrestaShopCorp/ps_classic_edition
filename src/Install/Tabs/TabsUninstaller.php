@@ -21,9 +21,9 @@
 
 declare(strict_types=1);
 
-namespace PrestaShop\Module\PsClassicEdition\Actions;
+namespace PrestaShop\Module\PsClassicEdition\Install\Tabs;
 
-class Uninstall
+class TabsUninstaller
 {
     /**
      * @var string
