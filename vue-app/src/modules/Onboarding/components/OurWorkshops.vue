@@ -34,7 +34,8 @@ import {useContext} from "@/common/composables/use-context";
 
 const { context } = useContext();
 const logo = await import('@/modules/Onboarding/assets/img/ateliers.svg');
-const logoUrl = context.value.baseUrl + '/../' + logo.default;
+const baseUrl = context.value.baseUrl.replace('/index.php', '');
+const logoUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/')) + logo.default;
 
 const handleWorkshopClick = async () => {
   window.open(constants.WORKSHOPS_URL);
