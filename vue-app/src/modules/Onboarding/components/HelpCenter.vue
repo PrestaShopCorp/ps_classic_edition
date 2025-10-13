@@ -32,7 +32,8 @@ import {useContext} from "@/common/composables/use-context";
 
 const { context } = useContext();
 const logo = await import('@/modules/Onboarding/assets/img/question.svg');
-const logoUrl = context.value.baseUrl + '/../' + logo.default;
+const baseUrl = context.value.baseUrl.replace('/index.php', '');
+const logoUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/')) + logo.default;
 
 const handleDocumentationClick = async () => {
   window.open(i18n.global.t("onb.homepage.help.url"));
