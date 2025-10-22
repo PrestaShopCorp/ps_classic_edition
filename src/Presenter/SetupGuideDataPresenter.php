@@ -53,7 +53,7 @@ class SetupGuideDataPresenter
     /**
      * Get setup guide datas.
      *
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
     public function getSetupGuideData(): array
     {
@@ -230,9 +230,9 @@ class SetupGuideDataPresenter
      *
      * @param string $name
      * @param string $title
-     * @param array $content [(string $title, string $description, array $documentation, array $buttons)]
+     * @param array<int, array<string, mixed>> $content [(string $title, string $description, array $documentation, array $buttons)]
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function buildStep(string $name, string $title, array $content = [], bool $disabledForUser = false): array
     {

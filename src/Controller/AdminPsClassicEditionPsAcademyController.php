@@ -81,6 +81,9 @@ class AdminPsClassicEditionPsAcademyController extends PrestaShopAdminController
         return new JsonResponse($cachedProducts);
     }
 
+    /**
+     * @return array<int>
+     */
     private function getProductsId(int $psAcademyLangId): array
     {
         $responseVideoHosted = $this->httpClient->request(
@@ -105,6 +108,11 @@ class AdminPsClassicEditionPsAcademyController extends PrestaShopAdminController
         return array_column(array_merge($responseContentsLiveHosted['products'], $responseContentsVideoHosted['products']), 'id');
     }
 
+    /**
+     * @param array<string, mixed> $response
+     *
+     * @return array<string, mixed>
+     */
     private function createObjectFromResponse(array $response): array
     {
         $locale = 'gb';

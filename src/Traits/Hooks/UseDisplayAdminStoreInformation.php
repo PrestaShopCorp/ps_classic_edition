@@ -22,7 +22,8 @@ declare(strict_types=1);
 
 namespace PrestaShop\Module\PsClassicEdition\Traits\Hooks;
 
-trait UseDisplayAdminStoreInformation {
+trait UseDisplayAdminStoreInformation
+{
     public function hookDisplayAdminStoreInformation(): string
     {
         $metadataFile = _PS_ROOT_DIR_ . '/app/metadata.json';
