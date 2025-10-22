@@ -49,7 +49,7 @@ class ps_classic_edition extends Module
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '9.0.0', 'max' => _PS_VERSION_];
-        $this->module_key = '5530785cbb44445d52d2a98f8ff6d309';
+        $this->module_key = '7703a924710f07762a78cbe96a8c7226';
 
         parent::__construct();
 
