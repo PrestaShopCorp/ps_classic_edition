@@ -1,0 +1,70 @@
+name: publish-module
+
+on:
+  workflow_dispatch: # manual trigger for testing before on release
+  # release:
+  #   types: [released]
+
+concurrency:
+  group: publish-module-${{ github.ref_name }}
+  cancel-in-progress: true
+
+env:
+  ID_PRODUCT: 96511
+  PHP_VERSION: 8.1
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: packages/ps_classic_edition
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check module version
+        id: cmv
+        uses: ./.github/actions/check-module-version
+        with:
+          marketplace-api-key: ${{ secrets.MARKETPLACE_API_KEY }}
+          id-product: ${{ env.ID_PRODUCT }}
+          path: packages/ps_classic_edition/ps_classic_edition.php
+
+      # - name: Setup PHP
+      #   uses: shivammathur/setup-php@v2
+      #   with:
+      #     php-version: ${{env.PHP_VERSION}}
+
+      # - name: Display versions
+      #   run: |
+      #     echo "Committed version: ${{ steps.cmv.outputs.committed-version }}"
+      #     echo "Published version: ${{ steps.cmv.outputs.published-version }}"
+      #     echo "Is new version: ${{ steps.cmv.outputs.is-new-version }}"
+
+      # - name: Install
+      #   run: composer install --no-dev --no-progress --no-interaction --optimize-autoloader
+
+      # - name: Build
+      #   uses: ./.github/actions/build-module-zip
+      #   with:
+      #     name: ps_classic_edition
+      #     path: packages/ps_classic_edition
+
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     name: ps_classic_edition
+      #     path: packages/ps_classic_edition/dist/ps_classic_edition.zip
+
+      # - name: Publish new version
+      #   if: steps.cmv.outputs.is-new-version == 'true' && steps.cmv.outputs.published-version != 'null'
+      #   uses: ./.github/actions/publish-module-update
+      #   with:
+      #     marketplace-api-key: ${{ secrets.MARKETPLACE_API_KEY }}
+      #     zip: "packages/ps_classic_edition/dist/ps_classic_edition.zip"
+      #     id-product: ${{ env.ID_PRODUCT }}
+      #     technical-name: "ps_classic_edition"
+      #     display-name: "PrestaShop Classic Edition Module"
+      #     change-log: "Version ${{ steps.cmv.outputs.committed-version }}"
+      #     compatible-from: "9.0.0"
