@@ -1,0 +1,61 @@
+name: "Check Module Version"
+description: "Check PrestaShop module version and whether it has been published yet"
+
+inputs:
+  marketplace-api-key:
+    description: "Marketplace API key"
+    required: true
+  id-product:
+    description: "Product ID"
+    required: true
+  path:
+    description: "Module path"
+    required: true
+
+outputs:
+  committed-version:
+    description: "Version now commited to the repo"
+    value: ${{ steps.get-committed-version.outputs.committed-version }}
+  published-version:
+    description: "Latest version published to marketplace, based on `last_release.product_version`"
+    value: ${{ steps.get-published-version.outputs.published-version }}
+  is-new-version:
+    description: 'Whether repo version is yet new to marketplace (`"true"` or `"false"`)'
+    value: ${{ steps.check-is-new-version.outputs.is-new-version }}
+
+runs:
+  using: composite
+
+  steps:
+    - id: get-published-version
+      shell: bash
+      run: |
+        PUBLISHED_VERSION=$(curl --silent --location --request POST 'https://api.addons.prestashop.com/request/index.php?method=product' \
+          --header "api-key: $MARKETPLACE_API_KEY" \
+          --form "id_product=$ID_PRODUCT" \
+          | jq -r '.product.technical_info.last_release.product_version')
+        echo "published-version=$PUBLISHED_VERSION" >> "$GITHUB_OUTPUT"
+      env:
+        MARKETPLACE_API_KEY: ${{ inputs.marketplace-api-key }}
+        ID_PRODUCT: ${{ inputs.id-product }}
+
+    - id: get-committed-version
+      shell: bash
+      run: |
+        COMMITTED_VERSION=$(cat $MODULE_PATH | grep "\$this->version = " | cut -d"'" -f 2)
+        echo "committed-version=$COMMITTED_VERSION" >> "$GITHUB_OUTPUT"
+      env:
+        MODULE_PATH: ${{ inputs.path }}
+
+    - id: check-is-new-version
+      shell: bash
+      run: |
+        if [[ "$COMMITTED_VERSION" != "$PUBLISHED_VERSION" ]]; then
+          IS_NEW_VERSION="true"
+        else
+          IS_NEW_VERSION="false"
+        fi
+        echo "is-new-version=$IS_NEW_VERSION" >> "$GITHUB_OUTPUT"
+      env:
+        COMMITTED_VERSION: ${{ steps.get-committed-version.outputs.committed-version }}
+        PUBLISHED_VERSION: ${{ steps.get-published-version.outputs.published-version }}
