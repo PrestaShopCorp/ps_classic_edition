@@ -1,0 +1,75 @@
+name: publish-module
+
+on:
+  release:
+    types: [released]
+
+concurrency:
+  group: publish-module-${{ github.ref_name }}
+  cancel-in-progress: true
+
+env:
+  ID_PRODUCT: 96511
+  PHP_VERSION: 8.1
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check module version
+        id: cmv
+        uses: ./.github/actions/check-module-version
+        with:
+          marketplace-api-key: ${{ secrets.MARKETPLACE_API_KEY }}
+          id-product: ${{ env.ID_PRODUCT }}
+          path: /home/runner/work/ps_classic_edition/ps_classic_edition/ps_classic_edition.php
+
+      - name: Display versions
+        run: |
+          echo "Committed version: ${{ steps.cmv.outputs.committed-version }}"
+          echo "Published version: ${{ steps.cmv.outputs.published-version }}"
+          echo "Is new version: ${{ steps.cmv.outputs.is-new-version }}"
+
+      - name: Install composer dependencies
+        run: composer install --no-dev -o
+
+      - name: Custom clean via Makefile
+        run: make clean-deploy
+
+      - name: Prepare auto-index tool
+        run: composer global require prestashop/autoindex
+
+      - name: Generate index.php
+        run: ~/.composer/vendor/bin/autoindex
+
+      - name: Clean-up project
+        uses: PrestaShopCorp/github-action-clean-before-deploy@v1.0
+        with:
+          paths: vue-app
+          working-directory: /home/runner/work/ps_classic_edition/ps_classic_edition
+
+      - name: Build zip
+        run: |
+          cd /home/runner/work/ps_classic_edition
+          rm -r ps_classic_edition/phpstan.neon
+          zip --recurse-paths ps_classic_edition.zip ps_classic_edition
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ps_classic_edition
+          path: /home/runner/work/ps_classic_edition/ps_classic_edition.zip
+
+      - name: Publish new version
+        if: steps.cmv.outputs.is-new-version == 'true' && steps.cmv.outputs.published-version != 'null'
+        uses: ./.github/actions/publish-module-update
+        with:
+          marketplace-api-key: ${{ secrets.MARKETPLACE_API_KEY }}
+          zip: "/home/runner/work/ps_classic_edition/ps_classic_edition.zip"
+          id-product: ${{ env.ID_PRODUCT }}
+          technical-name: "ps_classic_edition"
+          display-name: "PrestaShop Classic Edition Module"
+          change-log: "Version ${{ steps.cmv.outputs.committed-version }}"
+          compatible-from: "9.0.0"
