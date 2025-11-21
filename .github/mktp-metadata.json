@@ -1,0 +1,8 @@
+{
+  "id_product": "96511",
+  "technical_name": "ps_classic_edition",
+  "display_name": "PrestaShop Classic Edition Module",
+  "channel": "stable",
+  "product_type": "module",
+  "compatible_from": "9.0.0"
+}

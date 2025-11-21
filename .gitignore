@@ -6,3 +6,4 @@ vendor
 node_modules
 .hintrc
 .env
+views/js/vue
